@@ -271,6 +271,11 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 				break;
 		}
 	}
+	
+	public File getLastFolder()
+	{
+		return lastFolder;
+	}
 
 	@Override
 	public void onClipboardContentsChange(Clipboard clipboard)

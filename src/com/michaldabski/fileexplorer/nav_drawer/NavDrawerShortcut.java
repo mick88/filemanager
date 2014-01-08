@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.michaldabski.fileexplorer.MainActivity;
-import com.michaldabski.fileexplorer.R;
 import com.michaldabski.fileexplorer.folders.FolderFragment;
 import com.michaldabski.fileexplorer.nav_drawer.NavDrawerAdapter.NavDrawerItem;
 import com.michaldabski.utils.FileUtils;
@@ -26,6 +25,7 @@ public class NavDrawerShortcut implements NavDrawerItem
 	@Override
 	public boolean onClicked(MainActivity activity)
 	{
+		if (folder.equals(activity.getLastFolder())) return true;
 		Bundle args = new Bundle();
 		args.putString(FolderFragment.EXTRA_DIR, folder.getAbsolutePath());
 		FolderFragment folderFragment = new FolderFragment();
