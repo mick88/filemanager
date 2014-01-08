@@ -238,6 +238,8 @@ public class FileUtils
 	{
 		if (toFolder.equals(file))
 			throw new IOException("Folder cannot be copied to itself");
+		else if (toFolder.equals(file.getParentFile()))
+			throw new IOException("Source and target directory are the same");
 		else if (toFolder.getAbsolutePath().startsWith(file.getAbsolutePath()))
 			throw new IOException("Folder cannot be copied to its child folder");
 	}
