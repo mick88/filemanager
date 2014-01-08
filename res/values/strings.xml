@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">File Wizard</string>
+    <string name="cannot_read_directory_s">Cannot read directory %s</string>
+    <string name="open_file_with_">Open %s with:</string>
+    <string name="size_s">Size: %s</string>
+    <string name="folder">%d items</string>
+    <string name="folder_is_empty">Folder %s is empty</string>
+    <string name="open_drawer">Open drawer</string>
+    <string name="close_drawer">Close drawer</string>
+    <string name="back">Back</string>
+    <string name="forward">Forward</string>
+    <string name="favourite">Favourite</string>
+    <string name="remove_favourite">Remove favourite</string>
+    <string name="folder_empty">Empty folder</string>
+    <string name="delete">Delete</string>
+    <string name="_d_objects">%d objects</string>
+    <string name="delete_d_items_">Delete %d items?</string>
+    <string name="select_all">Select All</string>
+    <string name="rename">Rename</string>
+    <string name="share">Share</string>
+    <string name="_d_files_deleted">%d files deleted</string>
+    <string name="add_to_homescreen">Create shortcut</string>
+    <string name="shortcut_created">Shortcut added to homescreen</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="system">System</string>
+    <string name="root">Root</string>
+    <string name="sd_card">SD card</string>
+    <string name="cut">Cut</string>
+    <string name="paste_here">Paste here</string>
+    <string name="objects_cut_to_clipboard">Objects cut to clipboard</string>
+    <string name="files_pasted">Files pasted</string>
+    <string name="clipboard_is_empty">Clipboard is empty</string>
+    <string name="refresh">Refresh</string>
+    <string name="copy">Copy</string>
+    <string name="objects_copied_to_clipboard">Objects copied to clipboard</string>
+    <string name="create_folder">Create folder</string>
+    <string name="create">Create</string>
+    <string name="folder_created_successfully">Folder created successfully</string>
+    <string name="loading_">Loading...</string>
+
+</resources>

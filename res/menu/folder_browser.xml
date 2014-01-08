@@ -1,0 +1,42 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_unfavourite"
+        android:icon="@drawable/ic_favourite"
+        android:orderInCategory="3"
+        android:showAsAction="always"
+        android:title="@string/remove_favourite"
+        android:visible="false"/>
+    
+    <item
+        android:id="@+id/menu_refresh"
+        android:icon="@drawable/ic_refresh"
+        android:orderInCategory="1"
+        android:showAsAction="ifRoom"
+        android:title="@string/refresh"
+        android:visible="true"/>
+    
+    <item
+        android:id="@+id/menu_paste"
+        android:icon="@drawable/ic_paste"
+        android:orderInCategory="2"
+        android:showAsAction="ifRoom"
+        android:title="@string/paste_here"
+        android:visible="true"/>
+    <item
+        android:id="@+id/menu_selectAll"
+        android:icon="@drawable/ic_select_all"
+        android:orderInCategory="4"
+        android:showAsAction="ifRoom"
+        android:title="@string/select_all"
+        android:visible="true"/>
+    
+    <item
+        android:id="@+id/menu_create_folder"
+        android:icon="@drawable/ic_create_folder"
+        android:orderInCategory="3"
+        android:showAsAction="ifRoom"
+        android:title="@string/create_folder"
+        android:visible="true"/>
+
+</menu>

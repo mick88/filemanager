@@ -1,0 +1,12 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="list_icon_size">64dp</dimen>
+    <dimen name="list_item_padding">12dp</dimen>
+    <dimen name="nav_drawer_width">260dp</dimen>
+    <dimen name="clipboard_drawer_width">200dp</dimen>
+    <dimen name="card_content_height">100dp</dimen>
+
+</resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/list_item_padding"
+    android:layout_marginTop="@dimen/list_item_padding"
+    android:background="@drawable/card" >
+
+    <ImageView
+        android:id="@+id/imgFileContent"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher" />
+
+    <LinearLayout
+        android:id="@+id/layoutFileDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/imgFileContent"
+        android:layout_toRightOf="@+id/imgFileIcon"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tvFileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/list_item_padding"
+            android:layout_marginTop="@dimen/list_item_padding"
+            android:text="File name.mp4"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tvFileDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Size: 48mb" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgFileIcon"
+        android:layout_width="@dimen/list_icon_size"
+        android:layout_height="@dimen/list_icon_size"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/layoutFileDetails"
+        android:background="#ffffff"
+        android:padding="@dimen/list_item_padding"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon_folder" />
+
+</RelativeLayout>
