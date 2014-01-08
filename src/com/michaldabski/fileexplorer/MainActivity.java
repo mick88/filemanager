@@ -173,13 +173,13 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 	{
 		return Arrays.asList(
 				new NavDrawerDivider(getString(R.string.bookmarks)),
-				new NavDrawerShortcut(new File("/"), getString(R.string.root)),
-				new NavDrawerShortcut(Environment.getRootDirectory(), getString(R.string.system)),
 				new NavDrawerShortcut(Environment.getExternalStorageDirectory(), getString(R.string.sd_card)),
-				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "Downloads"),
-				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), "Music"),
-				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Pictures"),
-				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "DCIM")
+				new NavDrawerShortcut(Environment.getRootDirectory(), getString(R.string.system)),
+				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), getString(R.string.downloads)),
+				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), getString(R.string.music)),
+				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), getString(R.string.dcim)),
+				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), getString(R.string.pictures)),
+				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), getString(R.string.movies))
 			);
 	}
 	
