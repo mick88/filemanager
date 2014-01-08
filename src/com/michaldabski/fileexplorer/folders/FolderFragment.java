@@ -289,6 +289,8 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 								Toast.makeText(getActivity(), R.string.folder_created_successfully, Toast.LENGTH_SHORT).show();
 								navigateTo(newFolder);
 							}
+							else Toast.makeText(getActivity(), R.string.folder_could_not_be_created, Toast.LENGTH_SHORT).show();
+							
 						} catch (Exception e)
 						{
 							e.printStackTrace();
