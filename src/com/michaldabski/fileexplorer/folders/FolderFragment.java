@@ -237,8 +237,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.folder_browser, menu);
 		
-		if (files == null)
-			menu.findItem(R.id.menu_selectAll).setVisible(false);
+		menu.findItem(R.id.menu_selectAll).setVisible(!(files == null || files.isEmpty()));
 	}
 	
 	void showEditTextDialog(int title, int okButtonText, final OnResultListener<CharSequence> enteredTextResult, CharSequence hint)
@@ -648,7 +647,8 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			listView.clearChoices();
 		selectedFiles.clear();
 		updateActionMode();
-		fileAdapter.notifyDataSetChanged();
+		if (fileAdapter != null)
+			fileAdapter.notifyDataSetChanged();
 		Log.d(LOG_TAG, "Selection cleared");
 	}
 	
@@ -659,7 +659,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	
 	void selectFiles(Collection<File> files)
 	{
-		if (files == null) return;
+		if (files == null || files.isEmpty()) return;
 		
 		if (actionMode == null)
 		{
@@ -669,7 +669,8 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		
 		selectedFiles.addAll(files);
 		updateActionMode();
-		fileAdapter.notifyDataSetChanged();
+		if (fileAdapter != null)
+			fileAdapter.notifyDataSetChanged();
 	}
 	
 	void setFileSelected(File file, boolean selected)
@@ -685,7 +686,8 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		else 
 			selectedFiles.remove(file);
 		updateActionMode();
-		fileAdapter.notifyDataSetChanged();
+		if (fileAdapter != null)
+			fileAdapter.notifyDataSetChanged();
 		
 		if (selectedFiles.isEmpty())
 			finishActionMode(false);
