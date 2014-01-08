@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -14,9 +15,11 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -141,6 +144,21 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 		drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
 //		drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, Gravity.END);
 		
+		// add listview header to push items below the actionbar
+		LayoutInflater inflater = getLayoutInflater();
+		ListView clipboardListView = (ListView) findViewById(R.id.listClipboard);
+		View header = inflater.inflate(R.layout.list_header_actionbar_padding, clipboardListView, false);
+		SystemBarTintManager systemBarTintManager = new SystemBarTintManager(this);
+		int headerHeight = systemBarTintManager.getConfig().getPixelInsetTop(true);
+		header.setLayoutParams(new android.widget.AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, headerHeight));
+		clipboardListView.addHeaderView(header);
+		int footerHeight = systemBarTintManager.getConfig().getPixelInsetBottom();
+		if (footerHeight > 0)
+		{
+			View footer = inflater.inflate(R.layout.list_header_actionbar_padding, clipboardListView, false);
+			footer.setLayoutParams(new android.widget.AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, footerHeight));
+			clipboardListView.addFooterView(footer);
+		}		
 		onClipboardContentsChange(Clipboard.getInstance());
 		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
