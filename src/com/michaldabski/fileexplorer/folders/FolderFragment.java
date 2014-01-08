@@ -241,9 +241,12 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			menu.findItem(R.id.menu_selectAll).setVisible(false);
 	}
 	
-	void showEditTextDialog(int title, int okButtonText, final OnResultListener<CharSequence> enteredTextResult)
+	void showEditTextDialog(int title, int okButtonText, final OnResultListener<CharSequence> enteredTextResult, CharSequence hint)
 	{
-		final EditText view = new EditText(getActivity());
+		View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_edittext, (ViewGroup) getActivity().getWindow().getDecorView(), false);
+		final EditText editText = (EditText) view.findViewById(android.R.id.edit);
+		editText.setHint(hint);
+		
 		new AlertDialog.Builder(getActivity())
 			.setTitle(title)
 			.setView(view)
@@ -253,7 +256,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 				@Override
 				public void onClick(DialogInterface dialog, int which)
 				{
-					enteredTextResult.onResult(new AsyncResult<CharSequence>(view.getText()));
+					enteredTextResult.onResult(new AsyncResult<CharSequence>(editText.getText()));
 				}
 			})
 			.setNegativeButton(android.R.string.cancel, null)
@@ -292,7 +295,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 							Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
 						}						
 					}
-				});
+				}, "");
 				return true;
 				
 			case R.id.menu_paste:
