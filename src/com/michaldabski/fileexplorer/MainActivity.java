@@ -113,8 +113,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 			public void onDrawerOpened(View drawerView)
 			{
 				super.onDrawerOpened(drawerView);
-//				wasActionbarVisible = getActionBar().isShowing();
-//				setActionbarVisible(true);
+				setActionbarVisible(true);
 			}
 			
 			@Override
