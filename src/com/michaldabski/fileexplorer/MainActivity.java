@@ -114,6 +114,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 			{
 				super.onDrawerOpened(drawerView);
 				setActionbarVisible(true);
+				invalidateOptionsMenu();
 			}
 			
 			@Override
@@ -121,6 +122,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 			{
 				actionBarShown=false;
 				super.onDrawerClosed(drawerView);
+				invalidateOptionsMenu();
 			}
 			
 			@Override
