@@ -309,6 +309,32 @@ public class FileUtils
 		}
 	}
 	
+	public static int countFilesIn(Collection<File> roots)
+	{
+		int result=0;
+		for (File file : roots)
+			result += countFilesIn(file);
+		return result;
+	}
+	
+	public static int countFilesIn(File root)
+	{
+		if (root.isDirectory() == false) return 1;
+		File[] files = root.listFiles();
+		if (files == null) return 0;
+		
+		int n = 0;
+		
+		for (File file : files)
+		{
+			if (file.isDirectory())
+				n += countFilesIn(file);
+			else
+				n ++;
+		}
+		return n;
+	}
+	
 	public static String getUserFriendlySdcardPath(File file)
 	{
 		String path;

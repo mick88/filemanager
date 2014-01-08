@@ -40,5 +40,6 @@
     <string name="folder_created_successfully">Folder created successfully</string>
     <string name="loading_">Loading...</string>
     <string name="folder_could_not_be_created">Folder could not be created</string>
+    <string name="pasting_files_">Pasting files...</string>
 
 </resources>

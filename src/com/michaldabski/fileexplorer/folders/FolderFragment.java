@@ -11,6 +11,7 @@ import java.util.List;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -47,6 +48,7 @@ import com.michaldabski.fileexplorer.MainActivity;
 import com.michaldabski.fileexplorer.R;
 import com.michaldabski.fileexplorer.clipboard.Clipboard;
 import com.michaldabski.fileexplorer.clipboard.Clipboard.FileAction;
+import com.michaldabski.fileexplorer.clipboard.FileOperationListener;
 import com.michaldabski.fileexplorer.folders.FileAdapter.OnFileSelectedListener;
 import com.michaldabski.utils.AsyncResult;
 import com.michaldabski.utils.FileUtils;
@@ -300,16 +302,86 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 				return true;
 				
 			case R.id.menu_paste:
-				try
+				new AsyncTask<Clipboard, Float, Exception>()
 				{
-					Clipboard.getInstance().paste(currentDir);
-					Toast.makeText(getActivity(), R.string.files_pasted, Toast.LENGTH_SHORT).show();
-					refreshFolder();
-				} catch (IOException e)
-				{
-					e.printStackTrace();
-					Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-				}
+
+					ProgressDialog progressDialog;
+					
+					@Override
+					protected void onPreExecute()
+					{
+						super.onPreExecute();
+						progressDialog = new ProgressDialog(getActivity());
+						progressDialog.setTitle(getActivity().getString(R.string.pasting_files_));
+						progressDialog.setIndeterminate(false);
+						progressDialog.setCancelable(false);
+						progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+						progressDialog.show();
+					}
+					
+					@Override
+					protected void onProgressUpdate(Float... values) 
+					{
+						float progress = values[0];
+						progressDialog.setMax(100);
+						progressDialog.setProgress((int) (progress * 100));
+					}
+					@Override
+					protected Exception doInBackground(Clipboard... params)
+					{
+						try
+						{
+							final int total = FileUtils.countFilesIn(params[0].getFiles());
+							final int[] progress = {0};
+							params[0].paste(currentDir, new FileOperationListener()
+							{								
+								@Override
+								public void onFileProcessed(String filename)
+								{
+									progress[0]++;
+									publishProgress((float)progress[0] / (float)total);
+								}
+								
+								@Override
+								public boolean isOperationCancelled()
+								{
+									return isCancelled();
+								}
+							});
+							return null;
+						} catch (IOException e)
+						{
+							e.printStackTrace();
+							return e;
+						}
+					}
+					
+					@Override
+					protected void onCancelled() {
+						progressDialog.dismiss();
+						refreshFolder();
+					};
+					
+					@Override
+					protected void onPostExecute(Exception result) {
+						progressDialog.dismiss();
+						refreshFolder();
+						if (result == null)
+						{
+							Clipboard.getInstance().clear();
+							Toast.makeText(getActivity(), R.string.files_pasted, Toast.LENGTH_SHORT).show();
+						}
+						else
+						{
+							new AlertDialog.Builder(getActivity())
+								.setMessage(result.getMessage())
+								.setPositiveButton(android.R.string.ok, null)
+								.show();
+						}
+					};
+					
+				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Clipboard.getInstance());
+				
 				return true;
 				
 			case R.id.menu_refresh:

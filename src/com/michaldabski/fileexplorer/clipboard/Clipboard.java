@@ -72,8 +72,11 @@ public class Clipboard
 	/**
 	 * Recursively move/copy files
 	 */
-	private void pasteFile(File file, File destinationDir, FileAction fileAction) throws IOException
+	private void pasteFile(File file, File destinationDir, FileAction fileAction, FileOperationListener fileOperationListener) throws IOException
 	{
+		if (fileOperationListener.isOperationCancelled())
+			return;
+
 		FileUtils.validateCopyMoveDirectory(file, destinationDir);
 		destinationDir.mkdirs();
 		
@@ -81,7 +84,7 @@ public class Clipboard
 		{
 			destinationDir = new File(destinationDir, file.getName());
 			for (File f : file.listFiles())
-				pasteFile(f, destinationDir, fileAction);
+				pasteFile(f, destinationDir, fileAction, fileOperationListener);
 			FileUtils.deleteEmptyFolders(Arrays.asList(file));
 		}
 		else
@@ -93,11 +96,12 @@ public class Clipboard
 				FileUtils.copyFile(file, newFile);
 			else 
 				throw new RuntimeException("Unsupported operation "+files.get(file));
-			Log.d(LOG_TAG, file.getName()+" copied to "+newFile.getAbsolutePath());
+			fileOperationListener.onFileProcessed(newFile.getName());
+			Log.d(LOG_TAG, file.getName()+" pasted to "+newFile.getAbsolutePath());
 		}
 	}
 	
-	public void paste(File destination) throws IOException
+	public void paste(File destination, FileOperationListener operationListener) throws IOException
 	{
 		destination.mkdirs();
 		if (destination.isDirectory() == false)
@@ -105,22 +109,20 @@ public class Clipboard
 
 		for (Entry<File, FileAction> entry : files.entrySet())
 		{
-			pasteFile(entry.getKey(), destination, entry.getValue());
+			pasteFile(entry.getKey(), destination, entry.getValue(), operationListener);
 		}
-		
-		clear();
 	}
 	
-	public void pasteSingleFile(File file, File destinaton) throws IOException
+	public void pasteSingleFile(File file, File destinaton, FileOperationListener operationListener) throws IOException
 	{
 		if (files.containsKey(file) == false)
 			throw new InvalidParameterException("File is not in clipboard");
 		
-		pasteFile(file, destinaton, files.get(file));
+		pasteFile(file, destinaton, files.get(file), operationListener);
 		
-		this.files.remove(file);
+/*		this.files.remove(file);
 		for (ClipboardListener listener : clipboardListeners)
-			listener.onClipboardContentsChange(this);
+			listener.onClipboardContentsChange(this);*/
 	}
 	
 	public Set<File> getFiles()
