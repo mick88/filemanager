@@ -74,8 +74,7 @@ public class Clipboard
 	 */
 	private void pasteFile(File file, File destinationDir, FileAction fileAction) throws IOException
 	{
-		if (file.getParentFile().equals(destinationDir))
-			throw new IOException("Target directory is the same as file directory");
+		FileUtils.validateCopyMoveDirectory(file, destinationDir);
 		destinationDir.mkdirs();
 		
 		if (file.isDirectory())

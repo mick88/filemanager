@@ -234,8 +234,18 @@ public class FileUtils
 		else result.add(directory);
 	}
 	
+	public static void validateCopyMoveDirectory(File file, File toFolder) throws IOException
+	{
+		if (toFolder.equals(file))
+			throw new IOException("Folder cannot be copied to itself");
+		else if (toFolder.getAbsolutePath().startsWith(file.getAbsolutePath()))
+			throw new IOException("Folder cannot be copied to its child folder");
+	}
+	
 	public static void copyFile(File src, File dst) throws IOException 
 	{
+		if (src.isDirectory())
+			throw new IOException("Source is a directory");
 	    InputStream in = new FileInputStream(src);
 	    OutputStream out = new FileOutputStream(dst);
 
