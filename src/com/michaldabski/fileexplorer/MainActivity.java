@@ -280,6 +280,10 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 		ListView clipboardListView = (ListView) findViewById(R.id.listClipboard);
 		TextView tvMessage = (TextView) findViewById(R.id.tvClipboardMessage);
 		
+		if (clipboard.isEmpty())
+			drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, Gravity.END);
+		else drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, Gravity.END);
+		
 		if (clipboardListView != null)
 		{
 			if (clipboard.isEmpty())
