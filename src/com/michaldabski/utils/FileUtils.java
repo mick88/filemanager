@@ -350,4 +350,26 @@ public class FileUtils
 		return path
 				.replace(Environment.getExternalStorageDirectory().getAbsolutePath(), "/sdcard");
 	}
+	
+	public static boolean isMediaDirectory(File file)
+	{
+		try
+		{
+			String path = file.getCanonicalPath();
+			for (String directory : new String[]{Environment.DIRECTORY_DCIM, 
+					Environment.DIRECTORY_MOVIES, 
+					Environment.DIRECTORY_PICTURES, 
+					Environment.DIRECTORY_MUSIC})
+			{
+				if (path.startsWith(Environment.getExternalStoragePublicDirectory(directory)
+						.getAbsolutePath()))
+					return true;
+			}
+			return false;
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

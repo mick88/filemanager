@@ -37,6 +37,11 @@ public class FileAdapter extends BaseFileAdapter
 		super(context, layoutId, files);
 	}
 	
+	public FileAdapter(Context context, int layoutId, List<File> files)
+	{
+		super(context, layoutId, files);
+	}
+	
 	public FileAdapter(Context context,	List<File> objects)
 	{
 		super(context, R.layout.list_item_file, objects);

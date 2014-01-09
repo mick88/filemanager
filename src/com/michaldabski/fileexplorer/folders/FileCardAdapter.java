@@ -1,6 +1,7 @@
 package com.michaldabski.fileexplorer.folders;
 
 import java.io.File;
+import java.util.List;
 
 import android.content.Context;
 import android.view.View;
@@ -13,6 +14,11 @@ import com.michaldabski.utils.ViewHolder;
 public class FileCardAdapter extends FileAdapter
 {
 	public FileCardAdapter(Context context, File[] files)
+	{
+		super(context, R.layout.list_item_file_card, files);
+	}
+	
+	public FileCardAdapter(Context context, List<File> files)
 	{
 		super(context, R.layout.list_item_file_card, files);
 	}
