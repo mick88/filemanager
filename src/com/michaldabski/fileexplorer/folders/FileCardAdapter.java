@@ -29,7 +29,12 @@ public class FileCardAdapter extends FileAdapter
 		final View view = super.getView(position, convertView, parent);
 		final ViewHolder viewHolder = (ViewHolder) view.getTag();
 		ImageView imgFileContent = viewHolder.getViewById(R.id.imgFileContent);
-		// TOOD: implement preview
+		File file = getItem(position);
+		
+		View cardBg = viewHolder.getViewById(R.id.layoutCard); 
+		if (isSelected(file)) cardBg.setBackgroundResource(R.drawable.card_selected);
+		else cardBg.setBackgroundResource(R.drawable.card);
+		view.setBackgroundResource(android.R.color.transparent);
 		return view;
 	}
 	
