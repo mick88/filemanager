@@ -248,6 +248,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	{
 		super.onPrepareOptionsMenu(menu);
 		menu.findItem(R.id.menu_paste).setVisible(Clipboard.getInstance().isEmpty() == false);
+		menu.findItem(R.id.menu_navigate_up).setVisible(currentDir.getParentFile() != null);
 	}
 	
 	void showEditTextDialog(int title, int okButtonText, final OnResultListener<CharSequence> enteredTextResult, CharSequence hint)
@@ -279,6 +280,20 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		{				
 			case R.id.menu_selectAll:
 				selectFiles(this.files);
+				return true;
+				
+			case R.id.menu_navigate_up:
+				String newFolder = currentDir.getParent();
+				if (newFolder != null)
+				{
+					Bundle args = new Bundle(1);
+					args.putString(EXTRA_DIR, newFolder);
+					FolderFragment fragment = new FolderFragment();
+					fragment.setArguments(args);
+					MainActivity activity = (MainActivity) getActivity();
+					activity.showFragment(fragment);
+					
+				}
 				return true;
 				
 			case R.id.menu_create_folder:

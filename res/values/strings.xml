@@ -52,5 +52,6 @@
         \n        
         In-app icons from www.iconsdb.com</string>
     <string name="app_icon">App icon</string>
+    <string name="up">Up</string>
 
 </resources>
