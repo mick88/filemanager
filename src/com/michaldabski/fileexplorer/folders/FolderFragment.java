@@ -489,6 +489,8 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	{
 		if (loadFilesTask != null)
 			loadFilesTask.cancel(true);
+		if (thumbCache != null)
+			thumbCache.evictAll();
 		super.onDestroy();
 	}
 	
