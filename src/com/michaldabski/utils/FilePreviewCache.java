@@ -7,7 +7,7 @@ import android.util.LruCache;
 
 public class FilePreviewCache extends LruCache<File, Bitmap>
 {
-	public static final int DEFAULT_CACHE_SZE = 4*1024*1024;
+	public static final int DEFAULT_CACHE_SZE = 24*1024*1024;
 	/**
 	 * create new cache
 	 * @param maxSize max size in bytes
