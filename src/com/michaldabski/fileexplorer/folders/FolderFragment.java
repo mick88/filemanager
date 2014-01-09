@@ -455,7 +455,16 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			View footer = inflater.inflate(R.layout.list_header_actionbar_padding, getListView(), false);
 			footer.setLayoutParams(new android.widget.AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, footerHeight));
 			getListView().addFooterView(footer);
-		}		
+		}
+		
+		int paddingRight = systemBarTintManager.getConfig().getPixelInsetRight();
+		if (paddingRight > 0)
+		{
+			
+			View layoutList = view.findViewById(R.id.layoutlist);
+			layoutList.setPadding(layoutList.getPaddingLeft(), layoutList.getPaddingTop(), 
+					layoutList.getPaddingRight()+paddingRight, layoutList.getPaddingBottom());
+		}
 		
 		if (fileAdapter != null)
 			setListAdapter(fileAdapter);
