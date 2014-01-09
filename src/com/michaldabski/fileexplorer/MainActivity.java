@@ -235,11 +235,6 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 			.commit();
 	}
 	
-	public boolean canGoBack()
-	{
-		return getFragmentManager().getBackStackEntryCount() > 0;
-	}
-	
 	public void goBack()
 	{
 		getFragmentManager().popBackStack();

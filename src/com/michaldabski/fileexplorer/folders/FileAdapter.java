@@ -6,19 +6,17 @@ import java.util.List;
 import java.util.Set;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import com.michaldabski.fileexplorer.BaseFileAdapter;
 import com.michaldabski.fileexplorer.R;
-import com.michaldabski.utils.FileUtils;
 import com.michaldabski.utils.ViewHolder;
 
-public class FileAdapter extends ArrayAdapter<File>
+
+public class FileAdapter extends BaseFileAdapter
 {
 	Set<File> selectedFiles=null;
 	OnFileSelectedListener onFileSelectedListener=null;
@@ -36,12 +34,12 @@ public class FileAdapter extends ArrayAdapter<File>
 	
 	public FileAdapter(Context context,	List<File> objects)
 	{
-		super(context, 0, 0, objects);
+		super(context, R.layout.list_item_file, objects);
 	}
 	
 	public FileAdapter(Context context,	File [] objects)
 	{
-		super(context, 0, 0, objects);
+		super(context, R.layout.list_item_file, objects);
 	}
 	
 	public FileAdapter(Context context)
@@ -62,43 +60,13 @@ public class FileAdapter extends ArrayAdapter<File>
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
-		View view = convertView;
-		if (view == null)
-		{
-			view = ((LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE))
-					.inflate(R.layout.list_item_file, parent, false);
-			view.setTag(new ViewHolder(view));
-		}
-		
-		ViewHolder viewHolder = (ViewHolder) view.getTag();
+		final View view = super.getView(position, convertView, parent);
 		final File file = getItem(position);
-		TextView 
-			tvFileName = viewHolder.getViewById(R.id.tvFileName),
-			tvFileDetails = viewHolder.getViewById(R.id.tvFileDetails);
-		ImageView imgIcon = viewHolder.getViewById(R.id.imgFileIcon);
-		
-		tvFileName.setText(file.getName());
-		
-		if (file.isDirectory())
-		{
-			int files = FileUtils.getNumFilesInFolder(file); 
-			if (files == 0) tvFileDetails.setText(R.string.folder_empty);
-			else tvFileDetails.setText(getContext().getString(R.string.folder, files));
-		}
-		else
-		{			
-			tvFileDetails.setText(getContext().getString(R.string.size_s, FileUtils.formatFileSize(file)));
-		}
-		imgIcon.setImageResource(FileUtils.getFileIconResource(file));
+		final ViewHolder viewHolder = (ViewHolder) view.getTag();
+		final ImageView imgIcon = viewHolder.getViewById(R.id.imgFileIcon);
 		
 		if (isSelected(file))
 		{
-/*			if (file.exists() == false)
-			{
-				remove(file);
-				notifyDataSetChanged();
-			}*/
-
 			view.setBackgroundResource(R.drawable.list_item_selected);
 			imgIcon.setImageResource(R.drawable.icon_selected);
 		}
