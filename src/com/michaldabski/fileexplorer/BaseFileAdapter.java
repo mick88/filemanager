@@ -38,7 +38,7 @@ public class BaseFileAdapter extends ArrayAdapter<File>
 		if (view == null)
 		{
 			view = ((LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE))
-					.inflate(R.layout.list_item_file, parent, false);
+					.inflate(layoutId, parent, false);
 			view.setTag(new ViewHolder(view));
 		}
 		
