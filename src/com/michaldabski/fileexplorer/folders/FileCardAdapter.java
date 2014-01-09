@@ -30,6 +30,11 @@ public class FileCardAdapter extends FileAdapter
 		super(context, R.layout.list_item_file_card, files);
 	}
 	
+	public void setThumbCache(Map<File, Bitmap> thumbCache)
+	{
+		this.thumbCache = thumbCache;
+	}
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
