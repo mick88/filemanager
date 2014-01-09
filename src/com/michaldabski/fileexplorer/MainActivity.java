@@ -217,6 +217,12 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 	{
 		if (actionBarDrawerToggle.onOptionsItemSelected(item))
 			return true;
+		switch (item.getItemId())
+		{
+			case R.id.menu_about:
+				startActivity(new Intent(getApplicationContext(), AboutActivity.class));
+				return true;
+		}
 		return super.onOptionsItemSelected(item);
 	}
 	

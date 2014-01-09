@@ -27,6 +27,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.michaldabski.fileexplorer.AboutActivity"
+            android:label="@string/title_activity_about"
+            android:icon="@drawable/ic_about"
+            android:parentActivityName="com.michaldabski.fileexplorer.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.michaldabski.fileexplorer.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

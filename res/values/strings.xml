@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">File Wizard</string>
+    <string name="title_activity_about">About</string>
     <string name="cannot_read_directory_s">Cannot read directory %s</string>
     <string name="open_file_with_">Open %s with:</string>
     <string name="size_s">Size: %s</string>
@@ -46,5 +47,10 @@
     <string name="pictures">Pictures</string>
     <string name="movies">Movies</string>
     <string name="dcim">DCIM</string>
+    <string name="credits">App developed by Michal Dabski www.michaldabski.com
+        \n
+        \n        
+        In-app icons from www.iconsdb.com</string>
+    <string name="app_icon">App icon</string>
 
 </resources>
