@@ -25,4 +25,19 @@ public class ViewHolder
 		}
 		return view;
 	}
+	
+	public boolean hasView(int id)
+	{
+		if (views.get(id) != null) return true;
+		else
+		{
+			View view = this.root.findViewById(id);
+			if (view == null) return false;
+			else
+			{
+				views.put(id, view);
+				return true;
+			}
+		}
+	}
 }
