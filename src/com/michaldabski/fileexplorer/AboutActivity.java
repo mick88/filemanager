@@ -1,5 +1,7 @@
 package com.michaldabski.fileexplorer;
 
+import com.readystatesoftware.systembartint.SystemBarTintManager;
+
 import android.app.Activity;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -19,6 +21,12 @@ public class AboutActivity extends Activity
 		setContentView(R.layout.activity_about);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		
+		SystemBarTintManager tintManager = new SystemBarTintManager(this);
+		tintManager.setStatusBarTintEnabled(true);
+		tintManager.setStatusBarTintResource(R.color.accent_color);
+		tintManager.setNavigationBarTintEnabled(true);
+		tintManager.setNavigationBarTintResource(R.color.accent_color);
 		
 		TextView tvAppVersion = (TextView) findViewById(R.id.tvAppVersion);
 		try
