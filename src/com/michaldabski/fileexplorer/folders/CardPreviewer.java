@@ -32,11 +32,11 @@ public class CardPreviewer extends AsyncTask<File, Void, Bitmap>
 	    if ((bounds.outWidth == -1) || (bounds.outHeight == -1))
 	        return null;
 
-	    int originalSize = bounds.outWidth;
+	    int originalSize = (bounds.outHeight > bounds.outWidth) ? bounds.outHeight
+	            : bounds.outWidth;
 
 	    BitmapFactory.Options opts = new BitmapFactory.Options();
-	    if (originalSize > imageView.getWidth()) 
-	    	opts.inSampleSize = originalSize / imageView.getWidth();
+	    opts.inSampleSize = originalSize / THUMBNAIL_SIZE;
 	    return BitmapFactory.decodeFile(image.getPath(), opts);     
 	}
 	
