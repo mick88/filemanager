@@ -242,6 +242,13 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		menu.findItem(R.id.menu_selectAll).setVisible(!(files == null || files.isEmpty()));
 	}
 	
+	@Override
+	public void onPrepareOptionsMenu(Menu menu)
+	{
+		super.onPrepareOptionsMenu(menu);
+		menu.findItem(R.id.menu_paste).setVisible(Clipboard.getInstance().isEmpty() == false);
+	}
+	
 	void showEditTextDialog(int title, int okButtonText, final OnResultListener<CharSequence> enteredTextResult, CharSequence hint)
 	{
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_edittext, (ViewGroup) getActivity().getWindow().getDecorView(), false);

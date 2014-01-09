@@ -255,7 +255,6 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu)
 	{
-		menu.findItem(R.id.menu_paste).setVisible(Clipboard.getInstance().isEmpty() == false);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
