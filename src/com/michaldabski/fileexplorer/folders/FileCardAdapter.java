@@ -1,26 +1,35 @@
 package com.michaldabski.fileexplorer.folders;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.michaldabski.fileexplorer.R;
+import com.michaldabski.utils.FilePreviewCache;
 import com.michaldabski.utils.ViewHolder;
 
 public class FileCardAdapter extends FileAdapter
 {
-	public FileCardAdapter(Context context, File[] files)
+	private final FilePreviewCache thumbCache;
+	Map<ImageView, CardPreviewer> runningTasks = new HashMap<ImageView, CardPreviewer>();
+	
+	public FileCardAdapter(Context context, File[] files, FilePreviewCache previewCache)
 	{
 		super(context, R.layout.list_item_file_card, files);
+		this.thumbCache = previewCache;
 	}
 	
-	public FileCardAdapter(Context context, List<File> files)
+	public FileCardAdapter(Context context, List<File> files, FilePreviewCache previewCache)
 	{
 		super(context, R.layout.list_item_file_card, files);
+		this.thumbCache = previewCache;
 	}
 	
 	@Override
@@ -29,7 +38,24 @@ public class FileCardAdapter extends FileAdapter
 		final View view = super.getView(position, convertView, parent);
 		final ViewHolder viewHolder = (ViewHolder) view.getTag();
 		ImageView imgFileContent = viewHolder.getViewById(R.id.imgFileContent);
-		// TOOD: implement preview
+		if (runningTasks.containsKey(imgFileContent))
+		{
+			runningTasks.get(imgFileContent).cancel(true);
+			runningTasks.remove(imgFileContent);
+		}
+		File file = getItem(position);
+		if (thumbCache.get(file) != null)
+			imgFileContent.setImageBitmap(thumbCache.get(file));
+		else
+		{
+			CardPreviewer previewer = (CardPreviewer) new CardPreviewer(imgFileContent, thumbCache).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, file);
+			runningTasks.put(imgFileContent, previewer);
+		}
+		
+		View cardBg = viewHolder.getViewById(R.id.layoutCard); 
+		if (isSelected(file)) cardBg.setBackgroundResource(R.drawable.card_selected);
+		else cardBg.setBackgroundResource(R.drawable.card);
+		view.setBackgroundResource(android.R.color.transparent);
 		return view;
 	}
 	
