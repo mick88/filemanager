@@ -44,9 +44,18 @@ public class CardPreviewer extends AsyncTask<File, Void, Bitmap>
 	protected Bitmap doInBackground(File... params)
 	{
 		file = params[0];
-		if (thumbCache.containsKey(file))
-			return thumbCache.get(file);
-		return getPreview(file);
+		try
+		{
+			if (thumbCache.containsKey(file))
+				return thumbCache.get(file);
+			return getPreview(file);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 	
 	@Override
