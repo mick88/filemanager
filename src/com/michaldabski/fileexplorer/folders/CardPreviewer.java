@@ -12,7 +12,7 @@ import com.michaldabski.fileexplorer.R;
 
 public class CardPreviewer extends AsyncTask<File, Void, Bitmap>
 {
-	private static final int THUMBNAIL_SIZE = 512;
+	private static final int THUMBNAIL_SIZE = 256;
 	final ImageView imageView;
 	final Map<File, Bitmap> thumbCache;
 	File file;
