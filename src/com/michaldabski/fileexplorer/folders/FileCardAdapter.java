@@ -6,33 +6,30 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.michaldabski.fileexplorer.R;
+import com.michaldabski.utils.FilePreviewCache;
 import com.michaldabski.utils.ViewHolder;
 
 public class FileCardAdapter extends FileAdapter
 {
-	Map<File, Bitmap> thumbCache = new HashMap<File, Bitmap>();
+	private final FilePreviewCache thumbCache;
 	Map<ImageView, CardPreviewer> runningTasks = new HashMap<ImageView, CardPreviewer>();
 	
-	public FileCardAdapter(Context context, File[] files)
+	public FileCardAdapter(Context context, File[] files, FilePreviewCache previewCache)
 	{
 		super(context, R.layout.list_item_file_card, files);
+		this.thumbCache = previewCache;
 	}
 	
-	public FileCardAdapter(Context context, List<File> files)
+	public FileCardAdapter(Context context, List<File> files, FilePreviewCache previewCache)
 	{
 		super(context, R.layout.list_item_file_card, files);
-	}
-	
-	public void setThumbCache(Map<File, Bitmap> thumbCache)
-	{
-		this.thumbCache = thumbCache;
+		this.thumbCache = previewCache;
 	}
 	
 	@Override
@@ -47,7 +44,7 @@ public class FileCardAdapter extends FileAdapter
 			runningTasks.remove(imgFileContent);
 		}
 		File file = getItem(position);
-		if (thumbCache.containsKey(file))
+		if (thumbCache.get(file) != null)
 			imgFileContent.setImageBitmap(thumbCache.get(file));
 		else
 		{

@@ -6,10 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -19,13 +17,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.util.LruCache;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -55,6 +51,7 @@ import com.michaldabski.fileexplorer.clipboard.Clipboard.FileAction;
 import com.michaldabski.fileexplorer.clipboard.FileOperationListener;
 import com.michaldabski.fileexplorer.folders.FileAdapter.OnFileSelectedListener;
 import com.michaldabski.utils.AsyncResult;
+import com.michaldabski.utils.FilePreviewCache;
 import com.michaldabski.utils.FileUtils;
 import com.michaldabski.utils.OnResultListener;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -71,7 +68,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	}
 
 	private static final String LOG_TAG = "FolderFragment";
-	private final int DISTANCE_TO_HIDE_ACTIONBAR = 0;
+	private final int DISTANCE_TO_HIDE_ACTIONBAR = 0; 
 	public static final String 
 		EXTRA_DIR = "directory",
 		EXTRA_SELECTED_FILES = "selected_files",
@@ -89,7 +86,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	private ShareActionProvider shareActionProvider;
 	// set to true when selection shouldnt be cleared from switching out fragments
 	boolean preserveSelection = false;
-	Map<File, Bitmap> thumbCache;
+	FilePreviewCache thumbCache;
 	
 	public ListView getListView()
 	{
@@ -180,7 +177,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	{
 		super.onLowMemory();
 		if (thumbCache != null)
-			thumbCache.clear();
+			thumbCache.trimToSize(1024*1024);
 	}
 	void loadFileList()
 	{
@@ -230,9 +227,8 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 					}
 					if (FileUtils.isMediaDirectory(currentDir)) 
 					{
-						if (thumbCache == null) thumbCache = new HashMap<File, Bitmap>();
-						adapter = new FileCardAdapter(getActivity(), files);
-						((FileCardAdapter) adapter).setThumbCache(thumbCache);
+						if (thumbCache == null) thumbCache = new FilePreviewCache();
+						adapter = new FileCardAdapter(getActivity(), files, thumbCache);
 					}
 					else adapter = new FileAdapter(getActivity(), files);
 					adapter.setSelectedFiles(selectedFiles);

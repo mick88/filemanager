@@ -1,7 +1,6 @@
 package com.michaldabski.fileexplorer.folders;
 
 import java.io.File;
-import java.util.Map;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,15 +8,16 @@ import android.os.AsyncTask;
 import android.widget.ImageView;
 
 import com.michaldabski.fileexplorer.R;
+import com.michaldabski.utils.FilePreviewCache;
 
 public class CardPreviewer extends AsyncTask<File, Void, Bitmap>
 {
 	private static final int THUMBNAIL_SIZE = 256;
 	final ImageView imageView;
-	final Map<File, Bitmap> thumbCache;
+	final FilePreviewCache thumbCache;
 	File file;
 	
-	public CardPreviewer(ImageView imageView, Map<File, Bitmap> thumbCache) 
+	public CardPreviewer(ImageView imageView, FilePreviewCache thumbCache) 
 	{
 		this.imageView = imageView;
 		this.thumbCache = thumbCache;
@@ -46,9 +46,9 @@ public class CardPreviewer extends AsyncTask<File, Void, Bitmap>
 		file = params[0];
 		try
 		{
-			if (thumbCache.containsKey(file))
-				return thumbCache.get(file);
-			return getPreview(file);
+			Bitmap bitmap = thumbCache.get(file);
+			if (bitmap == null) bitmap = getPreview(file);
+			return bitmap;
 		}
 		catch (Exception e)
 		{
