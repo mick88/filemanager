@@ -28,11 +28,30 @@ import com.michaldabski.filemanager.R;
 
 public class FileUtils
 {
+	public static class DirectoryNotEmptyException extends IOException
+	{
+		private static final long serialVersionUID = 1L;
+
+		public DirectoryNotEmptyException(File file)
+		{
+			super("Directory "+file.getName()+" is not empty");
+		}
+	}
+	
+	public static class FileAlreadyExistsException extends IOException
+	{
+		private static final long serialVersionUID = 1L;
+
+		public FileAlreadyExistsException(File file)
+		{
+			super("File "+file.getName()+" already exists in destination");
+		}
+	}
+	
 	@SuppressLint("SdCardPath")
 	private static final String SDCARD_DISPLAY_NAME = "/sdcard";
-
 	private static final double FILE_APP_ICON_SCALE = 0.2;
-
+	
 	public final static int 
 		KILOBYTE = 1024,
 		MEGABYTE = KILOBYTE * 1024,
@@ -251,13 +270,14 @@ public class FileUtils
 	    out.close();
 	}
 	
-	public static void deleteEmptyFolders(Collection<File> directories)
+	public static void deleteEmptyFolders(Collection<File> directories) throws DirectoryNotEmptyException
 	{
 		for (File file : directories) if (file.isDirectory())
 		{			
 			deleteFiles(Arrays.asList(file.listFiles()));
 			file.delete();
 		}
+		else throw new DirectoryNotEmptyException(file);
 	}
 	
 	public static int deleteFiles(Collection<File> files)

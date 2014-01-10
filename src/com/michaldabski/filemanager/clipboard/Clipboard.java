@@ -2,6 +2,7 @@ package com.michaldabski.filemanager.clipboard;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.channels.AlreadyConnectedException;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +17,7 @@ import java.util.Set;
 import android.util.Log;
 
 import com.michaldabski.utils.FileUtils;
+import com.michaldabski.utils.FileUtils.DirectoryNotEmptyException;
 
 public class Clipboard
 {
@@ -85,11 +87,21 @@ public class Clipboard
 			destinationDir = new File(destinationDir, file.getName());
 			for (File f : file.listFiles())
 				pasteFile(f, destinationDir, fileAction, fileOperationListener);
-			FileUtils.deleteEmptyFolders(Arrays.asList(file));
+			try
+			{
+				if (files.get(file) == FileAction.Cut)
+					FileUtils.deleteEmptyFolders(Arrays.asList(file));
+			}
+			catch (DirectoryNotEmptyException e)
+			{
+				e.printStackTrace();
+			}
 		}
 		else
 		{
 			File newFile = new File(destinationDir, file.getName());
+			if (newFile.exists())
+				throw new FileUtils.FileAlreadyExistsException(newFile);
 			if (fileAction == FileAction.Cut)
 				file.renameTo(newFile);
 			else if (fileAction == FileAction.Copy)
