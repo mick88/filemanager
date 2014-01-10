@@ -669,16 +669,28 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			
 			if (shareActionProvider != null)
 			{
-				ArrayList<Uri> fileUris = new ArrayList<Uri>(selectedFiles.size());
-				
-				for (File file : selectedFiles) if (file.isDirectory() == false)
+				final Intent shareIntent;
+				if (selectedFiles.isEmpty()) shareIntent = null;
+				else if (selectedFiles.size() == 1)
 				{
-					fileUris.add(Uri.fromFile(file));
+					File file = (File) selectedFiles.toArray()[0];
+					shareIntent = new Intent(Intent.ACTION_SEND);
+					shareIntent.setType(FileUtils.getFileMimeType(file));
+					shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
 				}
+				else
+				{
+					ArrayList<Uri> fileUris = new ArrayList<Uri>(selectedFiles.size());
+					
+					for (File file : selectedFiles) if (file.isDirectory() == false)
+					{
+						fileUris.add(Uri.fromFile(file));
+					}
+					shareIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+					shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, fileUris);
+					shareIntent.setType(FileUtils.getCollectiveMimeType(selectedFiles));
+				}			
 				
-				Intent shareIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-				shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, fileUris);
-				shareIntent.setType(FileUtils.getCollectiveMimeType(selectedFiles));
 				shareActionProvider.setShareIntent(shareIntent);
 			}
 		}
