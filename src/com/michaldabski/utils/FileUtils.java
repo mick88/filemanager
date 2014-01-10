@@ -16,6 +16,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.webkit.MimeTypeMap;
 
@@ -23,6 +25,8 @@ import com.michaldabski.fileexplorer.R;
 
 public class FileUtils
 {
+	private static final double FILE_APP_ICON_SCALE = 0.2;
+
 	public final static int 
 		KILOBYTE = 1024,
 		MEGABYTE = KILOBYTE * 1024,
@@ -301,6 +305,16 @@ public class FileUtils
 			bitmap = Bitmap.createBitmap(folderBitmap.getWidth(), folderBitmap.getHeight(), Bitmap.Config.ARGB_8888);
 			canvas = new Canvas(bitmap);
 			canvas.drawBitmap(folderBitmap, 0, 0, null);
+			
+			Drawable appIcon = IntentUtils.getAppIconForFile(file, context);
+			Rect bounds = canvas.getClipBounds();
+			int shrinkage = (int)(bounds.width() * FILE_APP_ICON_SCALE);
+			bounds.left += shrinkage;
+			bounds.right -= shrinkage;
+			bounds.top += shrinkage * 1.5;
+			bounds.bottom -= shrinkage * 0.5;
+			appIcon.setBounds(bounds);
+			appIcon.draw(canvas);
 		}
 		
 		// add shortcut symbol
