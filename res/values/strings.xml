@@ -23,6 +23,7 @@
     <string name="share">Share</string>
     <string name="_d_files_deleted">%d files deleted</string>
     <string name="add_to_homescreen">Create shortcut</string>
+    <string name="add_to_homescreen_multiple">Create shortcuts</string>
     <string name="shortcut_created">Shortcut added to homescreen</string>
     <string name="bookmarks">Bookmarks</string>
     <string name="system">System</string>

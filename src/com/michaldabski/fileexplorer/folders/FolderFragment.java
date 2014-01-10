@@ -739,10 +739,12 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		if (count == 1)
 		{
 			menu.findItem(R.id.action_rename).setVisible(true);
+			menu.findItem(R.id.menu_add_homescreen_icon).setTitle(R.string.add_to_homescreen);
 		}
 		else
 		{
 			menu.findItem(R.id.action_rename).setVisible(false);
+			menu.findItem(R.id.menu_add_homescreen_icon).setTitle(R.string.add_to_homescreen_multiple);
 		}
 		
 		// show Share button if no folder was selected
