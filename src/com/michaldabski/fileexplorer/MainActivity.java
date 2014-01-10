@@ -22,7 +22,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.michaldabski.fileexplorer.clipboard.Clipboard;
 import com.michaldabski.fileexplorer.clipboard.Clipboard.ClipboardListener;
@@ -283,25 +282,14 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 		invalidateOptionsMenu();
 		
 		ListView clipboardListView = (ListView) findViewById(R.id.listClipboard);
-		TextView tvMessage = (TextView) findViewById(R.id.tvClipboardMessage);
 		
-		if (clipboard.isEmpty())
+		if (clipboard.isEmpty() && drawerLayout != null)
 			drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, Gravity.END);
-		else drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, Gravity.END);
-		
-		if (clipboardListView != null)
+		else 
 		{
-			if (clipboard.isEmpty())
-			{
-				clipboardListView.setVisibility(View.GONE);
-				tvMessage.setVisibility(View.VISIBLE);
-			}
-			else
-			{
-				clipboardListView.setVisibility(View.VISIBLE);
-				tvMessage.setVisibility(View.GONE);
+			drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, Gravity.END);
+			if (clipboardListView != null)
 				clipboardListView.setAdapter(new ClipboardFileAdapter(this, clipboard));
-			}
 		}
 	}
 	
