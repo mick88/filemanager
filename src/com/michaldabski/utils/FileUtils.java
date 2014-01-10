@@ -13,16 +13,20 @@ import java.util.List;
 import java.util.Locale;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.webkit.MimeTypeMap;
 
-import com.michaldabski.fileexplorer.MainActivity;
 import com.michaldabski.fileexplorer.R;
 
 public class FileUtils
 {
+	private static final double FILE_APP_ICON_SCALE = 0.2;
+
 	public final static int 
 		KILOBYTE = 1024,
 		MEGABYTE = KILOBYTE * 1024,
@@ -133,36 +137,6 @@ public class FileUtils
 	public static String getFileMimeType(File file)
 	{
 		return MimeTypeMap.getSingleton().getMimeTypeFromExtension(getFileExtension(file));
-	}
-	
-	public static Intent createFileOpenIntent(File file)
-	{
-		Intent intent = new Intent(Intent.ACTION_VIEW);		
-		String mimeType = getFileMimeType(file);
-		intent.setDataAndType(Uri.fromFile(file), mimeType);
-		return intent;
-	}
-	
-	public static void createShortcut(Context context, File file)
-	{
-		final Intent shortcutIntent;
-		if (file.isDirectory())
-		{
-			shortcutIntent = new Intent(context, MainActivity.class);
-			shortcutIntent.putExtra(MainActivity.EXTRA_DIR, file.getAbsolutePath());
-		}
-		else 
-		{
-			shortcutIntent = createFileOpenIntent(file);
-		}
-		
-		Intent addIntent = new Intent();
-		addIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
-		addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, file.getName());
-		addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, 
-				Intent.ShortcutIconResource.fromContext(context, getFileIconResource(file)));
-		addIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-		context.sendBroadcast(addIntent);
 	}
 	
 	public static int getNumFilesInFolder(File folder)
@@ -309,6 +283,44 @@ public class FileUtils
 		{
 			return R.drawable.icon_file;
 		}
+	}
+	
+	public static Bitmap createFileHomescreenIcon(File file, Context context)
+	{
+		final Bitmap bitmap;
+		final Canvas canvas;
+		if (file.isDirectory())
+		{
+			// load Folder bitmap
+			Bitmap folderBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_home_folder);
+			
+			bitmap = Bitmap.createBitmap(folderBitmap.getWidth(), folderBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+			canvas = new Canvas(bitmap);
+			canvas.drawBitmap(folderBitmap, 0, 0, null);
+		}
+		else
+		{
+			Bitmap folderBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_home_file);
+			
+			bitmap = Bitmap.createBitmap(folderBitmap.getWidth(), folderBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+			canvas = new Canvas(bitmap);
+			canvas.drawBitmap(folderBitmap, 0, 0, null);
+			
+			Drawable appIcon = IntentUtils.getAppIconForFile(file, context);
+			Rect bounds = canvas.getClipBounds();
+			int shrinkage = (int)(bounds.width() * FILE_APP_ICON_SCALE);
+			bounds.left += shrinkage;
+			bounds.right -= shrinkage;
+			bounds.top += shrinkage * 1.5;
+			bounds.bottom -= shrinkage * 0.5;
+			appIcon.setBounds(bounds);
+			appIcon.draw(canvas);
+		}
+		
+		// add shortcut symbol
+		canvas.drawBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.shortcut), 0, 0, null);
+		
+		return  bitmap;
 	}
 	
 	public static int countFilesIn(Collection<File> roots)

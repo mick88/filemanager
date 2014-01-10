@@ -12,23 +12,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.michaldabski.fileexplorer.R;
+import com.michaldabski.utils.FileIconResolver;
 import com.michaldabski.utils.FileUtils;
+import com.michaldabski.utils.IntentUtils;
 import com.michaldabski.utils.ViewHolder;
 
 public class BaseFileAdapter extends ArrayAdapter<File>
 {	
 	protected final int layoutId; 
+	final FileIconResolver fileIconResolver;
 	
 	public BaseFileAdapter(Context context, int resource, File[] objects)
 	{
 		super(context, resource, objects);
 		this.layoutId = resource;
+		fileIconResolver = new FileIconResolver(context);
 	}
 	
 	public BaseFileAdapter(Context context, int resource, List<File> objects)
 	{
 		super(context, resource, objects);
 		this.layoutId = resource;
+		fileIconResolver = new FileIconResolver(context);
 	}
 
 	@Override
@@ -56,12 +61,14 @@ public class BaseFileAdapter extends ArrayAdapter<File>
 			int files = FileUtils.getNumFilesInFolder(file); 
 			if (files == 0) tvFileDetails.setText(R.string.folder_empty);
 			else tvFileDetails.setText(getContext().getString(R.string.folder, files));
+			imgIcon.setImageResource(FileUtils.getFileIconResource(file));
 		}
 		else
 		{			
 			tvFileDetails.setText(getContext().getString(R.string.size_s, FileUtils.formatFileSize(file)));
+			imgIcon.setImageDrawable(fileIconResolver.getFileIcon(file));
 		}
-		imgIcon.setImageResource(FileUtils.getFileIconResource(file));
+		
 			
 		return view;
 	}
