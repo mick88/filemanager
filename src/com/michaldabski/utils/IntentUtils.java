@@ -46,10 +46,7 @@ public class IntentUtils
 	
 	public static List<ResolveInfo> getAppsThatHandleFile(File file, Context context)
 	{
-		Intent intent = new Intent(Intent.ACTION_VIEW);
-		intent.setType(FileUtils.getFileMimeType(file));
-		intent.setData(Uri.fromFile(file));
-		return getAppsThatHandleIntent(intent, context);
+		return getAppsThatHandleIntent(createFileOpenIntent(file), context);
 	}
 	
 	public static List<ResolveInfo> getAppsThatHandleIntent(Intent intent, Context context)
