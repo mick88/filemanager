@@ -12,13 +12,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Environment;
 import android.webkit.MimeTypeMap;
 
-import com.michaldabski.fileexplorer.MainActivity;
 import com.michaldabski.fileexplorer.R;
 
 public class FileUtils
@@ -133,36 +129,6 @@ public class FileUtils
 	public static String getFileMimeType(File file)
 	{
 		return MimeTypeMap.getSingleton().getMimeTypeFromExtension(getFileExtension(file));
-	}
-	
-	public static Intent createFileOpenIntent(File file)
-	{
-		Intent intent = new Intent(Intent.ACTION_VIEW);		
-		String mimeType = getFileMimeType(file);
-		intent.setDataAndType(Uri.fromFile(file), mimeType);
-		return intent;
-	}
-	
-	public static void createShortcut(Context context, File file)
-	{
-		final Intent shortcutIntent;
-		if (file.isDirectory())
-		{
-			shortcutIntent = new Intent(context, MainActivity.class);
-			shortcutIntent.putExtra(MainActivity.EXTRA_DIR, file.getAbsolutePath());
-		}
-		else 
-		{
-			shortcutIntent = createFileOpenIntent(file);
-		}
-		
-		Intent addIntent = new Intent();
-		addIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
-		addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, file.getName());
-		addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, 
-				Intent.ShortcutIconResource.fromContext(context, getFileIconResource(file)));
-		addIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-		context.sendBroadcast(addIntent);
 	}
 	
 	public static int getNumFilesInFolder(File folder)

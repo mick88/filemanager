@@ -3,6 +3,8 @@ package com.michaldabski.utils;
 import java.io.File;
 import java.util.List;
 
+import com.michaldabski.fileexplorer.MainActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,6 +14,36 @@ import android.net.Uri;
 
 public class IntentUtils
 {
+	
+	public static Intent createFileOpenIntent(File file)
+	{
+		Intent intent = new Intent(Intent.ACTION_VIEW);		
+		intent.setDataAndType(Uri.fromFile(file), FileUtils.getFileMimeType(file));
+		return intent;
+	}
+	
+	public static void createShortcut(Context context, File file)
+	{
+		final Intent shortcutIntent;
+		if (file.isDirectory())
+		{
+			shortcutIntent = new Intent(context, MainActivity.class);
+			shortcutIntent.putExtra(MainActivity.EXTRA_DIR, file.getAbsolutePath());
+		}
+		else 
+		{
+			shortcutIntent = createFileOpenIntent(file);
+		}
+		
+		Intent addIntent = new Intent();
+		addIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+		addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, file.getName());
+		addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, 
+				Intent.ShortcutIconResource.fromContext(context, FileUtils.getFileIconResource(file)));
+		addIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+		context.sendBroadcast(addIntent);
+	}
+	
 	public static List<ResolveInfo> getAppsThatHandleFile(File file, Context context)
 	{
 		Intent intent = new Intent(Intent.ACTION_VIEW);

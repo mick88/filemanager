@@ -53,6 +53,7 @@ import com.michaldabski.fileexplorer.folders.FileAdapter.OnFileSelectedListener;
 import com.michaldabski.utils.AsyncResult;
 import com.michaldabski.utils.FilePreviewCache;
 import com.michaldabski.utils.FileUtils;
+import com.michaldabski.utils.IntentUtils;
 import com.michaldabski.utils.OnResultListener;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
@@ -522,7 +523,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		if (file.isDirectory())
 			throw new IllegalArgumentException("File cannot be a directory!");
 		
-		Intent intent = FileUtils.createFileOpenIntent(file);
+		Intent intent = IntentUtils.createFileOpenIntent(file);
 
 		try
 		{
@@ -647,7 +648,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			case R.id.menu_add_homescreen_icon:
 
 				for (File file : selectedFiles)
-					FileUtils.createShortcut(getActivity(), file);
+					IntentUtils.createShortcut(getActivity(), file);
 				Toast.makeText(getActivity(), R.string.shortcut_created, Toast.LENGTH_SHORT).show();
 				actionMode.finish();
 				return true;
