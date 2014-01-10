@@ -251,6 +251,15 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 	{
 		return super.onPrepareOptionsMenu(menu);
 	}
+	
+	public FolderFragment getFolderFragment()
+	{
+		Fragment fragment = getFragmentManager().findFragmentById(R.id.fragment);
+		if (fragment instanceof FolderFragment)
+			return (FolderFragment) fragment;
+		else return null;
+		
+	}
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
