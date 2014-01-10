@@ -55,7 +55,7 @@ public class FileCardAdapter extends FileAdapter
 		View cardBg = viewHolder.getViewById(R.id.layoutCard); 
 		if (isSelected(file)) cardBg.setBackgroundResource(R.drawable.card_selected);
 		else cardBg.setBackgroundResource(R.drawable.card);
-		view.setBackgroundResource(android.R.color.transparent);
+		view.setBackgroundResource(R.color.color_window_background);
 		return view;
 	}
 	
