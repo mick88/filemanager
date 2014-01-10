@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.michaldabski.fileexplorer.R;
 import com.michaldabski.utils.FileUtils;
+import com.michaldabski.utils.IntentUtils;
 import com.michaldabski.utils.ViewHolder;
 
 public class BaseFileAdapter extends ArrayAdapter<File>
@@ -56,12 +57,14 @@ public class BaseFileAdapter extends ArrayAdapter<File>
 			int files = FileUtils.getNumFilesInFolder(file); 
 			if (files == 0) tvFileDetails.setText(R.string.folder_empty);
 			else tvFileDetails.setText(getContext().getString(R.string.folder, files));
+			imgIcon.setImageResource(FileUtils.getFileIconResource(file));
 		}
 		else
 		{			
 			tvFileDetails.setText(getContext().getString(R.string.size_s, FileUtils.formatFileSize(file)));
+			imgIcon.setImageDrawable(IntentUtils.getAppIconForFile(file, getContext()));
 		}
-		imgIcon.setImageResource(FileUtils.getFileIconResource(file));
+		
 			
 		return view;
 	}
