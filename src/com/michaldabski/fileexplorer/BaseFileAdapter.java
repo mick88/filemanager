@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.michaldabski.fileexplorer.R;
+import com.michaldabski.utils.FileIconResolver;
 import com.michaldabski.utils.FileUtils;
 import com.michaldabski.utils.IntentUtils;
 import com.michaldabski.utils.ViewHolder;
@@ -19,17 +20,20 @@ import com.michaldabski.utils.ViewHolder;
 public class BaseFileAdapter extends ArrayAdapter<File>
 {	
 	protected final int layoutId; 
+	final FileIconResolver fileIconResolver;
 	
 	public BaseFileAdapter(Context context, int resource, File[] objects)
 	{
 		super(context, resource, objects);
 		this.layoutId = resource;
+		fileIconResolver = new FileIconResolver(context);
 	}
 	
 	public BaseFileAdapter(Context context, int resource, List<File> objects)
 	{
 		super(context, resource, objects);
 		this.layoutId = resource;
+		fileIconResolver = new FileIconResolver(context);
 	}
 
 	@Override
@@ -62,7 +66,7 @@ public class BaseFileAdapter extends ArrayAdapter<File>
 		else
 		{			
 			tvFileDetails.setText(getContext().getString(R.string.size_s, FileUtils.formatFileSize(file)));
-			imgIcon.setImageDrawable(IntentUtils.getAppIconForFile(file, getContext()));
+			imgIcon.setImageDrawable(fileIconResolver.getFileIcon(file));
 		}
 		
 			
