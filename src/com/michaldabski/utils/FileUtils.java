@@ -12,6 +12,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.os.Environment;
 import android.webkit.MimeTypeMap;
 
@@ -275,6 +279,34 @@ public class FileUtils
 		{
 			return R.drawable.icon_file;
 		}
+	}
+	
+	public static Bitmap createFileHomescreenIcon(File file, Context context)
+	{
+		final Bitmap bitmap;
+		final Canvas canvas;
+		if (file.isDirectory())
+		{
+			// load Folder bitmap
+			Bitmap folderBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_home_folder);
+			
+			bitmap = Bitmap.createBitmap(folderBitmap.getWidth(), folderBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+			canvas = new Canvas(bitmap);
+			canvas.drawBitmap(folderBitmap, 0, 0, null);
+		}
+		else
+		{
+			Bitmap folderBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_home_file);
+			
+			bitmap = Bitmap.createBitmap(folderBitmap.getWidth(), folderBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+			canvas = new Canvas(bitmap);
+			canvas.drawBitmap(folderBitmap, 0, 0, null);
+		}
+		
+		// add shortcut symbol
+		canvas.drawBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.shortcut), 0, 0, null);
+		
+		return  bitmap;
 	}
 	
 	public static int countFilesIn(Collection<File> roots)
