@@ -53,6 +53,7 @@ import com.michaldabski.filemanager.favourites.FavouritesManager;
 import com.michaldabski.filemanager.favourites.FavouritesManager.FolderAlreadyFavouriteException;
 import com.michaldabski.filemanager.folders.FileAdapter.OnFileSelectedListener;
 import com.michaldabski.utils.AsyncResult;
+import com.michaldabski.utils.FilePreviewCache;
 import com.michaldabski.utils.FileUtils;
 import com.michaldabski.utils.FontApplicator;
 import com.michaldabski.utils.IntentUtils;
@@ -80,6 +81,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	private ShareActionProvider shareActionProvider;
 	// set to true when selection shouldnt be cleared from switching out fragments
 	boolean preserveSelection = false;
+	FilePreviewCache thumbCache;
 	
 	public ListView getListView()
 	{
@@ -190,7 +192,18 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			listView.setFastScrollAlwaysVisible(true);
 		return view;
 	}
-	
+
+	@Override
+	public void onLowMemory()
+	{
+		super.onLowMemory();
+		if (thumbCache != null)
+		{
+			if (getView() == null) thumbCache.evictAll();
+			else thumbCache.trimToSize(1024*1024);
+		}
+	}
+
 	void loadFileList()
 	{
 		if (loadFilesTask != null) return;
@@ -238,6 +251,12 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 						return;
 					}
 					adapter = new FileAdapter(getActivity(), files, getApplication().getFileIconResolver());
+					if (FileUtils.isMediaDirectory(currentDir)) 
+					{
+						if (thumbCache == null) thumbCache = new FilePreviewCache();
+						adapter = new FileCardAdapter(getActivity(), files, thumbCache);
+					}
+					else adapter = new FileAdapter(getActivity(), files);
 					adapter.setSelectedFiles(selectedFiles);
 					adapter.setOnFileSelectedListener(FolderFragment.this);
 					adapter.setFontApplicator(getFontApplicator());
@@ -528,6 +547,8 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	{
 		if (loadFilesTask != null)
 			loadFilesTask.cancel(true);
+		if (thumbCache != null)
+			thumbCache.evictAll();
 		super.onDestroy();
 	}
 	
