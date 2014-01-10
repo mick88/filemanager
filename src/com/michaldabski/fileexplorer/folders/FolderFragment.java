@@ -258,11 +258,13 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		menu.findItem(R.id.menu_navigate_up).setVisible(currentDir.getParentFile() != null);
 	}
 	
-	void showEditTextDialog(int title, int okButtonText, final OnResultListener<CharSequence> enteredTextResult, CharSequence hint)
+	void showEditTextDialog(int title, int okButtonText, final OnResultListener<CharSequence> enteredTextResult, CharSequence hint, CharSequence defaultValue)
 	{
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_edittext, (ViewGroup) getActivity().getWindow().getDecorView(), false);
 		final EditText editText = (EditText) view.findViewById(android.R.id.edit);
 		editText.setHint(hint);
+		editText.setText(defaultValue);
+		editText.setSelection(defaultValue.length());
 		
 		new AlertDialog.Builder(getActivity())
 			.setTitle(title)
@@ -328,7 +330,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 							Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
 						}						
 					}
-				}, "");
+				}, "", "");
 				return true;
 				
 			case R.id.menu_paste:
@@ -642,6 +644,32 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 				return true;
 				
 			case R.id.action_rename:
+				final File fileToRename = (File) selectedFiles.toArray()[0];
+				showEditTextDialog(fileToRename.isDirectory()?R.string.rename_folder:R.string.rename_file, R.string.rename, new OnResultListener<CharSequence>()
+				{
+					
+					@Override
+					public void onResult(AsyncResult<CharSequence> result)
+					{
+						try
+						{
+							String newName = result.getResult().toString();
+							if (fileToRename.renameTo(new File(fileToRename.getParentFile(), newName)))
+							{
+								finishActionMode(false);
+								refreshFolder();
+								Toast.makeText(getActivity(), R.string.file_renamed, Toast.LENGTH_SHORT).show();
+							}
+							else Toast.makeText(getActivity(), getActivity().getString(R.string.file_could_not_be_renamed_to_s, newName), Toast.LENGTH_SHORT).show();
+						} 
+						catch (Exception e)
+						{
+							e.printStackTrace();
+							Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+						}
+						
+					}
+				}, fileToRename.getName(), fileToRename.getName());
 				return true;
 			
 			case R.id.menu_add_homescreen_icon:

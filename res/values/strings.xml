@@ -55,5 +55,9 @@
     <string name="app_icon">App icon</string>
     <string name="up">Up</string>
     <string name="error">Error</string>
+    <string name="rename_file">Rename file</string>
+    <string name="rename_folder">Rename folder</string>
+    <string name="file_renamed">File renamed</string>
+    <string name="file_could_not_be_renamed_to_s">File could not be renamed to %s</string>
 
 </resources>
