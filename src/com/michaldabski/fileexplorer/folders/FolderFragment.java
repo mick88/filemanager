@@ -225,12 +225,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 						showMessage(R.string.folder_empty);
 						return;
 					}
-					if (FileUtils.isMediaDirectory(currentDir)) 
-					{
-						if (thumbCache == null) thumbCache = new FilePreviewCache();
-						adapter = new FileCardAdapter(getActivity(), files, thumbCache);
-					}
-					else adapter = new FileAdapter(getActivity(), files);
+					adapter = new FileAdapter(getActivity(), files);
 					adapter.setSelectedFiles(selectedFiles);
 					adapter.setOnFileSelectedListener(FolderFragment.this);
 					
