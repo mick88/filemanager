@@ -379,86 +379,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 				return true;
 				
 			case R.id.menu_paste:
-				new AsyncTask<Clipboard, Float, Exception>()
-				{
-
-					ProgressDialog progressDialog;
-					
-					@Override
-					protected void onPreExecute()
-					{
-						super.onPreExecute();
-						progressDialog = new ProgressDialog(getActivity());
-						progressDialog.setTitle(getActivity().getString(R.string.pasting_files_));
-						progressDialog.setIndeterminate(false);
-						progressDialog.setCancelable(false);
-						progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-						progressDialog.show();
-					}
-					
-					@Override
-					protected void onProgressUpdate(Float... values) 
-					{
-						float progress = values[0];
-						progressDialog.setMax(100);
-						progressDialog.setProgress((int) (progress * 100));
-					}
-					@Override
-					protected Exception doInBackground(Clipboard... params)
-					{
-						try
-						{
-							final int total = FileUtils.countFilesIn(params[0].getFiles());
-							final int[] progress = {0};
-							params[0].paste(currentDir, new FileOperationListener()
-							{								
-								@Override
-								public void onFileProcessed(String filename)
-								{
-									progress[0]++;
-									publishProgress((float)progress[0] / (float)total);
-								}
-								
-								@Override
-								public boolean isOperationCancelled()
-								{
-									return isCancelled();
-								}
-							});
-							return null;
-						} catch (IOException e)
-						{
-							e.printStackTrace();
-							return e;
-						}
-					}
-					
-					@Override
-					protected void onCancelled() {
-						progressDialog.dismiss();
-						refreshFolder();
-					};
-					
-					@Override
-					protected void onPostExecute(Exception result) {
-						progressDialog.dismiss();
-						refreshFolder();
-						if (result == null)
-						{
-							Clipboard.getInstance().clear();
-							Toast.makeText(getActivity(), R.string.files_pasted, Toast.LENGTH_SHORT).show();
-						}
-						else
-						{
-							new AlertDialog.Builder(getActivity())
-								.setMessage(result.getMessage())
-								.setPositiveButton(android.R.string.ok, null)
-								.show();
-						}
-					};
-					
-				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Clipboard.getInstance());
-				
+				pasteFiles();				
 				return true;
 				
 			case R.id.menu_refresh:
@@ -466,6 +387,89 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 				return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public void pasteFiles()
+	{
+		new AsyncTask<Clipboard, Float, Exception>()
+		{
+
+			ProgressDialog progressDialog;
+			
+			@Override
+			protected void onPreExecute()
+			{
+				super.onPreExecute();
+				progressDialog = new ProgressDialog(getActivity());
+				progressDialog.setTitle(getActivity().getString(R.string.pasting_files_));
+				progressDialog.setIndeterminate(false);
+				progressDialog.setCancelable(false);
+				progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+				progressDialog.show();
+			}
+			
+			@Override
+			protected void onProgressUpdate(Float... values) 
+			{
+				float progress = values[0];
+				progressDialog.setMax(100);
+				progressDialog.setProgress((int) (progress * 100));
+			}
+			@Override
+			protected Exception doInBackground(Clipboard... params)
+			{
+				try
+				{
+					final int total = FileUtils.countFilesIn(params[0].getFiles());
+					final int[] progress = {0};
+					params[0].paste(currentDir, new FileOperationListener()
+					{								
+						@Override
+						public void onFileProcessed(String filename)
+						{
+							progress[0]++;
+							publishProgress((float)progress[0] / (float)total);
+						}
+						
+						@Override
+						public boolean isOperationCancelled()
+						{
+							return isCancelled();
+						}
+					});
+					return null;
+				} catch (IOException e)
+				{
+					e.printStackTrace();
+					return e;
+				}
+			}
+			
+			@Override
+			protected void onCancelled() {
+				progressDialog.dismiss();
+				refreshFolder();
+			};
+			
+			@Override
+			protected void onPostExecute(Exception result) {
+				progressDialog.dismiss();
+				refreshFolder();
+				if (result == null)
+				{
+					Clipboard.getInstance().clear();
+					Toast.makeText(getActivity(), R.string.files_pasted, Toast.LENGTH_SHORT).show();
+				}
+				else
+				{
+					new AlertDialog.Builder(getActivity())
+						.setMessage(result.getMessage())
+						.setPositiveButton(android.R.string.ok, null)
+						.show();
+				}
+			};
+			
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Clipboard.getInstance());
 	}
 	
 	@Override
