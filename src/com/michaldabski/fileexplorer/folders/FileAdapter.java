@@ -77,17 +77,17 @@ public class FileAdapter extends BaseFileAdapter
 		
 		if (isSelected(file))
 		{
-			view.setBackgroundResource(R.drawable.list_item_selected);
+			view.setBackgroundResource(R.drawable.selector_list_item_selected);
 			imgIcon.setImageResource(R.drawable.icon_selected);
 		}
 		else
 		{
-			view.setBackgroundResource(R.drawable.list_item);
+			view.setBackgroundResource(R.drawable.selector_list_item);
 		}
 		
 		if (onFileSelectedListener != null)
 		{
-			imgIcon.setBackgroundResource(R.drawable.list_item);
+			imgIcon.setBackgroundResource(R.drawable.selector_list_item);
 			imgIcon.setOnClickListener(new OnClickListener()
 			{
 				
