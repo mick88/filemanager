@@ -307,6 +307,11 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 				break;
 				
 			case R.id.listClipboard:
+				FolderFragment folderFragment = getFolderFragment();
+				if (folderFragment != null)
+				{
+					// TODO: paste single file
+				}
 				break;
 			
 			default:
