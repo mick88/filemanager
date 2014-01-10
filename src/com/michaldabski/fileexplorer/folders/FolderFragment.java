@@ -532,6 +532,14 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		{
 			startActivity(Intent.createChooser(intent, getString(R.string.open_file_with_, file.getName())));
 		}
+		catch (Exception e)
+		{
+			new AlertDialog.Builder(getActivity())
+				.setMessage(e.getMessage())
+				.setTitle(R.string.error)
+				.setPositiveButton(android.R.string.ok, null)
+				.show();
+		}
 	}
 
 	@Override
