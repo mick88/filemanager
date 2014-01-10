@@ -53,8 +53,8 @@ public class FileCardAdapter extends FileAdapter
 		}
 		
 		View cardBg = viewHolder.getViewById(R.id.layoutCard); 
-		if (isSelected(file)) cardBg.setBackgroundResource(R.drawable.card_selected);
-		else cardBg.setBackgroundResource(R.drawable.card);
+		if (isSelected(file)) cardBg.setBackgroundResource(R.drawable.selector_card_selected);
+		else cardBg.setBackgroundResource(R.drawable.selector_card);
 		view.setBackgroundResource(R.color.color_window_background);
 		return view;
 	}
