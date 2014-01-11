@@ -322,8 +322,13 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			case R.id.menu_favourite:				
 				try
 				{
+					final String directoryName;
+					if (currentDir.equals(Environment.getExternalStorageDirectory()))
+						directoryName = getActivity().getString(R.string.sd_card);
+					else directoryName = currentDir.getName();
+					
 					FavouritesManager favouritesManager = getApplication().getFavouritesManager();
-					favouritesManager.addFavourite(new FavouriteFolder(currentDir));
+					favouritesManager.addFavourite(new FavouriteFolder(currentDir, directoryName));
 					getActivity().invalidateOptionsMenu();
 				} catch (FolderAlreadyFavouriteException e1)
 				{
