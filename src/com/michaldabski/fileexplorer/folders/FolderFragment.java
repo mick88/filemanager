@@ -245,14 +245,15 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 					adapter = new FileAdapter(getActivity(), files);
 					adapter.setSelectedFiles(selectedFiles);
 					adapter.setOnFileSelectedListener(FolderFragment.this);
+					setListAdapter(adapter);
 					
 				} catch (Exception e)
 				{
 					// exception was thrown while loading files
-					Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+					showMessage(e.getMessage());
 					adapter = new FileAdapter(getActivity());
 				}
-				setListAdapter(adapter);
+				
 				getActivity().invalidateOptionsMenu();
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, currentDir);
