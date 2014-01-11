@@ -50,7 +50,6 @@ import com.michaldabski.fileexplorer.clipboard.Clipboard.FileAction;
 import com.michaldabski.fileexplorer.clipboard.FileOperationListener;
 import com.michaldabski.fileexplorer.favourites.FavouriteFolder;
 import com.michaldabski.fileexplorer.favourites.FavouritesManager;
-import com.michaldabski.fileexplorer.favourites.FavouritesManager.FavouritesListener;
 import com.michaldabski.fileexplorer.favourites.FavouritesManager.FolderAlreadyFavouriteException;
 import com.michaldabski.fileexplorer.folders.FileAdapter.OnFileSelectedListener;
 import com.michaldabski.utils.AsyncResult;
@@ -326,9 +325,6 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 					FavouritesManager favouritesManager = getApplication().getFavouritesManager();
 					favouritesManager.addFavourite(new FavouriteFolder(currentDir));
 					getActivity().invalidateOptionsMenu();
-					
-					FavouritesListener listener = (FavouritesListener) getActivity();
-					listener.onFavouritesChanged();
 				} catch (FolderAlreadyFavouriteException e1)
 				{
 					e1.printStackTrace();
@@ -339,10 +335,6 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 				FavouritesManager favouritesManager = getApplication().getFavouritesManager();
 				favouritesManager.removeFavourite(currentDir);
 				getActivity().invalidateOptionsMenu();
-				
-				FavouritesListener listener = (FavouritesListener) getActivity();
-				listener.onFavouritesChanged();
-
 				return true;
 				
 			case R.id.menu_create_folder:

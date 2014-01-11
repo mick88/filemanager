@@ -1,7 +1,7 @@
 package com.michaldabski.fileexplorer;
 
 import java.io.File;
-import java.util.List;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -59,6 +59,8 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 	protected void onDestroy()
 	{
 		Clipboard.getInstance().removeListener(this);
+		FileExplorerApplication application = (FileExplorerApplication) getApplication();
+		application.getFavouritesManager().removeFavouritesListener(this);
 		super.onDestroy();
 	}
 	
@@ -160,21 +162,16 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 		getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 
-        loadFavourites();
+        FileExplorerApplication application = (FileExplorerApplication) getApplication();
+        loadFavourites(application.getFavouritesManager());
+        application.getFavouritesManager().addFavouritesListener(this);
 	}
 	
-	void loadFavourites()
+	void loadFavourites(FavouritesManager favouritesManager)
 	{
 		ListView listNavigation = (ListView) findViewById(R.id.listNavigation);
-		listNavigation.setAdapter(new NavDrawerAdapter(this, getNavDrawerItems()));
+		listNavigation.setAdapter(new NavDrawerAdapter(this, new ArrayList<NavDrawerAdapter.NavDrawerItem>(favouritesManager.getFolders())));
 		listNavigation.setOnItemClickListener(this);
-	}
-	
-	@SuppressWarnings("unchecked")
-	<T extends NavDrawerItem> List<T> getNavDrawerItems()
-	{
-		FileExplorerApplication application = (FileExplorerApplication) getApplication();
-		return (List<T>) application.getFavouritesManager().getFolders();
 	}
 	
 	@Override
@@ -298,9 +295,9 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 	}
 
 	@Override
-	public void onFavouritesChanged()
+	public void onFavouritesChanged(FavouritesManager favouritesManager)
 	{
-		loadFavourites();
+		loadFavourites(favouritesManager);
 	}
 	
 }

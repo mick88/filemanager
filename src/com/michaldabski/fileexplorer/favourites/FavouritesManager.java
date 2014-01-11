@@ -1,7 +1,9 @@
 package com.michaldabski.fileexplorer.favourites;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import android.content.Context;
 
@@ -21,16 +23,34 @@ public class FavouritesManager
 	
 	public static interface FavouritesListener
 	{
-		void onFavouritesChanged();
+		void onFavouritesChanged(FavouritesManager favouritesManager);
 	}
 	
 	private final List<FavouriteFolder> folders;
 	private final SQLiteHelper sqLiteHelper;
+	private final Set<FavouritesListener> favouritesListeners;
 
 	public FavouritesManager(Context context) 
 	{
 		this.sqLiteHelper = new SQLiteHelper(context);
+		this.favouritesListeners = new HashSet<FavouritesManager.FavouritesListener>();
 		this.folders = sqLiteHelper.selectAll(FavouriteFolder.class);
+	}
+	
+	public void addFavouritesListener(FavouritesListener favouritesListener)
+	{
+		favouritesListeners.add(favouritesListener);
+	}
+	
+	public void removeFavouritesListener(FavouritesListener favouritesListener)
+	{
+		favouritesListeners.remove(favouritesListener);
+	}
+	
+	void notifyListeners()
+	{
+		for (FavouritesListener listener : favouritesListeners)
+			listener.onFavouritesChanged(this);
 	}
 	
 	public List<FavouriteFolder> getFolders()
@@ -43,6 +63,7 @@ public class FavouritesManager
 		long id = sqLiteHelper.insert(favouriteFolder);
 		if (id == -1) throw new FolderAlreadyFavouriteException(favouriteFolder);
 		folders.add(favouriteFolder);
+		notifyListeners();
 	}
 	
 	public void removeFavourite(File file)
@@ -58,6 +79,7 @@ public class FavouritesManager
 	{
 		folders.remove(favouriteFolder);
 		sqLiteHelper.delete(favouriteFolder);
+		notifyListeners();
 	}
 	
 	public boolean isFolderFavourite(File file)
