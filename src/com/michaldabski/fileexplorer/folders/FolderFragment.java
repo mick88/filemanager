@@ -156,7 +156,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		loadFileList();
 	}
 	
-	void showMessage(int message)
+	void showMessage(CharSequence message)
 	{
 		View view = getView();
 		if (view != null)
@@ -168,6 +168,11 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			tvMessage.setText(message);
 					
 		}
+	}
+	
+	void showMessage(int message)
+	{
+		showMessage(getString(message));
 	}
 	
 	void showList()
