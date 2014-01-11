@@ -1,7 +1,6 @@
 package com.michaldabski.fileexplorer;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
@@ -9,7 +8,6 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -30,8 +28,6 @@ import com.michaldabski.fileexplorer.favourites.FavouritesManager;
 import com.michaldabski.fileexplorer.folders.FolderFragment;
 import com.michaldabski.fileexplorer.nav_drawer.NavDrawerAdapter;
 import com.michaldabski.fileexplorer.nav_drawer.NavDrawerAdapter.NavDrawerItem;
-import com.michaldabski.fileexplorer.nav_drawer.NavDrawerDivider;
-import com.michaldabski.fileexplorer.nav_drawer.NavDrawerShortcut;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class MainActivity extends Activity implements OnItemClickListener, ClipboardListener
@@ -172,8 +168,8 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 	@SuppressWarnings("unchecked")
 	<T extends NavDrawerItem> List<T> getNavDrawerItems()
 	{
-		FavouritesManager favouritesManager = new FavouritesManager(getApplicationContext());
-		return (List<T>) favouritesManager.getFolders();
+		FileExplorerApplication application = (FileExplorerApplication) getApplication();
+		return (List<T>) application.getFavouritesManager().getFolders();
 	}
 	
 	@Override
