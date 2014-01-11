@@ -157,7 +157,7 @@ public class FileUtils
 	public static int getNumFilesInFolder(File folder)
 	{
 		if (folder.isDirectory() == false) return 0;
-		String [] files = folder.list();
+		File [] files = folder.listFiles(DEFAULT_FILE_FILTER);
 		if (files == null) return 0;
 		return files.length;
 	}
@@ -213,7 +213,7 @@ public class FileUtils
 	{
 		if (directory.isDirectory())
 		{
-			for (File file : directory.listFiles())
+			for (File file : directory.listFiles(DEFAULT_FILE_FILTER))
 			{
 				if (file.isDirectory())
 					flattenDirectory(file, result);
