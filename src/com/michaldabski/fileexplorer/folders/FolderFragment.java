@@ -59,15 +59,6 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class FolderFragment extends Fragment implements OnItemClickListener, OnScrollListener, OnItemLongClickListener, MultiChoiceModeListener, OnFileSelectedListener
 {
-	public static final class FilterHidden implements FileFilter
-	{
-		@Override
-		public boolean accept(File file)
-		{
-			return file.isHidden() == false;
-		}
-	}
-
 	private static final String LOG_TAG = "FolderFragment";
 	private final int DISTANCE_TO_HIDE_ACTIONBAR = 0; 
 	public static final String 
@@ -206,7 +197,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			{
 				try
 				{
-					File[] files =params[0].listFiles(new FilterHidden());
+					File[] files =params[0].listFiles(FileUtils.DEFAULT_FILE_FILTER);
 					if (files == null)
 						throw new NullPointerException(getString(R.string.cannot_read_directory_s, params[0].getName()));
 					if (isCancelled())

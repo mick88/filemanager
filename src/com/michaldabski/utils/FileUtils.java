@@ -1,6 +1,7 @@
 package com.michaldabski.utils;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,6 +37,16 @@ public class FileUtils
 		MAX_MEGABYTE_SIZE = GIGABYTE / 2;
 	
 	public static final String MIME_TYPE_ANY = "*/*";
+	
+	public static final FileFilter DEFAULT_FILE_FILTER = new FileFilter()
+	{
+		
+		@Override
+		public boolean accept(File pathname)
+		{
+			return pathname.isHidden() == false;
+		}
+	};
 	
 	/**
 	 * Compares files by name, where directories come always first
