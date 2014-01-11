@@ -26,6 +26,7 @@ import android.widget.ListView;
 import com.michaldabski.fileexplorer.clipboard.Clipboard;
 import com.michaldabski.fileexplorer.clipboard.Clipboard.ClipboardListener;
 import com.michaldabski.fileexplorer.clipboard.ClipboardFileAdapter;
+import com.michaldabski.fileexplorer.favourites.FavouritesManager;
 import com.michaldabski.fileexplorer.folders.FolderFragment;
 import com.michaldabski.fileexplorer.nav_drawer.NavDrawerAdapter;
 import com.michaldabski.fileexplorer.nav_drawer.NavDrawerAdapter.NavDrawerItem;
@@ -168,18 +169,11 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 		// TODO: add favourites
 	}
 	
-	List<NavDrawerItem> getNavDrawerItems()
+	@SuppressWarnings("unchecked")
+	<T extends NavDrawerItem> List<T> getNavDrawerItems()
 	{
-		return Arrays.asList(
-				new NavDrawerDivider(getString(R.string.bookmarks)),
-				new NavDrawerShortcut(Environment.getExternalStorageDirectory(), getString(R.string.sd_card)),
-				new NavDrawerShortcut(Environment.getRootDirectory(), getString(R.string.system)),
-				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), getString(R.string.downloads)),
-				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), getString(R.string.music)),
-				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), getString(R.string.dcim)),
-				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), getString(R.string.pictures)),
-				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), getString(R.string.movies))
-			);
+		FavouritesManager favouritesManager = new FavouritesManager(getApplicationContext());
+		return (List<T>) favouritesManager.getFolders();
 	}
 	
 	@Override
