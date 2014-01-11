@@ -12,10 +12,11 @@ import android.widget.TextView;
 
 import com.michaldabski.fileexplorer.MainActivity;
 import com.michaldabski.fileexplorer.R;
+import com.michaldabski.fileexplorer.RobotoAdapter;
 import com.michaldabski.fileexplorer.nav_drawer.NavDrawerAdapter.NavDrawerItem;
 import com.michaldabski.utils.ViewHolder;
 
-public class NavDrawerAdapter extends ArrayAdapter<NavDrawerItem>
+public class NavDrawerAdapter extends RobotoAdapter<NavDrawerItem>
 {
 	private static final int TYPE_COUNT = 2;
 	
@@ -68,6 +69,7 @@ public class NavDrawerAdapter extends ArrayAdapter<NavDrawerItem>
 					throw new RuntimeException("Nav drawer item does not conform to available view types");
 			}
 			view.setTag(viewHolder = new ViewHolder(view));
+			applyFont(view);
 		}
 		else viewHolder = (ViewHolder) view.getTag();
 		

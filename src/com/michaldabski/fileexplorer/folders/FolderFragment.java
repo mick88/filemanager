@@ -54,6 +54,7 @@ import com.michaldabski.fileexplorer.favourites.FavouritesManager.FolderAlreadyF
 import com.michaldabski.fileexplorer.folders.FileAdapter.OnFileSelectedListener;
 import com.michaldabski.utils.AsyncResult;
 import com.michaldabski.utils.FileUtils;
+import com.michaldabski.utils.FontApplicator;
 import com.michaldabski.utils.IntentUtils;
 import com.michaldabski.utils.OnResultListener;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -96,6 +97,12 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			getView().findViewById(R.id.layoutMessage).setVisibility(View.GONE);
 			listView.setVisibility(View.VISIBLE);
 		}
+	}
+	
+	FontApplicator getFontApplicator()
+	{
+		MainActivity mainActivity = (MainActivity) getActivity();
+		return mainActivity.getFontApplicator();
 	}
 	
 	void showProgress()
@@ -464,6 +471,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	public void onViewCreated(View view, final Bundle savedInstanceState)
 	{
 		super.onViewCreated(view, savedInstanceState);
+		getFontApplicator().applyFont(view);
 		
 		loadFileList();
 		
@@ -517,6 +525,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		
 		MainActivity activity = (MainActivity) getActivity();
 		activity.setLastFolder(currentDir);
+
 	}
 	
 	@Override

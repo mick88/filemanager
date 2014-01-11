@@ -7,7 +7,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,7 +14,7 @@ import com.michaldabski.utils.FileIconResolver;
 import com.michaldabski.utils.FileUtils;
 import com.michaldabski.utils.ViewHolder;
 
-public class BaseFileAdapter extends ArrayAdapter<File>
+public class BaseFileAdapter extends RobotoAdapter<File>
 {	
 	protected final int layoutId; 
 	final FileIconResolver fileIconResolver;
@@ -43,6 +42,7 @@ public class BaseFileAdapter extends ArrayAdapter<File>
 			view = ((LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE))
 					.inflate(layoutId, parent, false);
 			view.setTag(new ViewHolder(view));
+			applyFont(view);
 		}
 		
 		ViewHolder viewHolder = (ViewHolder) view.getTag();
