@@ -296,7 +296,7 @@ public class FileUtils
 		}
 	}
 	
-	public static Bitmap createFileHomescreenIcon(File file, Context context)
+	public static Bitmap createFileIcon(File file, Context context, boolean homescreen)
 	{
 		final Bitmap bitmap;
 		final Canvas canvas;
@@ -311,25 +311,29 @@ public class FileUtils
 		}
 		else
 		{
-			Bitmap folderBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_home_file);
+			Bitmap folderBitmap = BitmapFactory.decodeResource(context.getResources(), homescreen?R.drawable.icon_home_file:R.drawable.icon_file);
 			
 			bitmap = Bitmap.createBitmap(folderBitmap.getWidth(), folderBitmap.getHeight(), Bitmap.Config.ARGB_8888);
 			canvas = new Canvas(bitmap);
 			canvas.drawBitmap(folderBitmap, 0, 0, null);
 			
 			Drawable appIcon = IntentUtils.getAppIconForFile(file, context);
-			Rect bounds = canvas.getClipBounds();
-			int shrinkage = (int)(bounds.width() * FILE_APP_ICON_SCALE);
-			bounds.left += shrinkage;
-			bounds.right -= shrinkage;
-			bounds.top += shrinkage * 1.5;
-			bounds.bottom -= shrinkage * 0.5;
-			appIcon.setBounds(bounds);
-			appIcon.draw(canvas);
+			if (appIcon != null)
+			{
+				Rect bounds = canvas.getClipBounds();
+				int shrinkage = (int)(bounds.width() * FILE_APP_ICON_SCALE);
+				bounds.left += shrinkage;
+				bounds.right -= shrinkage;
+				bounds.top += shrinkage * 1.5;
+				bounds.bottom -= shrinkage * 0.5;
+				appIcon.setBounds(bounds);
+				appIcon.draw(canvas);
+			}
 		}
 		
 		// add shortcut symbol
-		canvas.drawBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.shortcut), 0, 0, null);
+		if (homescreen)
+			canvas.drawBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.shortcut), 0, 0, null);
 		
 		return  bitmap;
 	}
