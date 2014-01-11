@@ -107,6 +107,16 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		}
 	}
 	
+	void showProgress()
+	{
+		if (getView() != null)
+		{
+			getListView().setVisibility(View.GONE);
+			getView().findViewById(R.id.layoutMessage).setVisibility(View.VISIBLE);
+			getView().findViewById(R.id.tvMessage).setVisibility(View.GONE);
+		}
+	}
+	
 	FileExplorerApplication getApplication()
 	{
 		if (getActivity() == null) return null;
@@ -153,6 +163,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		{
 			getListView().setVisibility(View.GONE);
 			view.findViewById(R.id.layoutMessage).setVisibility(View.VISIBLE);
+			view.findViewById(R.id.progress).setVisibility(View.GONE);
 			TextView tvMessage = (TextView) view.findViewById(R.id.tvMessage);
 			tvMessage.setText(message);
 					
@@ -686,6 +697,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	
 	protected void refreshFolder()
 	{
+		showProgress();
 		loadFileList();		
 	}
 
