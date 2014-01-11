@@ -19,6 +19,11 @@ public class FavouritesManager
 		
 	}
 	
+	public static interface FavouritesListener
+	{
+		void onFavouritesChanged();
+	}
+	
 	private final List<FavouriteFolder> folders;
 	private final SQLiteHelper sqLiteHelper;
 
@@ -38,6 +43,15 @@ public class FavouritesManager
 		long id = sqLiteHelper.insert(favouriteFolder);
 		if (id == -1) throw new FolderAlreadyFavouriteException(favouriteFolder);
 		folders.add(favouriteFolder);
+	}
+	
+	public void removeFavourite(File file)
+	{
+		for (FavouriteFolder folder : folders) if (folder.equals(file))
+			{
+				removeFavourite(folder);
+				break;
+			}
 	}
 	
 	public void removeFavourite(FavouriteFolder favouriteFolder)

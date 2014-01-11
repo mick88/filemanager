@@ -48,6 +48,10 @@ import com.michaldabski.fileexplorer.R;
 import com.michaldabski.fileexplorer.clipboard.Clipboard;
 import com.michaldabski.fileexplorer.clipboard.Clipboard.FileAction;
 import com.michaldabski.fileexplorer.clipboard.FileOperationListener;
+import com.michaldabski.fileexplorer.favourites.FavouriteFolder;
+import com.michaldabski.fileexplorer.favourites.FavouritesManager;
+import com.michaldabski.fileexplorer.favourites.FavouritesManager.FavouritesListener;
+import com.michaldabski.fileexplorer.favourites.FavouritesManager.FolderAlreadyFavouriteException;
 import com.michaldabski.fileexplorer.folders.FileAdapter.OnFileSelectedListener;
 import com.michaldabski.utils.AsyncResult;
 import com.michaldabski.utils.FileUtils;
@@ -248,6 +252,17 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		inflater.inflate(R.menu.folder_browser, menu);
 		
 		menu.findItem(R.id.menu_selectAll).setVisible(!(files == null || files.isEmpty()));
+		
+		if (getApplication().getFavouritesManager().isFolderFavourite(currentDir))
+		{
+			menu.findItem(R.id.menu_unfavourite).setVisible(true);
+			menu.findItem(R.id.menu_favourite).setVisible(false);
+		}
+		else
+		{
+			menu.findItem(R.id.menu_unfavourite).setVisible(false);
+			menu.findItem(R.id.menu_favourite).setVisible(true);
+		}
 	}
 	
 	@Override
@@ -303,6 +318,31 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 					activity.showFragment(fragment);
 					
 				}
+				return true;
+				
+			case R.id.menu_favourite:				
+				try
+				{
+					FavouritesManager favouritesManager = getApplication().getFavouritesManager();
+					favouritesManager.addFavourite(new FavouriteFolder(currentDir));
+					getActivity().invalidateOptionsMenu();
+					
+					FavouritesListener listener = (FavouritesListener) getActivity();
+					listener.onFavouritesChanged();
+				} catch (FolderAlreadyFavouriteException e1)
+				{
+					e1.printStackTrace();
+				}
+				return true;
+				
+			case R.id.menu_unfavourite:				
+				FavouritesManager favouritesManager = getApplication().getFavouritesManager();
+				favouritesManager.removeFavourite(currentDir);
+				getActivity().invalidateOptionsMenu();
+				
+				FavouritesListener listener = (FavouritesListener) getActivity();
+				listener.onFavouritesChanged();
+
 				return true;
 				
 			case R.id.menu_create_folder:
