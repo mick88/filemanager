@@ -38,7 +38,7 @@ public class IntentUtils
 		Intent addIntent = new Intent();
 		addIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
 		addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, file.getName());
-		addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON, FileUtils.createFileHomescreenIcon(file, context));
+		addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON, FileUtils.createFileIcon(file, context, true));
 		addIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
 		context.sendBroadcast(addIntent);
 	}
