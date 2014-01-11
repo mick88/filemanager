@@ -11,13 +11,20 @@ import com.michaldabski.fileexplorer.R;
 
 public class FileIconResolver extends LruCache<String, Bitmap>
 {	
+	public static final int CACHE_SIZE = 5 * 1024 * 1024;
 	final Context context;
 	Bitmap nullIcon=null;
 	
 	public FileIconResolver(Context context)
 	{
-		super(50);
+		super(CACHE_SIZE);
 		this.context = context;
+	}
+	
+	@Override
+	protected int sizeOf(String key, Bitmap value)
+	{
+		return value.getByteCount();
 	}
 	
 	public Bitmap getNullIcon()
