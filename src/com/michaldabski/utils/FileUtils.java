@@ -307,14 +307,17 @@ public class FileUtils
 			canvas.drawBitmap(folderBitmap, 0, 0, null);
 			
 			Drawable appIcon = IntentUtils.getAppIconForFile(file, context);
-			Rect bounds = canvas.getClipBounds();
-			int shrinkage = (int)(bounds.width() * FILE_APP_ICON_SCALE);
-			bounds.left += shrinkage;
-			bounds.right -= shrinkage;
-			bounds.top += shrinkage * 1.5;
-			bounds.bottom -= shrinkage * 0.5;
-			appIcon.setBounds(bounds);
-			appIcon.draw(canvas);
+			if (appIcon != null)
+			{
+				Rect bounds = canvas.getClipBounds();
+				int shrinkage = (int)(bounds.width() * FILE_APP_ICON_SCALE);
+				bounds.left += shrinkage;
+				bounds.right -= shrinkage;
+				bounds.top += shrinkage * 1.5;
+				bounds.bottom -= shrinkage * 0.5;
+				appIcon.setBounds(bounds);
+				appIcon.draw(canvas);
+			}
 		}
 		
 		// add shortcut symbol
