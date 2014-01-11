@@ -11,10 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.michaldabski.fileexplorer.R;
 import com.michaldabski.utils.FileIconResolver;
 import com.michaldabski.utils.FileUtils;
-import com.michaldabski.utils.IntentUtils;
 import com.michaldabski.utils.ViewHolder;
 
 public class BaseFileAdapter extends ArrayAdapter<File>
@@ -66,7 +64,7 @@ public class BaseFileAdapter extends ArrayAdapter<File>
 		else
 		{			
 			tvFileDetails.setText(getContext().getString(R.string.size_s, FileUtils.formatFileSize(file)));
-			imgIcon.setImageDrawable(fileIconResolver.getFileIcon(file));
+			imgIcon.setImageBitmap(fileIconResolver.getFileIcon(file));
 		}
 		
 			
