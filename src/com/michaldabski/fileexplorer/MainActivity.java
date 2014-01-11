@@ -29,6 +29,7 @@ import com.michaldabski.fileexplorer.favourites.FavouritesManager.FavouritesList
 import com.michaldabski.fileexplorer.folders.FolderFragment;
 import com.michaldabski.fileexplorer.nav_drawer.NavDrawerAdapter;
 import com.michaldabski.fileexplorer.nav_drawer.NavDrawerAdapter.NavDrawerItem;
+import com.michaldabski.utils.FontApplicator;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class MainActivity extends Activity implements OnItemClickListener, ClipboardListener, FavouritesListener
@@ -40,6 +41,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 	DrawerLayout drawerLayout;
 	ActionBarDrawerToggle actionBarDrawerToggle;
 	File lastFolder=null;
+	private FontApplicator fontApplicator;
 
 	private SystemBarTintManager tintManager;
 	
@@ -53,6 +55,13 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 		
 		setupNavDrawer();
 		Clipboard.getInstance().addListener(this);
+		
+		fontApplicator = new FontApplicator(getApplicationContext(), "Roboto_Light.ttf").applyFont(getWindow().getDecorView());
+	}
+	
+	public FontApplicator getFontApplicator()
+	{
+		return fontApplicator;
 	}
 	
 	@Override
