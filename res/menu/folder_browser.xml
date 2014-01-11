@@ -3,9 +3,17 @@
     <item
         android:id="@+id/menu_unfavourite"
         android:icon="@drawable/ic_favourite"
-        android:orderInCategory="3"
+        android:orderInCategory="1"
         android:showAsAction="always"
         android:title="@string/remove_favourite"
+        android:visible="false"/>
+    
+    <item
+        android:id="@+id/menu_favourite"
+        android:icon="@drawable/ic_favourite_not"
+        android:orderInCategory="2"
+        android:showAsAction="always"
+        android:title="@string/add_favourite"
         android:visible="false"/>
     
     <item
@@ -27,14 +35,14 @@
     <item
         android:id="@+id/menu_paste"
         android:icon="@drawable/ic_paste"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         android:showAsAction="ifRoom"
         android:title="@string/paste_here"
         android:visible="true"/>
     <item
         android:id="@+id/menu_selectAll"
         android:icon="@drawable/ic_select_all"
-        android:orderInCategory="4"
+        android:orderInCategory="5"
         android:showAsAction="ifRoom"
         android:title="@string/select_all"
         android:visible="true"/>
@@ -42,7 +50,7 @@
     <item
         android:id="@+id/menu_create_folder"
         android:icon="@drawable/ic_create_folder"
-        android:orderInCategory="3"
+        android:orderInCategory="4"
         android:showAsAction="ifRoom"
         android:title="@string/create_folder"
         android:visible="true"/>

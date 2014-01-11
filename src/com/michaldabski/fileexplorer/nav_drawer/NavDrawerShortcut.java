@@ -11,45 +11,32 @@ import com.michaldabski.fileexplorer.folders.FolderFragment;
 import com.michaldabski.fileexplorer.nav_drawer.NavDrawerAdapter.NavDrawerItem;
 import com.michaldabski.utils.FileUtils;
 
-public class NavDrawerShortcut implements NavDrawerItem
+public abstract class NavDrawerShortcut implements NavDrawerItem
 {
-	String name;
-	File folder;
-	
-	public NavDrawerShortcut(File folder, String name)
-	{
-		this.folder = folder;
-		this.name = name;
-	}
+	public abstract File getFile();
 	
 	@Override
 	public boolean onClicked(MainActivity activity)
 	{
-		if (folder.equals(activity.getLastFolder())) return true;
+		if (getFile().equals(activity.getLastFolder())) return true;
 		Bundle args = new Bundle();
-		args.putString(FolderFragment.EXTRA_DIR, folder.getAbsolutePath());
+		args.putString(FolderFragment.EXTRA_DIR, getFile().getAbsolutePath());
 		FolderFragment folderFragment = new FolderFragment();
 		folderFragment.setArguments(args);
 		activity.showFragment(folderFragment);
 		return true;
 	}
-
-	@Override
-	public CharSequence getTitle(Context context)
-	{
-		return name;
-	}
 	
 	@Override
 	public CharSequence getSubTitle(Context context)
 	{
-		return FileUtils.getUserFriendlySdcardPath(folder);
+		return FileUtils.getUserFriendlySdcardPath(getFile());
 	}
 
 	@Override
 	public void setImageToView(ImageView imageView)
 	{
-		imageView.setImageResource(FileUtils.getFileIconResource(folder));
+		imageView.setImageResource(FileUtils.getFileIconResource(getFile()));
 	}
 
 	@Override

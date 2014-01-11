@@ -1,15 +1,13 @@
 package com.michaldabski.fileexplorer;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.List;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -26,14 +24,14 @@ import android.widget.ListView;
 import com.michaldabski.fileexplorer.clipboard.Clipboard;
 import com.michaldabski.fileexplorer.clipboard.Clipboard.ClipboardListener;
 import com.michaldabski.fileexplorer.clipboard.ClipboardFileAdapter;
+import com.michaldabski.fileexplorer.favourites.FavouritesManager;
+import com.michaldabski.fileexplorer.favourites.FavouritesManager.FavouritesListener;
 import com.michaldabski.fileexplorer.folders.FolderFragment;
 import com.michaldabski.fileexplorer.nav_drawer.NavDrawerAdapter;
 import com.michaldabski.fileexplorer.nav_drawer.NavDrawerAdapter.NavDrawerItem;
-import com.michaldabski.fileexplorer.nav_drawer.NavDrawerDivider;
-import com.michaldabski.fileexplorer.nav_drawer.NavDrawerShortcut;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
-public class MainActivity extends Activity implements OnItemClickListener, ClipboardListener
+public class MainActivity extends Activity implements OnItemClickListener, ClipboardListener, FavouritesListener
 {	
 	private static final String LOG_TAG = "Main Activity";
 
@@ -61,6 +59,8 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 	protected void onDestroy()
 	{
 		Clipboard.getInstance().removeListener(this);
+		FileExplorerApplication application = (FileExplorerApplication) getApplication();
+		application.getFavouritesManager().removeFavouritesListener(this);
 		super.onDestroy();
 	}
 	
@@ -161,25 +161,17 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
-		
-		ListView listNavigation = (ListView) findViewById(R.id.listNavigation);
-		listNavigation.setAdapter(new NavDrawerAdapter(this, getNavDrawerItems()));
-		listNavigation.setOnItemClickListener(this);
-		// TODO: add favourites
+
+        FileExplorerApplication application = (FileExplorerApplication) getApplication();
+        loadFavourites(application.getFavouritesManager());
+        application.getFavouritesManager().addFavouritesListener(this);
 	}
 	
-	List<NavDrawerItem> getNavDrawerItems()
+	void loadFavourites(FavouritesManager favouritesManager)
 	{
-		return Arrays.asList(
-				new NavDrawerDivider(getString(R.string.bookmarks)),
-				new NavDrawerShortcut(Environment.getExternalStorageDirectory(), getString(R.string.sd_card)),
-				new NavDrawerShortcut(Environment.getRootDirectory(), getString(R.string.system)),
-				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), getString(R.string.downloads)),
-				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), getString(R.string.music)),
-				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), getString(R.string.dcim)),
-				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), getString(R.string.pictures)),
-				new NavDrawerShortcut(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), getString(R.string.movies))
-			);
+		ListView listNavigation = (ListView) findViewById(R.id.listNavigation);
+		listNavigation.setAdapter(new NavDrawerAdapter(this, new ArrayList<NavDrawerAdapter.NavDrawerItem>(favouritesManager.getFolders())));
+		listNavigation.setOnItemClickListener(this);
 	}
 	
 	@Override
@@ -300,6 +292,12 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 			if (clipboardListView != null)
 				clipboardListView.setAdapter(new ClipboardFileAdapter(this, clipboard));
 		}
+	}
+
+	@Override
+	public void onFavouritesChanged(FavouritesManager favouritesManager)
+	{
+		loadFavourites(favouritesManager);
 	}
 	
 }
