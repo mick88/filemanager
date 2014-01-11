@@ -1,7 +1,6 @@
 package com.michaldabski.fileexplorer.folders;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,7 +50,6 @@ import com.michaldabski.fileexplorer.clipboard.Clipboard.FileAction;
 import com.michaldabski.fileexplorer.clipboard.FileOperationListener;
 import com.michaldabski.fileexplorer.folders.FileAdapter.OnFileSelectedListener;
 import com.michaldabski.utils.AsyncResult;
-import com.michaldabski.utils.FilePreviewCache;
 import com.michaldabski.utils.FileUtils;
 import com.michaldabski.utils.IntentUtils;
 import com.michaldabski.utils.OnResultListener;
@@ -78,7 +76,6 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	private ShareActionProvider shareActionProvider;
 	// set to true when selection shouldnt be cleared from switching out fragments
 	boolean preserveSelection = false;
-	FilePreviewCache thumbCache;
 	
 	public ListView getListView()
 	{
@@ -180,13 +177,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		this.listView = (ListView) view.findViewById(android.R.id.list);
 		return view;
 	}
-	@Override
-	public void onLowMemory()
-	{
-		super.onLowMemory();
-		if (thumbCache != null)
-			thumbCache.trimToSize(1024*1024);
-	}
+	
 	void loadFileList()
 	{
 		if (loadFilesTask != null) return;
@@ -504,8 +495,6 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	{
 		if (loadFilesTask != null)
 			loadFilesTask.cancel(true);
-		if (thumbCache != null)
-			thumbCache.evictAll();
 		super.onDestroy();
 	}
 	

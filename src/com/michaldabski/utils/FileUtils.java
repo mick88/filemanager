@@ -345,7 +345,7 @@ public class FileUtils
 	public static int countFilesIn(File root)
 	{
 		if (root.isDirectory() == false) return 1;
-		File[] files = root.listFiles();
+		File[] files = root.listFiles(DEFAULT_FILE_FILTER);
 		if (files == null) return 0;
 		
 		int n = 0;
