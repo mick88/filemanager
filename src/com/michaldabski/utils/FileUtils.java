@@ -13,6 +13,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,6 +27,9 @@ import com.michaldabski.fileexplorer.R;
 
 public class FileUtils
 {
+	@SuppressLint("SdCardPath")
+	private static final String SDCARD_DISPLAY_NAME = "/sdcard";
+
 	private static final double FILE_APP_ICON_SCALE = 0.2;
 
 	public final static int 
@@ -375,7 +379,7 @@ public class FileUtils
 			path = file.getAbsolutePath();
 		}
 		return path
-				.replace(Environment.getExternalStorageDirectory().getAbsolutePath(), "/sdcard");
+				.replace(Environment.getExternalStorageDirectory().getAbsolutePath(), SDCARD_DISPLAY_NAME);
 	}
 	
 	public static boolean isMediaDirectory(File file)
