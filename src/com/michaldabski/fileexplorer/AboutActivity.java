@@ -1,5 +1,6 @@
 package com.michaldabski.fileexplorer;
 
+import com.michaldabski.utils.FontApplicator;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import android.app.Activity;
@@ -38,6 +39,8 @@ public class AboutActivity extends Activity
 		{
 			e.printStackTrace();
 		}
+		
+		new FontApplicator(getApplicationContext(), "Roboto_Light.ttf").applyFont(getWindow().getDecorView());
 	}
 	
 	/**
