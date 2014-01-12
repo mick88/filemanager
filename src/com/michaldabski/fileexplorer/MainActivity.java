@@ -179,7 +179,9 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 	void loadFavourites(FavouritesManager favouritesManager)
 	{
 		ListView listNavigation = (ListView) findViewById(R.id.listNavigation);
-		listNavigation.setAdapter(new NavDrawerAdapter(this, new ArrayList<NavDrawerAdapter.NavDrawerItem>(favouritesManager.getFolders())));
+		NavDrawerAdapter navDrawerAdapter = new NavDrawerAdapter(this, new ArrayList<NavDrawerAdapter.NavDrawerItem>(favouritesManager.getFolders()));
+		navDrawerAdapter.setFontApplicator(fontApplicator);
+		listNavigation.setAdapter(navDrawerAdapter);
 		listNavigation.setOnItemClickListener(this);
 	}
 	
@@ -299,7 +301,11 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 		{
 			drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, Gravity.END);
 			if (clipboardListView != null)
-				clipboardListView.setAdapter(new ClipboardFileAdapter(this, clipboard));
+			{
+				ClipboardFileAdapter clipboardFileAdapter = new ClipboardFileAdapter(this, clipboard);
+				clipboardFileAdapter.setFontApplicator(fontApplicator);
+				clipboardListView.setAdapter(clipboardFileAdapter);
+			}
 		}
 	}
 

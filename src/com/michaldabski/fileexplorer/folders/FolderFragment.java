@@ -237,6 +237,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 					adapter = new FileAdapter(getActivity(), files);
 					adapter.setSelectedFiles(selectedFiles);
 					adapter.setOnFileSelectedListener(FolderFragment.this);
+					adapter.setFontApplicator(getFontApplicator());
 					setListAdapter(adapter);
 					
 				} catch (Exception e)
