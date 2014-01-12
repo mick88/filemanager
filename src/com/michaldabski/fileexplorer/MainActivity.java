@@ -158,13 +158,13 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 		SystemBarTintManager systemBarTintManager = new SystemBarTintManager(this);
 		int headerHeight = systemBarTintManager.getConfig().getPixelInsetTop(true);
 		header.setLayoutParams(new android.widget.AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, headerHeight));
-		clipboardListView.addHeaderView(header);
+		clipboardListView.addHeaderView(header, null, false);
 		int footerHeight = systemBarTintManager.getConfig().getPixelInsetBottom();
 		if (footerHeight > 0)
 		{
 			View footer = inflater.inflate(R.layout.list_header_actionbar_padding, clipboardListView, false);
 			footer.setLayoutParams(new android.widget.AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, footerHeight));
-			clipboardListView.addFooterView(footer);
+			clipboardListView.addFooterView(footer, null, false);
 		}		
 		onClipboardContentsChange(Clipboard.getInstance());
 		

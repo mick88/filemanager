@@ -501,7 +501,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		SystemBarTintManager systemBarTintManager = new SystemBarTintManager(getActivity());
 		int headerHeight = systemBarTintManager.getConfig().getPixelInsetTop(true);
 		header.setLayoutParams(new android.widget.AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, headerHeight));
-		getListView().addHeaderView(header);
+		getListView().addHeaderView(header, null, false);
 		
 		// add footer
 		int footerHeight = systemBarTintManager.getConfig().getPixelInsetBottom();
@@ -509,7 +509,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		{
 			View footer = inflater.inflate(R.layout.list_header_actionbar_padding, getListView(), false);
 			footer.setLayoutParams(new android.widget.AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, footerHeight));
-			getListView().addFooterView(footer);
+			getListView().addFooterView(footer, null, false);
 		}
 		
 		int paddingRight = systemBarTintManager.getConfig().getPixelInsetRight();
