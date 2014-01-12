@@ -20,18 +20,18 @@ public class BaseFileAdapter extends ArrayAdapter<File>
 	protected final int layoutId; 
 	final FileIconResolver fileIconResolver;
 	
-	public BaseFileAdapter(Context context, int resource, File[] objects)
+	public BaseFileAdapter(Context context, int resource, File[] objects, FileIconResolver fileIconResolver)
 	{
 		super(context, resource, objects);
 		this.layoutId = resource;
-		fileIconResolver = new FileIconResolver(context);
+		this.fileIconResolver = fileIconResolver;
 	}
 	
-	public BaseFileAdapter(Context context, int resource, List<File> objects)
+	public BaseFileAdapter(Context context, int resource, List<File> objects, FileIconResolver fileIconResolver)
 	{
 		super(context, resource, objects);
 		this.layoutId = resource;
-		fileIconResolver = new FileIconResolver(context);
+		this.fileIconResolver = fileIconResolver;
 	}
 
 	@Override

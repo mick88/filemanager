@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.michaldabski.fileexplorer.BaseFileAdapter;
 import com.michaldabski.fileexplorer.R;
+import com.michaldabski.utils.FileIconResolver;
 import com.michaldabski.utils.ViewHolder;
 
 
@@ -32,29 +33,29 @@ public class FileAdapter extends BaseFileAdapter
 		this.onFileSelectedListener = onFileSelectedListener;
 	}
 	
-	public FileAdapter(Context context, int layoutId, File[] files)
+	public FileAdapter(Context context, int layoutId, File[] files, FileIconResolver fileIconResolver)
 	{
-		super(context, layoutId, files);
+		super(context, layoutId, files, fileIconResolver);
 	}
 	
-	public FileAdapter(Context context, int layoutId, List<File> files)
+	public FileAdapter(Context context, int layoutId, List<File> files, FileIconResolver fileIconResolver)
 	{
-		super(context, layoutId, files);
+		super(context, layoutId, files, fileIconResolver);
 	}
 	
-	public FileAdapter(Context context,	List<File> objects)
+	public FileAdapter(Context context,	List<File> objects, FileIconResolver fileIconResolver)
 	{
-		super(context, R.layout.list_item_file, objects);
+		super(context, R.layout.list_item_file, objects, fileIconResolver);
 	}
 	
-	public FileAdapter(Context context,	File [] objects)
+	public FileAdapter(Context context,	File [] objects, FileIconResolver fileIconResolver)
 	{
-		super(context, R.layout.list_item_file, objects);
+		super(context, R.layout.list_item_file, objects, fileIconResolver);
 	}
 	
-	public FileAdapter(Context context)
+	public FileAdapter(Context context, FileIconResolver fileIconResolver)
 	{
-		this(context, new ArrayList<File>(0));
+		this(context, new ArrayList<File>(0), fileIconResolver);
 	}
 	
 	boolean isSelected(File file)

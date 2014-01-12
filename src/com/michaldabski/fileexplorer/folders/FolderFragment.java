@@ -242,7 +242,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 						showMessage(R.string.folder_empty);
 						return;
 					}
-					adapter = new FileAdapter(getActivity(), files);
+					adapter = new FileAdapter(getActivity(), files, getApplication().getFileIconResolver());
 					adapter.setSelectedFiles(selectedFiles);
 					adapter.setOnFileSelectedListener(FolderFragment.this);
 					setListAdapter(adapter);
@@ -251,7 +251,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 				{
 					// exception was thrown while loading files
 					showMessage(e.getMessage());
-					adapter = new FileAdapter(getActivity());
+					adapter = new FileAdapter(getActivity(), getApplication().getFileIconResolver());
 				}
 				
 				getActivity().invalidateOptionsMenu();
