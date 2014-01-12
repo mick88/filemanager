@@ -12,6 +12,7 @@
         android:footerDividersEnabled="false"
         android:divider="@null"
         android:listSelector="@null"
+        android:fastScrollEnabled="true"
         android:visibility="gone" />
 
     <LinearLayout
