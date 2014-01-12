@@ -1,8 +1,5 @@
 package com.michaldabski.fileexplorer;
 
-import com.michaldabski.utils.FontApplicator;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
-
 import android.app.Activity;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -11,6 +8,9 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.michaldabski.utils.FontApplicator;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class AboutActivity extends Activity
 {

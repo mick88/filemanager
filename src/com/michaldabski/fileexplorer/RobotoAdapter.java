@@ -2,11 +2,11 @@ package com.michaldabski.fileexplorer;
 
 import java.util.List;
 
-import com.michaldabski.utils.FontApplicator;
-
 import android.content.Context;
 import android.view.View;
 import android.widget.ArrayAdapter;
+
+import com.michaldabski.utils.FontApplicator;
 
 public class RobotoAdapter<T> extends ArrayAdapter<T>
 {

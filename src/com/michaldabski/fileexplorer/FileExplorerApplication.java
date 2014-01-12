@@ -1,13 +1,15 @@
 package com.michaldabski.fileexplorer;
 
-import com.michaldabski.fileexplorer.favourites.FavouritesManager;
-
 import android.app.Application;
+
+import com.michaldabski.fileexplorer.favourites.FavouritesManager;
+import com.michaldabski.utils.FileIconResolver;
 
 public class FileExplorerApplication extends Application
 {
 	AppPreferences appPreferences=null;
 	FavouritesManager favouritesManager=null;
+	FileIconResolver fileIconResolver = null;
 	
 	@Override
 	public void onCreate()
@@ -28,5 +30,12 @@ public class FileExplorerApplication extends Application
 		if (favouritesManager == null)
 			favouritesManager = new FavouritesManager(getApplicationContext());
 		return favouritesManager;
+	}
+
+	public FileIconResolver getFileIconResolver()
+	{
+		if (fileIconResolver == null)
+			fileIconResolver = new FileIconResolver(getApplicationContext());
+		return fileIconResolver;
 	}
 }

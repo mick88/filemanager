@@ -6,13 +6,14 @@ import android.view.ViewGroup;
 
 import com.michaldabski.fileexplorer.BaseFileAdapter;
 import com.michaldabski.fileexplorer.R;
+import com.michaldabski.utils.FileIconResolver;
 
 public class ClipboardFileAdapter extends BaseFileAdapter
 {
 	final Clipboard clipboard;
-	public ClipboardFileAdapter(Context context, Clipboard clipboard)
+	public ClipboardFileAdapter(Context context, Clipboard clipboard, FileIconResolver fileIconResolver)
 	{
-		super(context, R.layout.list_item_file, clipboard.getFilesList());
+		super(context, R.layout.list_item_file, clipboard.getFilesList(), fileIconResolver);
 		this.clipboard = clipboard;
 	}
 	

@@ -300,9 +300,10 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 		else 
 		{
 			drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, Gravity.END);
+			FileExplorerApplication application = (FileExplorerApplication) getApplication();
 			if (clipboardListView != null)
 			{
-				ClipboardFileAdapter clipboardFileAdapter = new ClipboardFileAdapter(this, clipboard);
+				ClipboardFileAdapter clipboardFileAdapter = new ClipboardFileAdapter(this, clipboard, application.getFileIconResolver());
 				clipboardFileAdapter.setFontApplicator(fontApplicator);
 				clipboardListView.setAdapter(clipboardFileAdapter);
 			}
