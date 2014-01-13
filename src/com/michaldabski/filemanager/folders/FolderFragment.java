@@ -42,7 +42,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.michaldabski.filemanager.AppPreferences;
-import com.michaldabski.filemanager.FileExplorerApplication;
+import com.michaldabski.filemanager.FileManagerApplication;
 import com.michaldabski.filemanager.MainActivity;
 import com.michaldabski.filemanager.R;
 import com.michaldabski.filemanager.clipboard.Clipboard;
@@ -115,10 +115,10 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		}
 	}
 	
-	FileExplorerApplication getApplication()
+	FileManagerApplication getApplication()
 	{
 		if (getActivity() == null) return null;
-		return (FileExplorerApplication) getActivity().getApplication();
+		return (FileManagerApplication) getActivity().getApplication();
 	}
 	
 	AppPreferences getPreferences()

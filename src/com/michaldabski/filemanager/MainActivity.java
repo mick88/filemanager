@@ -69,7 +69,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 	protected void onDestroy()
 	{
 		Clipboard.getInstance().removeListener(this);
-		FileExplorerApplication application = (FileExplorerApplication) getApplication();
+		FileManagerApplication application = (FileManagerApplication) getApplication();
 		application.getFavouritesManager().removeFavouritesListener(this);
 		super.onDestroy();
 	}
@@ -84,7 +84,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 	{
 		if (lastFolder != null)
 		{
-			FileExplorerApplication application = (FileExplorerApplication) getApplication();
+			FileManagerApplication application = (FileManagerApplication) getApplication();
 			application.getAppPreferences().setStartFolder(lastFolder).saveChanges(getApplicationContext());
 			Log.d(LOG_TAG, "Saved last folder "+lastFolder.toString());
 		}
@@ -172,7 +172,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 		getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 
-        FileExplorerApplication application = (FileExplorerApplication) getApplication();
+        FileManagerApplication application = (FileManagerApplication) getApplication();
         loadFavourites(application.getFavouritesManager());
         application.getFavouritesManager().addFavouritesListener(this);
 	}
@@ -301,7 +301,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 		else 
 		{
 			drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, Gravity.END);
-			FileExplorerApplication application = (FileExplorerApplication) getApplication();
+			FileManagerApplication application = (FileManagerApplication) getApplication();
 			if (clipboardListView != null)
 			{
 				ClipboardFileAdapter clipboardFileAdapter = new ClipboardFileAdapter(this, clipboard, application.getFileIconResolver());
