@@ -13,7 +13,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:padding="@dimen/list_item_padding"
-        android:scaleType="fitCenter"
+        android:scaleType="center"
         android:src="@drawable/icon_folder" />
 
     <TextView
