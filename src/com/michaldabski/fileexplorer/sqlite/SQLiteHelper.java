@@ -1,5 +1,8 @@
 package com.michaldabski.fileexplorer.sqlite;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
@@ -26,12 +29,20 @@ public class SQLiteHelper extends MSQLiteOpenHelper
 	{
 		super.onCreate(db);
 		
-		for (FavouriteFolder favouriteFolder : new FavouriteFolder[]{
-				new FavouriteFolder(Environment.getExternalStorageDirectory(), getString(R.string.sd_card)),
-				new FavouriteFolder(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), getString(R.string.music)),
-				new FavouriteFolder(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), getString(R.string.music)),
-				new FavouriteFolder(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), getString(R.string.photos)),
-		})
+		List<FavouriteFolder> favouriteFolders = new ArrayList<FavouriteFolder>();
+		if (Environment.getExternalStorageDirectory().isDirectory())
+		{
+			favouriteFolders.add(new FavouriteFolder(Environment.getExternalStorageDirectory(), getString(R.string.sd_card)));
+			if (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).isDirectory())
+				favouriteFolders.add(new FavouriteFolder(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), getString(R.string.music)));
+			if (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).isDirectory())
+				favouriteFolders.add(new FavouriteFolder(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), getString(R.string.music)));
+			if (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).isDirectory())
+				favouriteFolders.add(new FavouriteFolder(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), getString(R.string.photos)));
+		}
+		else favouriteFolders.add(new FavouriteFolder(Environment.getExternalStoragePublicDirectory("/"), getString(R.string.root)));
+		
+		for (FavouriteFolder favouriteFolder : favouriteFolders)
 		{
 			if (favouriteFolder.exists())
 				insert(db, favouriteFolder);
