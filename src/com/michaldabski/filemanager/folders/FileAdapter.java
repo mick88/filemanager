@@ -1,4 +1,4 @@
-package com.michaldabski.fileexplorer.folders;
+package com.michaldabski.filemanager.folders;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,8 +11,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.michaldabski.fileexplorer.BaseFileAdapter;
-import com.michaldabski.fileexplorer.R;
+import com.michaldabski.filemanager.BaseFileAdapter;
+import com.michaldabski.filemanager.R;
 import com.michaldabski.utils.FileIconResolver;
 import com.michaldabski.utils.ViewHolder;
 

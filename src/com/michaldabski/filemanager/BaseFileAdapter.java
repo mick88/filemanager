@@ -1,4 +1,4 @@
-package com.michaldabski.fileexplorer;
+package com.michaldabski.filemanager;
 
 import java.io.File;
 import java.util.List;
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.michaldabski.filemanager.R;
 import com.michaldabski.utils.FileIconResolver;
 import com.michaldabski.utils.FileUtils;
 import com.michaldabski.utils.ViewHolder;

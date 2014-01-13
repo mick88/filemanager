@@ -1,11 +1,11 @@
-package com.michaldabski.fileexplorer;
+package com.michaldabski.filemanager;
 
 import android.app.Application;
 
-import com.michaldabski.fileexplorer.favourites.FavouritesManager;
+import com.michaldabski.filemanager.favourites.FavouritesManager;
 import com.michaldabski.utils.FileIconResolver;
 
-public class FileExplorerApplication extends Application
+public class FileManagerApplication extends Application
 {
 	AppPreferences appPreferences=null;
 	FavouritesManager favouritesManager=null;

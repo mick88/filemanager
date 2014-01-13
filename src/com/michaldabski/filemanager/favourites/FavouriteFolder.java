@@ -1,10 +1,10 @@
-package com.michaldabski.fileexplorer.favourites;
+package com.michaldabski.filemanager.favourites;
 
 import java.io.File;
 
 import android.content.Context;
 
-import com.michaldabski.fileexplorer.nav_drawer.NavDrawerShortcut;
+import com.michaldabski.filemanager.nav_drawer.NavDrawerShortcut;
 import com.michaldabski.msqlite.Annotations.PrimaryKey;
 
 public class FavouriteFolder extends NavDrawerShortcut

@@ -23,7 +23,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.webkit.MimeTypeMap;
 
-import com.michaldabski.fileexplorer.R;
+import com.michaldabski.filemanager.R;
 
 public class FileUtils
 {

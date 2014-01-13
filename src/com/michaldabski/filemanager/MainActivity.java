@@ -1,4 +1,4 @@
-package com.michaldabski.fileexplorer;
+package com.michaldabski.filemanager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,14 +21,15 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.michaldabski.fileexplorer.clipboard.Clipboard;
-import com.michaldabski.fileexplorer.clipboard.Clipboard.ClipboardListener;
-import com.michaldabski.fileexplorer.clipboard.ClipboardFileAdapter;
-import com.michaldabski.fileexplorer.favourites.FavouritesManager;
-import com.michaldabski.fileexplorer.favourites.FavouritesManager.FavouritesListener;
-import com.michaldabski.fileexplorer.folders.FolderFragment;
-import com.michaldabski.fileexplorer.nav_drawer.NavDrawerAdapter;
-import com.michaldabski.fileexplorer.nav_drawer.NavDrawerAdapter.NavDrawerItem;
+import com.michaldabski.filemanager.R;
+import com.michaldabski.filemanager.clipboard.Clipboard;
+import com.michaldabski.filemanager.clipboard.ClipboardFileAdapter;
+import com.michaldabski.filemanager.clipboard.Clipboard.ClipboardListener;
+import com.michaldabski.filemanager.favourites.FavouritesManager;
+import com.michaldabski.filemanager.favourites.FavouritesManager.FavouritesListener;
+import com.michaldabski.filemanager.folders.FolderFragment;
+import com.michaldabski.filemanager.nav_drawer.NavDrawerAdapter;
+import com.michaldabski.filemanager.nav_drawer.NavDrawerAdapter.NavDrawerItem;
 import com.michaldabski.utils.FontApplicator;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
@@ -68,7 +69,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 	protected void onDestroy()
 	{
 		Clipboard.getInstance().removeListener(this);
-		FileExplorerApplication application = (FileExplorerApplication) getApplication();
+		FileManagerApplication application = (FileManagerApplication) getApplication();
 		application.getFavouritesManager().removeFavouritesListener(this);
 		super.onDestroy();
 	}
@@ -83,7 +84,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 	{
 		if (lastFolder != null)
 		{
-			FileExplorerApplication application = (FileExplorerApplication) getApplication();
+			FileManagerApplication application = (FileManagerApplication) getApplication();
 			application.getAppPreferences().setStartFolder(lastFolder).saveChanges(getApplicationContext());
 			Log.d(LOG_TAG, "Saved last folder "+lastFolder.toString());
 		}
@@ -171,7 +172,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 		getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 
-        FileExplorerApplication application = (FileExplorerApplication) getApplication();
+        FileManagerApplication application = (FileManagerApplication) getApplication();
         loadFavourites(application.getFavouritesManager());
         application.getFavouritesManager().addFavouritesListener(this);
 	}
@@ -300,7 +301,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 		else 
 		{
 			drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, Gravity.END);
-			FileExplorerApplication application = (FileExplorerApplication) getApplication();
+			FileManagerApplication application = (FileManagerApplication) getApplication();
 			if (clipboardListView != null)
 			{
 				ClipboardFileAdapter clipboardFileAdapter = new ClipboardFileAdapter(this, clipboard, application.getFileIconResolver());

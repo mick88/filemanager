@@ -10,7 +10,7 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
-import com.michaldabski.fileexplorer.MainActivity;
+import com.michaldabski.filemanager.MainActivity;
 
 public class IntentUtils
 {

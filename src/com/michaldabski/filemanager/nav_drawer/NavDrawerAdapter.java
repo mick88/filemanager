@@ -1,4 +1,4 @@
-package com.michaldabski.fileexplorer.nav_drawer;
+package com.michaldabski.filemanager.nav_drawer;
 
 import java.util.List;
 
@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.michaldabski.fileexplorer.MainActivity;
-import com.michaldabski.fileexplorer.R;
-import com.michaldabski.fileexplorer.RobotoAdapter;
-import com.michaldabski.fileexplorer.nav_drawer.NavDrawerAdapter.NavDrawerItem;
+import com.michaldabski.filemanager.MainActivity;
+import com.michaldabski.filemanager.R;
+import com.michaldabski.filemanager.RobotoAdapter;
+import com.michaldabski.filemanager.nav_drawer.NavDrawerAdapter.NavDrawerItem;
 import com.michaldabski.utils.ViewHolder;
 
 public class NavDrawerAdapter extends RobotoAdapter<NavDrawerItem>
