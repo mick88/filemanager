@@ -1,4 +1,4 @@
-package com.michaldabski.fileexplorer.sqlite;
+package com.michaldabski.filemanager.sqlite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 
-import com.michaldabski.fileexplorer.R;
-import com.michaldabski.fileexplorer.favourites.FavouriteFolder;
+import com.michaldabski.filemanager.R;
+import com.michaldabski.filemanager.favourites.FavouriteFolder;
 import com.michaldabski.msqlite.MSQLiteOpenHelper;
 
 public class SQLiteHelper extends MSQLiteOpenHelper

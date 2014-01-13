@@ -1,4 +1,4 @@
-package com.michaldabski.fileexplorer.favourites;
+package com.michaldabski.filemanager.favourites;
 
 import java.io.File;
 import java.util.HashSet;
@@ -7,7 +7,7 @@ import java.util.Set;
 
 import android.content.Context;
 
-import com.michaldabski.fileexplorer.sqlite.SQLiteHelper;
+import com.michaldabski.filemanager.sqlite.SQLiteHelper;
 
 public class FavouritesManager
 {

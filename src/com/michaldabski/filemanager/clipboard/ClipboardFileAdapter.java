@@ -1,11 +1,11 @@
-package com.michaldabski.fileexplorer.clipboard;
+package com.michaldabski.filemanager.clipboard;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.michaldabski.fileexplorer.BaseFileAdapter;
-import com.michaldabski.fileexplorer.R;
+import com.michaldabski.filemanager.BaseFileAdapter;
+import com.michaldabski.filemanager.R;
 import com.michaldabski.utils.FileIconResolver;
 
 public class ClipboardFileAdapter extends BaseFileAdapter

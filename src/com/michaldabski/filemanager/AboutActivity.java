@@ -1,4 +1,4 @@
-package com.michaldabski.fileexplorer;
+package com.michaldabski.filemanager;
 
 import android.app.Activity;
 import android.content.pm.PackageInfo;
@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.michaldabski.filemanager.R;
 import com.michaldabski.utils.FontApplicator;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 

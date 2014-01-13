@@ -7,7 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.LruCache;
 
-import com.michaldabski.fileexplorer.R;
+import com.michaldabski.filemanager.R;
 
 public class FileIconResolver extends LruCache<String, Bitmap>
 {	

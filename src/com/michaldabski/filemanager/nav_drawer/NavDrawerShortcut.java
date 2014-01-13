@@ -1,4 +1,4 @@
-package com.michaldabski.fileexplorer.nav_drawer;
+package com.michaldabski.filemanager.nav_drawer;
 
 import java.io.File;
 
@@ -6,9 +6,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import com.michaldabski.fileexplorer.MainActivity;
-import com.michaldabski.fileexplorer.folders.FolderFragment;
-import com.michaldabski.fileexplorer.nav_drawer.NavDrawerAdapter.NavDrawerItem;
+import com.michaldabski.filemanager.MainActivity;
+import com.michaldabski.filemanager.folders.FolderFragment;
+import com.michaldabski.filemanager.nav_drawer.NavDrawerAdapter.NavDrawerItem;
 import com.michaldabski.utils.FileUtils;
 
 public abstract class NavDrawerShortcut implements NavDrawerItem

@@ -1,4 +1,4 @@
-package com.michaldabski.fileexplorer.clipboard;
+package com.michaldabski.filemanager.clipboard;
 
 
 public interface FileOperationListener

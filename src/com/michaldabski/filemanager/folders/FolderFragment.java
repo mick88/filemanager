@@ -1,4 +1,4 @@
-package com.michaldabski.fileexplorer.folders;
+package com.michaldabski.filemanager.folders;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,17 +41,17 @@ import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.michaldabski.fileexplorer.AppPreferences;
-import com.michaldabski.fileexplorer.FileExplorerApplication;
-import com.michaldabski.fileexplorer.MainActivity;
-import com.michaldabski.fileexplorer.R;
-import com.michaldabski.fileexplorer.clipboard.Clipboard;
-import com.michaldabski.fileexplorer.clipboard.Clipboard.FileAction;
-import com.michaldabski.fileexplorer.clipboard.FileOperationListener;
-import com.michaldabski.fileexplorer.favourites.FavouriteFolder;
-import com.michaldabski.fileexplorer.favourites.FavouritesManager;
-import com.michaldabski.fileexplorer.favourites.FavouritesManager.FolderAlreadyFavouriteException;
-import com.michaldabski.fileexplorer.folders.FileAdapter.OnFileSelectedListener;
+import com.michaldabski.filemanager.AppPreferences;
+import com.michaldabski.filemanager.FileExplorerApplication;
+import com.michaldabski.filemanager.MainActivity;
+import com.michaldabski.filemanager.R;
+import com.michaldabski.filemanager.clipboard.Clipboard;
+import com.michaldabski.filemanager.clipboard.FileOperationListener;
+import com.michaldabski.filemanager.clipboard.Clipboard.FileAction;
+import com.michaldabski.filemanager.favourites.FavouriteFolder;
+import com.michaldabski.filemanager.favourites.FavouritesManager;
+import com.michaldabski.filemanager.favourites.FavouritesManager.FolderAlreadyFavouriteException;
+import com.michaldabski.filemanager.folders.FileAdapter.OnFileSelectedListener;
 import com.michaldabski.utils.AsyncResult;
 import com.michaldabski.utils.FileUtils;
 import com.michaldabski.utils.FontApplicator;

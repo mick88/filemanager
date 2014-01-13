@@ -1,10 +1,10 @@
-package com.michaldabski.fileexplorer.nav_drawer;
+package com.michaldabski.filemanager.nav_drawer;
 
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.michaldabski.fileexplorer.MainActivity;
-import com.michaldabski.fileexplorer.nav_drawer.NavDrawerAdapter.NavDrawerItem;
+import com.michaldabski.filemanager.MainActivity;
+import com.michaldabski.filemanager.nav_drawer.NavDrawerAdapter.NavDrawerItem;
 
 public class NavDrawerDivider implements NavDrawerItem
 {

@@ -1,4 +1,4 @@
-package com.michaldabski.fileexplorer;
+package com.michaldabski.filemanager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,14 +21,15 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.michaldabski.fileexplorer.clipboard.Clipboard;
-import com.michaldabski.fileexplorer.clipboard.Clipboard.ClipboardListener;
-import com.michaldabski.fileexplorer.clipboard.ClipboardFileAdapter;
-import com.michaldabski.fileexplorer.favourites.FavouritesManager;
-import com.michaldabski.fileexplorer.favourites.FavouritesManager.FavouritesListener;
-import com.michaldabski.fileexplorer.folders.FolderFragment;
-import com.michaldabski.fileexplorer.nav_drawer.NavDrawerAdapter;
-import com.michaldabski.fileexplorer.nav_drawer.NavDrawerAdapter.NavDrawerItem;
+import com.michaldabski.filemanager.R;
+import com.michaldabski.filemanager.clipboard.Clipboard;
+import com.michaldabski.filemanager.clipboard.ClipboardFileAdapter;
+import com.michaldabski.filemanager.clipboard.Clipboard.ClipboardListener;
+import com.michaldabski.filemanager.favourites.FavouritesManager;
+import com.michaldabski.filemanager.favourites.FavouritesManager.FavouritesListener;
+import com.michaldabski.filemanager.folders.FolderFragment;
+import com.michaldabski.filemanager.nav_drawer.NavDrawerAdapter;
+import com.michaldabski.filemanager.nav_drawer.NavDrawerAdapter.NavDrawerItem;
 import com.michaldabski.utils.FontApplicator;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 

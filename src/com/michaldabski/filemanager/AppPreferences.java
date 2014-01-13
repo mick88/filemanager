@@ -1,4 +1,4 @@
-package com.michaldabski.fileexplorer;
+package com.michaldabski.filemanager;
 
 import java.io.File;
 import java.security.InvalidParameterException;
