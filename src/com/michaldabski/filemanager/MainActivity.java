@@ -51,7 +51,6 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		getActionBar().setIcon(R.drawable.folder_white);
 		tintManager = new SystemBarTintManager(this);
 		
 		setupNavDrawer();
