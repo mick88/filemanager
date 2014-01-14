@@ -337,7 +337,7 @@ public class FileUtils
 		
 		// add shortcut symbol
 		if (homescreen)
-			canvas.drawBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.shortcut), 0, 0, null);
+			canvas.drawBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_home_shortcut), 0, 0, null);
 		
 		return  bitmap;
 	}
