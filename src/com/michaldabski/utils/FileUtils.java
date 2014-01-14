@@ -20,6 +20,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Environment;
 import android.webkit.MimeTypeMap;
 
@@ -276,6 +277,7 @@ public class FileUtils
 	/**
 	 * gets icon for this file type
 	 */
+	@SuppressLint("NewApi")
 	public static int getFileIconResource(File file)
 	{
 		if (file.isDirectory())
@@ -292,6 +294,8 @@ public class FileUtils
 				return R.drawable.icon_music;
 			else if (file.equals(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)))
 				return R.drawable.icon_pictures;
+			else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && file.equals(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)))
+				return R.drawable.icon_documents;
 			return R.drawable.icon_folder;
 		}
 		else
