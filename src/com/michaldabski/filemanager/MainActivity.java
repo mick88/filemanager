@@ -53,7 +53,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 		setContentView(R.layout.activity_main);
 		tintManager = new SystemBarTintManager(this);
 		
-		setupNavDrawer();
+		setupDrawers();
 		Clipboard.getInstance().addListener(this);
 		
 		fontApplicator = new FontApplicator(getApplicationContext(), "Roboto_Light.ttf").applyFont(getWindow().getDecorView());
@@ -112,7 +112,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 		}
 	}
 	
-	private void setupNavDrawer()
+	private void setupDrawers()
 	{
 		this.drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.drawable.ic_drawer, R.string.open_drawer, R.string.close_drawer)
@@ -151,6 +151,22 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 		drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
 //		drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, Gravity.END);
 		
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
+
+        setupNavDrawer();
+		setupClipboardDrawer();
+	}
+	
+	void setupNavDrawer()
+	{
+		FileManagerApplication application = (FileManagerApplication) getApplication();
+        loadFavourites(application.getFavouritesManager());
+        application.getFavouritesManager().addFavouritesListener(this);
+	}
+	
+	void setupClipboardDrawer()
+	{
 		// add listview header to push items below the actionbar
 		LayoutInflater inflater = getLayoutInflater();
 		ListView clipboardListView = (ListView) findViewById(R.id.listClipboard);
@@ -167,13 +183,6 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 			clipboardListView.addFooterView(footer, null, false);
 		}		
 		onClipboardContentsChange(Clipboard.getInstance());
-		
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
-
-        FileManagerApplication application = (FileManagerApplication) getApplication();
-        loadFavourites(application.getFavouritesManager());
-        application.getFavouritesManager().addFavouritesListener(this);
 	}
 	
 	void loadFavourites(FavouritesManager favouritesManager)
