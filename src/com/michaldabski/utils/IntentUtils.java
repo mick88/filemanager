@@ -10,7 +10,7 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
-import com.michaldabski.filemanager.MainActivity;
+import com.michaldabski.filemanager.folders.FolderActivity;
 
 public class IntentUtils
 {
@@ -27,8 +27,8 @@ public class IntentUtils
 		final Intent shortcutIntent;
 		if (file.isDirectory())
 		{
-			shortcutIntent = new Intent(context, MainActivity.class);
-			shortcutIntent.putExtra(MainActivity.EXTRA_DIR, file.getAbsolutePath());
+			shortcutIntent = new Intent(context, FolderActivity.class);
+			shortcutIntent.putExtra(FolderActivity.EXTRA_DIR, file.getAbsolutePath());
 		}
 		else 
 		{

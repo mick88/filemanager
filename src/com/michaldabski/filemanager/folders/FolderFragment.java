@@ -43,7 +43,6 @@ import android.widget.Toast;
 
 import com.michaldabski.filemanager.AppPreferences;
 import com.michaldabski.filemanager.FileManagerApplication;
-import com.michaldabski.filemanager.MainActivity;
 import com.michaldabski.filemanager.R;
 import com.michaldabski.filemanager.clipboard.Clipboard;
 import com.michaldabski.filemanager.clipboard.FileOperationListener;
@@ -101,8 +100,8 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	
 	FontApplicator getFontApplicator()
 	{
-		MainActivity mainActivity = (MainActivity) getActivity();
-		return mainActivity.getFontApplicator();
+		FolderActivity folderActivity = (FolderActivity) getActivity();
+		return folderActivity.getFontApplicator();
 	}
 	
 	void showProgress()
@@ -321,7 +320,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 					args.putString(EXTRA_DIR, newFolder);
 					FolderFragment fragment = new FolderFragment();
 					fragment.setArguments(args);
-					MainActivity activity = (MainActivity) getActivity();
+					FolderActivity activity = (FolderActivity) getActivity();
 					activity.showFragment(fragment);
 					
 				}
@@ -522,7 +521,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		if (fileAdapter != null)
 			setListAdapter(fileAdapter);
 		
-		MainActivity activity = (MainActivity) getActivity();
+		FolderActivity activity = (FolderActivity) getActivity();
 		activity.setLastFolder(currentDir);
 
 	}
@@ -554,7 +553,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	void navigateTo(File folder)
 	{		
 		nextDir = folder;
-		MainActivity activity = (MainActivity) getActivity();
+		FolderActivity activity = (FolderActivity) getActivity();
 		FolderFragment fragment = new FolderFragment();
 		Bundle args = new Bundle();
 		args.putString(EXTRA_DIR, folder.getAbsolutePath());
@@ -611,7 +610,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	void setActionbarVisibility(boolean visible)
 	{
 		if (actionMode == null || visible == true) // cannot hide CAB
-			((MainActivity) getActivity()).setActionbarVisible(visible);
+			((FolderActivity) getActivity()).setActionbarVisible(visible);
 	}
 
 	@Override

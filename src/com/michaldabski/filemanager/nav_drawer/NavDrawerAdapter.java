@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.michaldabski.filemanager.MainActivity;
 import com.michaldabski.filemanager.R;
 import com.michaldabski.filemanager.RobotoAdapter;
+import com.michaldabski.filemanager.folders.FolderActivity;
 import com.michaldabski.filemanager.nav_drawer.NavDrawerAdapter.NavDrawerItem;
 import com.michaldabski.utils.ViewHolder;
 
@@ -28,7 +28,7 @@ public class NavDrawerAdapter extends RobotoAdapter<NavDrawerItem>
 		CharSequence getTitle(Context context);
 		CharSequence getSubTitle(Context context);
 		void setImageToView(ImageView imageView);
-		boolean onClicked(MainActivity activity);
+		boolean onClicked(FolderActivity activity);
 		int getViewType();
 	}
 	

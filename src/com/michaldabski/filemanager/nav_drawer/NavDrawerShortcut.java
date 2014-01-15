@@ -6,7 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import com.michaldabski.filemanager.MainActivity;
+import com.michaldabski.filemanager.folders.FolderActivity;
 import com.michaldabski.filemanager.folders.FolderFragment;
 import com.michaldabski.filemanager.nav_drawer.NavDrawerAdapter.NavDrawerItem;
 import com.michaldabski.utils.FileUtils;
@@ -16,7 +16,7 @@ public abstract class NavDrawerShortcut implements NavDrawerItem
 	public abstract File getFile();
 	
 	@Override
-	public boolean onClicked(MainActivity activity)
+	public boolean onClicked(FolderActivity activity)
 	{
 		if (getFile().equals(activity.getLastFolder())) return true;
 		Bundle args = new Bundle();

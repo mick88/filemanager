@@ -3,7 +3,7 @@ package com.michaldabski.filemanager.nav_drawer;
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.michaldabski.filemanager.MainActivity;
+import com.michaldabski.filemanager.folders.FolderActivity;
 import com.michaldabski.filemanager.nav_drawer.NavDrawerAdapter.NavDrawerItem;
 
 public class NavDrawerDivider implements NavDrawerItem
@@ -27,7 +27,7 @@ public class NavDrawerDivider implements NavDrawerItem
 	}
 	
 	@Override
-	public boolean onClicked(MainActivity activity)
+	public boolean onClicked(FolderActivity activity)
 	{
 		return false;
 	}
