@@ -18,8 +18,8 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -45,8 +45,8 @@ import com.michaldabski.filemanager.AppPreferences;
 import com.michaldabski.filemanager.FileManagerApplication;
 import com.michaldabski.filemanager.R;
 import com.michaldabski.filemanager.clipboard.Clipboard;
-import com.michaldabski.filemanager.clipboard.FileOperationListener;
 import com.michaldabski.filemanager.clipboard.Clipboard.FileAction;
+import com.michaldabski.filemanager.clipboard.FileOperationListener;
 import com.michaldabski.filemanager.favourites.FavouriteFolder;
 import com.michaldabski.filemanager.favourites.FavouritesManager;
 import com.michaldabski.filemanager.favourites.FavouritesManager.FolderAlreadyFavouriteException;
@@ -184,6 +184,9 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	{
 		View view = inflater.inflate(R.layout.fragment_list, container, false);
 		this.listView = (ListView) view.findViewById(android.R.id.list);
+		
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+			listView.setFastScrollAlwaysVisible(true);
 		return view;
 	}
 	
