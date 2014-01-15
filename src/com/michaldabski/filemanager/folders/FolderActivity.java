@@ -36,6 +36,11 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class FolderActivity extends Activity implements OnItemClickListener, ClipboardListener, FavouritesListener
 {	
+	public static class FolderNotOpenException extends Exception
+	{
+		
+	}
+	
 	private static final String LOG_TAG = "Main Activity";
 
 	public static final String EXTRA_DIR = FolderFragment.EXTRA_DIR;
@@ -296,11 +301,11 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 		
 	}
 	
-	public File getCurrentFolder()
+	public File getCurrentFolder() throws FolderNotOpenException
 	{
 		FolderFragment folderFragment = getFolderFragment();
 		if (folderFragment == null)
-			return null;
+			throw new FolderNotOpenException();
 		else return folderFragment.currentDir;
 	}
 
