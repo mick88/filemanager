@@ -308,7 +308,7 @@ public class FileUtils
 	{
 		if (file.isDirectory())
 		{
-			if (file.equals(Environment.getExternalStorageDirectory()))
+			if (file.equals(Environment.getExternalStorageDirectory()) || SDCARD_DISPLAY_PATH.equals(file.getAbsolutePath()))
 				return R.drawable.icon_sdcard;
 			else if (file.equals(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)))
 				return R.drawable.icon_pictures;
