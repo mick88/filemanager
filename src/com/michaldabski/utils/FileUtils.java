@@ -50,7 +50,7 @@ public class FileUtils
 	}
 	
 	@SuppressLint("SdCardPath")
-	private static final String SDCARD_DISPLAY_NAME = "/sdcard";
+	private static final String SDCARD_DISPLAY_PATH = "/sdcard";
 	private static final double FILE_APP_ICON_SCALE = 0.2;
 	
 	// user-friendly names for predefined folders
@@ -409,7 +409,7 @@ public class FileUtils
 			path = file.getAbsolutePath();
 		}
 		return path
-				.replace(Environment.getExternalStorageDirectory().getAbsolutePath(), SDCARD_DISPLAY_NAME);
+				.replace(Environment.getExternalStorageDirectory().getAbsolutePath(), SDCARD_DISPLAY_PATH);
 	}
 	
 	public static String getFolderDisplayName(File folder)
