@@ -163,6 +163,22 @@ public class MainActivity extends Activity implements OnItemClickListener, Clipb
 		FileManagerApplication application = (FileManagerApplication) getApplication();
         loadFavourites(application.getFavouritesManager());
         application.getFavouritesManager().addFavouritesListener(this);
+        
+		// add listview header to push items below the actionbar
+		LayoutInflater inflater = getLayoutInflater();
+		ListView navListView = (ListView) findViewById(R.id.listNavigation);
+		View header = inflater.inflate(R.layout.list_header_actionbar_padding, navListView, false);
+		SystemBarTintManager systemBarTintManager = new SystemBarTintManager(this);
+		int headerHeight = systemBarTintManager.getConfig().getPixelInsetTop(true);
+		header.setLayoutParams(new android.widget.AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, headerHeight));
+		navListView.addHeaderView(header, null, false);
+		int footerHeight = systemBarTintManager.getConfig().getPixelInsetBottom();
+		if (footerHeight > 0)
+		{
+			View footer = inflater.inflate(R.layout.list_header_actionbar_padding, navListView, false);
+			footer.setLayoutParams(new android.widget.AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, footerHeight));
+			navListView.addFooterView(footer, null, false);
+		}		
 	}
 	
 	void setupClipboardDrawer()

@@ -7,5 +7,4 @@
     android:background="#fff"
     android:choiceMode="singleChoice"
     android:divider="@android:color/transparent"
-    android:fitsSystemWindows="true"
     android:dividerHeight="0dp" />
