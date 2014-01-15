@@ -330,10 +330,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			case R.id.menu_favourite:				
 				try
 				{
-					final String directoryName;
-					if (currentDir.equals(Environment.getExternalStorageDirectory()))
-						directoryName = getActivity().getString(R.string.sd_card);
-					else directoryName = currentDir.getName();
+					final String directoryName = FileUtils.getFolderDisplayName(currentDir);
 					
 					FavouritesManager favouritesManager = getApplication().getFavouritesManager();
 					favouritesManager.addFavourite(new FavouriteFolder(currentDir, directoryName));
@@ -485,10 +482,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			selectFiles(selectedFiles);
 		}
 		
-		final String directoryName;
-		if (currentDir.equals(Environment.getExternalStorageDirectory()))
-			directoryName = getActivity().getString(R.string.sd_card);
-		else directoryName = currentDir.getName();
+		final String directoryName = FileUtils.getFolderDisplayName(currentDir);
 		getActivity().setTitle(directoryName);
 		getListView().setOnItemClickListener(FolderFragment.this);
 		getListView().setOnScrollListener(this);

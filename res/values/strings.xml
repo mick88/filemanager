@@ -28,7 +28,6 @@
     <string name="bookmarks">Bookmarks</string>
     <string name="system">System</string>
     <string name="root">Root</string>
-    <string name="sd_card">SD card</string>
     <string name="cut">Cut</string>
     <string name="paste_here">Paste here</string>
     <string name="objects_cut_to_clipboard">Objects cut to clipboard</string>

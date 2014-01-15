@@ -10,6 +10,7 @@ import android.os.Environment;
 import com.michaldabski.filemanager.R;
 import com.michaldabski.filemanager.favourites.FavouriteFolder;
 import com.michaldabski.msqlite.MSQLiteOpenHelper;
+import com.michaldabski.utils.FileUtils;
 
 public class SQLiteHelper extends MSQLiteOpenHelper
 {
@@ -32,7 +33,7 @@ public class SQLiteHelper extends MSQLiteOpenHelper
 		List<FavouriteFolder> favouriteFolders = new ArrayList<FavouriteFolder>();
 		if (Environment.getExternalStorageDirectory().isDirectory())
 		{
-			favouriteFolders.add(new FavouriteFolder(Environment.getExternalStorageDirectory(), getString(R.string.sd_card)));
+			favouriteFolders.add(new FavouriteFolder(Environment.getExternalStorageDirectory(), FileUtils.DISPLAY_NAME_SD_CARD));
 			if (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).isDirectory())
 				favouriteFolders.add(new FavouriteFolder(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), getString(R.string.downloads)));
 			if (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).isDirectory())

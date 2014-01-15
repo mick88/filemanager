@@ -28,6 +28,7 @@ import com.michaldabski.filemanager.R;
 
 public class FileUtils
 {
+
 	public static class DirectoryNotEmptyException extends IOException
 	{
 		private static final long serialVersionUID = 1L;
@@ -51,6 +52,11 @@ public class FileUtils
 	@SuppressLint("SdCardPath")
 	private static final String SDCARD_DISPLAY_NAME = "/sdcard";
 	private static final double FILE_APP_ICON_SCALE = 0.2;
+	
+	// user-friendly names for predefined folders
+	public static final String 
+		DISPLAY_NAME_ROOT = "Root",
+		DISPLAY_NAME_SD_CARD = "SD Card";
 	
 	public final static int 
 		KILOBYTE = 1024,
@@ -404,6 +410,15 @@ public class FileUtils
 		}
 		return path
 				.replace(Environment.getExternalStorageDirectory().getAbsolutePath(), SDCARD_DISPLAY_NAME);
+	}
+	
+	public static String getFolderDisplayName(File folder)
+	{
+		if (Environment.getExternalStorageDirectory().equals(folder))
+			return DISPLAY_NAME_SD_CARD;
+		else if ("/".equals(folder.getAbsolutePath()))
+			return DISPLAY_NAME_ROOT;
+		else return folder.getName();
 	}
 	
 	public static boolean isMediaDirectory(File file)
