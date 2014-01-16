@@ -167,8 +167,6 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 	void setupNavDrawer()
 	{
 		FileManagerApplication application = (FileManagerApplication) getApplication();
-        loadFavourites(application.getFavouritesManager());
-        application.getFavouritesManager().addFavouritesListener(this);
         
 		// add listview header to push items below the actionbar
 		LayoutInflater inflater = getLayoutInflater();
@@ -185,6 +183,9 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 			footer.setLayoutParams(new android.widget.AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, footerHeight));
 			navListView.addFooterView(footer, null, false);
 		}		
+		
+		loadFavourites(application.getFavouritesManager());
+        application.getFavouritesManager().addFavouritesListener(this);
 	}
 	
 	void setupClipboardDrawer()
