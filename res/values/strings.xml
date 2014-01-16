@@ -60,5 +60,7 @@
     <string name="file_could_not_be_renamed_to_s">File could not be renamed to %s</string>
     <string name="photos">Photos</string>
     <string name="add_favourite">Add favourite</string>
+    <string name="other_apps">Other apps</string>
+    <string name="feedback">Feedback</string>
 
 </resources>

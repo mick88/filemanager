@@ -41,4 +41,19 @@
         android:gravity="center"
         android:text="@string/credits" />
 
+    <Button
+        android:id="@+id/btnFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:drawableLeft="@drawable/ic_feedback"
+        android:text="@string/feedback" />
+
+    <Button
+        android:id="@+id/btnPlaystore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"      
+        android:drawableLeft="@drawable/ic_other_apps"
+        android:text="@string/other_apps" />
+
 </LinearLayout>
