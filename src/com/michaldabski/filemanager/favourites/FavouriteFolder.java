@@ -12,6 +12,7 @@ public class FavouriteFolder extends NavDrawerShortcut
 	private String label;
 	@PrimaryKey
 	private String path;
+	Integer order = null;
 	
 	public FavouriteFolder()
 	{
@@ -62,6 +63,16 @@ public class FavouriteFolder extends NavDrawerShortcut
 	public int hashCode()
 	{
 		return getFile().hashCode();
+	}
+	
+	public void setOrder(int order)
+	{
+		this.order = order;
+	}
+	
+	public int getOrder()
+	{
+		return order;
 	}
 	
 	public boolean exists()
