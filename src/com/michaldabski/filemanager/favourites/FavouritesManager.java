@@ -36,6 +36,11 @@ public class FavouritesManager
 		this.sqLiteHelper = new SQLiteHelper(context);
 		this.favouritesListeners = new HashSet<FavouritesManager.FavouritesListener>();
 		this.folders = sqLiteHelper.selectAll(FavouriteFolder.class);
+		sort();
+	}
+	
+	public void sort()
+	{
 		Collections.sort(folders);
 	}
 	
