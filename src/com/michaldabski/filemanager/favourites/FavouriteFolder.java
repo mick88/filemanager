@@ -5,6 +5,7 @@ import java.io.File;
 import android.content.Context;
 
 import com.michaldabski.filemanager.nav_drawer.NavDrawerShortcut;
+import com.michaldabski.msqlite.Annotations.ColumnName;
 import com.michaldabski.msqlite.Annotations.PrimaryKey;
 
 public class FavouriteFolder extends NavDrawerShortcut implements Comparable<FavouriteFolder>
@@ -12,6 +13,7 @@ public class FavouriteFolder extends NavDrawerShortcut implements Comparable<Fav
 	private String label;
 	@PrimaryKey
 	private String path;
+	@ColumnName("item_order")
 	Integer order;
 	
 	public FavouriteFolder()
