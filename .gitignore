@@ -30,3 +30,4 @@ out/
 build/
 whatzereandroid.iml
 .DS_Store
+proguard/
