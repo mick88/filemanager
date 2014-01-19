@@ -5,13 +5,16 @@ import java.io.File;
 import android.content.Context;
 
 import com.michaldabski.filemanager.nav_drawer.NavDrawerShortcut;
+import com.michaldabski.msqlite.Annotations.ColumnName;
 import com.michaldabski.msqlite.Annotations.PrimaryKey;
 
-public class FavouriteFolder extends NavDrawerShortcut
+public class FavouriteFolder extends NavDrawerShortcut implements Comparable<FavouriteFolder>
 {
 	private String label;
 	@PrimaryKey
 	private String path;
+	@ColumnName("item_order")
+	Integer order;
 	
 	public FavouriteFolder()
 	{
@@ -64,6 +67,21 @@ public class FavouriteFolder extends NavDrawerShortcut
 		return getFile().hashCode();
 	}
 	
+	public void setOrder(int order)
+	{
+		this.order = order;
+	}
+	
+	public Integer getOrder()
+	{
+		return order;
+	}
+	
+	public boolean hasValidOrder()
+	{
+		return order != null;
+	}
+	
 	public boolean exists()
 	{
 		return getFile().exists();
@@ -73,6 +91,16 @@ public class FavouriteFolder extends NavDrawerShortcut
 	public CharSequence getTitle(Context context)
 	{
 		return label;
+	}
+
+	@Override
+	public int compareTo(FavouriteFolder another)
+	{
+		if (order == null)
+			return -1;
+		if (another.order == null)
+			return 1;
+		return order.compareTo(another.order);
 	}
 
 }

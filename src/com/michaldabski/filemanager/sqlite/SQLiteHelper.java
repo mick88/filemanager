@@ -15,7 +15,7 @@ import com.michaldabski.utils.FileUtils;
 public class SQLiteHelper extends MSQLiteOpenHelper
 {
 	private static final String DB_NAME = "file_manager.db";
-	private static final int DB_VERSION = 1;
+	private static final int DB_VERSION = 3;
 	
 	private final Context context;
 

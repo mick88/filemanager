@@ -1,6 +1,7 @@
 package com.michaldabski.filemanager.favourites;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,6 +36,27 @@ public class FavouritesManager
 		this.sqLiteHelper = new SQLiteHelper(context);
 		this.favouritesListeners = new HashSet<FavouritesManager.FavouritesListener>();
 		this.folders = sqLiteHelper.selectAll(FavouriteFolder.class);
+		sort();
+		fixFavouritesOrder();
+	}
+	
+	public void sort()
+	{
+		Collections.sort(folders);
+	}
+	
+	private void fixFavouritesOrder()
+	{
+		int lastOrder=0;
+		for (FavouriteFolder folder : folders)
+		{
+			if (folder.hasValidOrder() == false || folder.getOrder() <= lastOrder)
+			{
+				folder.setOrder(lastOrder+1);
+			}
+				
+			lastOrder = folder.getOrder();
+		}
 	}
 	
 	public void addFavouritesListener(FavouritesListener favouritesListener)
