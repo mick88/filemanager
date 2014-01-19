@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">File Manager Pro</string>
+    <string name="app_name">File Manager Beta</string>
     <string name="title_activity_about">About</string>
     <string name="cannot_read_directory_s">Cannot read directory %s</string>
     <string name="open_file_with_">Open %s with:</string>
