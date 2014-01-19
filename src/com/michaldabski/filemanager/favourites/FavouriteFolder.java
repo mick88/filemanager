@@ -72,9 +72,14 @@ public class FavouriteFolder extends NavDrawerShortcut implements Comparable<Fav
 		this.order = order;
 	}
 	
-	public int getOrder()
+	public Integer getOrder()
 	{
 		return order;
+	}
+	
+	public boolean hasValidOrder()
+	{
+		return order != null;
 	}
 	
 	public boolean exists()

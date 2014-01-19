@@ -37,11 +37,26 @@ public class FavouritesManager
 		this.favouritesListeners = new HashSet<FavouritesManager.FavouritesListener>();
 		this.folders = sqLiteHelper.selectAll(FavouriteFolder.class);
 		sort();
+		fixFavouritesOrder();
 	}
 	
 	public void sort()
 	{
 		Collections.sort(folders);
+	}
+	
+	private void fixFavouritesOrder()
+	{
+		int lastOrder=0;
+		for (FavouriteFolder folder : folders)
+		{
+			if (folder.hasValidOrder() == false || folder.getOrder() <= lastOrder)
+			{
+				folder.setOrder(lastOrder+1);
+			}
+				
+			lastOrder = folder.getOrder();
+		}
 	}
 	
 	public void addFavouritesListener(FavouritesListener favouritesListener)
