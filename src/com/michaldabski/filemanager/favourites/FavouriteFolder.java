@@ -7,12 +7,12 @@ import android.content.Context;
 import com.michaldabski.filemanager.nav_drawer.NavDrawerShortcut;
 import com.michaldabski.msqlite.Annotations.PrimaryKey;
 
-public class FavouriteFolder extends NavDrawerShortcut
+public class FavouriteFolder extends NavDrawerShortcut implements Comparable<FavouriteFolder>
 {
 	private String label;
 	@PrimaryKey
 	private String path;
-	Integer order = null;
+	Integer order;
 	
 	public FavouriteFolder()
 	{
@@ -84,6 +84,16 @@ public class FavouriteFolder extends NavDrawerShortcut
 	public CharSequence getTitle(Context context)
 	{
 		return label;
+	}
+
+	@Override
+	public int compareTo(FavouriteFolder another)
+	{
+		if (order == null)
+			return -1;
+		if (another.order == null)
+			return 1;
+		return order.compareTo(another.order);
 	}
 
 }
