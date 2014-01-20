@@ -452,9 +452,7 @@ public class FileUtils
 		{
 			String path = file.getCanonicalPath();
 			for (String directory : new String[]{Environment.DIRECTORY_DCIM, 
-					Environment.DIRECTORY_MOVIES, 
-					Environment.DIRECTORY_PICTURES, 
-					Environment.DIRECTORY_MUSIC})
+					Environment.DIRECTORY_PICTURES})
 			{
 				if (path.startsWith(Environment.getExternalStoragePublicDirectory(directory)
 						.getAbsolutePath()))
