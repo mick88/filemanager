@@ -159,6 +159,29 @@ public class FileUtils
 			return String.format(Locale.ENGLISH, "%.2f gb", (float)size / GIGABYTE);
 	}
 	
+	public static String formatFileSize(Collection<File> files)
+	{
+		return formatFileSize(getFileSize(files));
+	}
+	
+	public static long getFileSize(File... files)
+	{
+		if (files == null) return 0l;
+		long size=0;
+		for (File file : files)
+		{
+			if (file.isDirectory())
+				size += getFileSize(file.listFiles());
+			else size += file.length();
+		}
+		return size;
+	}
+	
+	public static long getFileSize(Collection<File> files)
+	{
+		return getFileSize(files.toArray(new File[files.size()]));
+	}
+	
 	public static String getFileExtension(File file)
 	{
 		return getFileExtension(file.getName());

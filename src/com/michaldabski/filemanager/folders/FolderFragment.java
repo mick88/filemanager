@@ -645,6 +645,25 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		setFileSelected((File) arg0.getItemAtPosition(arg2), true);
 		return true;
 	}
+	
+	void showFileInfo(Collection<File> files)
+	{
+		final CharSequence title;
+		final StringBuilder message = new StringBuilder();
+		if (files.size() == 1) title = ((File) files.toArray()[0]).getName();
+		else title = getString(R.string._d_objects, files.size());
+		
+		if (files.size() > 1)
+			message.append(FileUtils.combineFileNames(files)).append("\n\n");
+		message.append(getString(R.string.size_s, FileUtils.formatFileSize(files))).append('\n');
+		message.append(getString(R.string.mime_type_s, FileUtils.getCollectiveMimeType(files)));
+		
+		new AlertDialog.Builder(getActivity())
+			.setTitle(title)
+			.setMessage(message)
+			.setPositiveButton(android.R.string.ok, null)
+			.show();
+	}
 
 	@Override
 	public boolean onActionItemClicked(ActionMode mode, MenuItem item)
@@ -675,6 +694,11 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 				else selectFiles(files);
 				return true;
 				
+			case R.id.action_info:
+				if (selectedFiles.isEmpty()) return true;
+				showFileInfo(selectedFiles);
+				return true;
+
 			case R.id.action_copy:
 				Clipboard.getInstance().addFiles(selectedFiles, FileAction.Copy);
 				Toast.makeText(getActivity(), R.string.objects_copied_to_clipboard, Toast.LENGTH_SHORT).show();
