@@ -4,7 +4,7 @@
         android:id="@+id/menu_unfavourite"
         android:icon="@drawable/ic_favourite"
         android:orderInCategory="2"
-        android:showAsAction="always"
+        android:showAsAction="ifRoom"
         android:title="@string/remove_favourite"
         android:visible="false"/>
     
@@ -12,7 +12,7 @@
         android:id="@+id/menu_favourite"
         android:icon="@drawable/ic_favourite_not"
         android:orderInCategory="2"
-        android:showAsAction="always"
+        android:showAsAction="ifRoom"
         android:title="@string/add_favourite"
         android:visible="false"/>
     
@@ -20,7 +20,7 @@
         android:id="@+id/menu_navigate_up"
         android:icon="@drawable/ic_navigate_up"
         android:orderInCategory="0"
-        android:showAsAction="ifRoom"
+        android:showAsAction="always"
         android:title="@string/up"
         android:visible="true"/>
     
