@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.michaldabski.filemanager.R;
+import com.michaldabski.utils.FileIconResolver;
 import com.michaldabski.utils.FilePreviewCache;
 import com.michaldabski.utils.ViewHolder;
 
@@ -20,15 +21,15 @@ public class FileCardAdapter extends FileAdapter
 	private final FilePreviewCache thumbCache;
 	Map<ImageView, CardPreviewer> runningTasks = new HashMap<ImageView, CardPreviewer>();
 	
-	public FileCardAdapter(Context context, File[] files, FilePreviewCache previewCache)
+	public FileCardAdapter(Context context, File[] files, FilePreviewCache previewCache, FileIconResolver fileIconResolver)
 	{
-		super(context, R.layout.list_item_file_card, files);
+		super(context, R.layout.list_item_file_card, files, fileIconResolver);
 		this.thumbCache = previewCache;
 	}
 	
-	public FileCardAdapter(Context context, List<File> files, FilePreviewCache previewCache)
+	public FileCardAdapter(Context context, List<File> files, FilePreviewCache previewCache, FileIconResolver fileIconResolver)
 	{
-		super(context, R.layout.list_item_file_card, files);
+		super(context, R.layout.list_item_file_card, files, fileIconResolver);
 		this.thumbCache = previewCache;
 	}
 	

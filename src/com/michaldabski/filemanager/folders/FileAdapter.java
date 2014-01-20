@@ -58,7 +58,7 @@ public class FileAdapter extends BaseFileAdapter
 		this(context, new ArrayList<File>(0), fileIconResolver);
 	}
 	
-	boolean isSelected(File file)
+	protected boolean isSelected(File file)
 	{
 		return (selectedFiles != null && selectedFiles.contains(file));
 	}

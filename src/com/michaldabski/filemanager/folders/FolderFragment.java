@@ -254,9 +254,9 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 					if (FileUtils.isMediaDirectory(currentDir)) 
 					{
 						if (thumbCache == null) thumbCache = new FilePreviewCache();
-						adapter = new FileCardAdapter(getActivity(), files, thumbCache);
+						adapter = new FileCardAdapter(getActivity(), files, thumbCache, getApplication().getFileIconResolver());
 					}
-					else adapter = new FileAdapter(getActivity(), files);
+					else adapter = new FileAdapter(getActivity(), files, getApplication().getFileIconResolver());
 					adapter.setSelectedFiles(selectedFiles);
 					adapter.setOnFileSelectedListener(FolderFragment.this);
 					adapter.setFontApplicator(getFontApplicator());
