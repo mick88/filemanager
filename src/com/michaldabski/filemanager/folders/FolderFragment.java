@@ -37,6 +37,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.EditText;
+import android.widget.HeaderViewListAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
@@ -636,6 +638,17 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		{
 			setActionbarVisibility(false);
 			this.topVisibleItem = firstVisibleItem;
+		}
+		
+		ListAdapter adapter = view.getAdapter();
+		if (adapter instanceof HeaderViewListAdapter)
+		{
+			HeaderViewListAdapter headerViewListAdapter = (HeaderViewListAdapter) adapter;
+			if (headerViewListAdapter.getWrappedAdapter() instanceof FileCardAdapter)
+			{
+				int startPrefetch = firstVisibleItem + visibleItemCount-headerViewListAdapter.getHeadersCount();
+				((FileCardAdapter) headerViewListAdapter.getWrappedAdapter()).prefetchImages(startPrefetch, visibleItemCount);
+			}
 		}
 	}
 

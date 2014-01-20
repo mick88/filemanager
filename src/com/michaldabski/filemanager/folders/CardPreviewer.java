@@ -25,7 +25,7 @@ public class CardPreviewer extends AsyncTask<File, Void, Bitmap>
 	private static final int NUM_FOLDER_PREVIEWS = 6;
 	private static final int PREVIEW_WIDTH = (int) (THUMBNAIL_SIZE * 1.3),
 			PREVIEW_HEIGHT = THUMBNAIL_SIZE;
-	final ImageView imageView;
+	ImageView imageView;
 	final FilePreviewCache thumbCache;
 	File file;
 	
@@ -33,6 +33,12 @@ public class CardPreviewer extends AsyncTask<File, Void, Bitmap>
 	{
 		this.imageView = imageView;
 		this.thumbCache = thumbCache;
+	}
+	
+	public void setImageView(ImageView imageView)
+	{
+		this.imageView = imageView;
+		if (imageView != null) imageView.setImageResource(R.drawable.card_image_placeholder);
 	}
 	
 	Bitmap buildFolderPreview(File folder)
@@ -123,7 +129,7 @@ public class CardPreviewer extends AsyncTask<File, Void, Bitmap>
 	protected void onPreExecute()
 	{
 		super.onPreExecute();
-		imageView.setImageResource(R.drawable.card_image_placeholder);
+		if (imageView != null) imageView.setImageResource(R.drawable.card_image_placeholder);
 	}
 	
 	@Override
@@ -142,12 +148,12 @@ public class CardPreviewer extends AsyncTask<File, Void, Bitmap>
 		super.onPostExecute(result);
 		if (result == null)
 		{
-			imageView.setImageResource(R.drawable.card_image_error);
+			if (imageView != null) imageView.setImageResource(R.drawable.card_image_error);
 		}
 		else
 		{
 			thumbCache.put(file, result);
-			imageView.setImageBitmap(result);
+			if (imageView != null) imageView.setImageBitmap(result);
 		}
 	}
 
