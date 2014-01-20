@@ -62,7 +62,7 @@ public class CardPreviewer extends AsyncTask<File, Void, Bitmap>
 	protected void onPreExecute()
 	{
 		super.onPreExecute();
-		imageView.setImageResource(R.drawable.ic_launcher);
+		imageView.setImageResource(R.drawable.card_image_placeholder);
 	}
 	
 	@Override
@@ -81,7 +81,7 @@ public class CardPreviewer extends AsyncTask<File, Void, Bitmap>
 		super.onPostExecute(result);
 		if (result == null)
 		{
-			
+			imageView.setImageResource(R.drawable.card_image_error);
 		}
 		else
 		{

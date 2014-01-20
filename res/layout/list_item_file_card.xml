@@ -17,7 +17,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/card_image_placeholder" />
 
         <LinearLayout
             android:id="@+id/layoutFileDetails"
