@@ -51,5 +51,12 @@
         android:orderInCategory="30"
         android:showAsAction="never"
         android:title="@string/add_to_homescreen"/>
+    
+    <item
+        android:id="@+id/action_info"
+        android:orderInCategory="40"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_about"
+        android:title="@string/file_info"/>
 
 </menu>
