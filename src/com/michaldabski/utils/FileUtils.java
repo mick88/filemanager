@@ -22,8 +22,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.media.ThumbnailUtils;
 import android.os.Build;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.webkit.MimeTypeMap;
 
 import com.michaldabski.filemanager.R;
@@ -504,18 +506,27 @@ public class FileUtils
 	public static Bitmap getPreview(File image) 
 	{
 		if (image.isDirectory()) return buildFolderPreview(image);
-	    BitmapFactory.Options bounds = new BitmapFactory.Options();
-	    bounds.inJustDecodeBounds = true;
-	    BitmapFactory.decodeFile(image.getPath(), bounds);
-	    if ((bounds.outWidth == -1) || (bounds.outHeight == -1))
-	        return null;
+		String type = getFileMimeType(image);
+		if (type.startsWith("video/"))
+		{
+			return ThumbnailUtils.createVideoThumbnail(image.getAbsolutePath(), MediaStore.Video.Thumbnails.MINI_KIND);
+		}
+		else if (type.startsWith("image/"))
+		{
+			BitmapFactory.Options bounds = new BitmapFactory.Options();
+		    bounds.inJustDecodeBounds = true;
+		    BitmapFactory.decodeFile(image.getPath(), bounds);
+		    if ((bounds.outWidth == -1) || (bounds.outHeight == -1))
+		        return null;
 
-	    int originalSize = (bounds.outHeight > bounds.outWidth) ? bounds.outHeight
-	            : bounds.outWidth;
+		    int originalSize = (bounds.outHeight > bounds.outWidth) ? bounds.outHeight
+		            : bounds.outWidth;
 
-	    BitmapFactory.Options opts = new BitmapFactory.Options();
-	    opts.inSampleSize = originalSize / THUMBNAIL_SIZE;
-	    return BitmapFactory.decodeFile(image.getPath(), opts);     
+		    BitmapFactory.Options opts = new BitmapFactory.Options();
+		    opts.inSampleSize = originalSize / THUMBNAIL_SIZE;
+		    return BitmapFactory.decodeFile(image.getPath(), opts);    
+		}
+		else return null;
 	}
 	
 	public static boolean isMediaDirectory(File file)
