@@ -32,6 +32,7 @@ import com.michaldabski.filemanager.favourites.FavouritesManager.FavouritesListe
 import com.michaldabski.filemanager.nav_drawer.NavDrawerAdapter;
 import com.michaldabski.filemanager.nav_drawer.NavDrawerAdapter.NavDrawerItem;
 import com.michaldabski.utils.FontApplicator;
+import com.michaldabski.utils.ListViewUtils;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class FolderActivity extends Activity implements OnItemClickListener, ClipboardListener, FavouritesListener
@@ -169,20 +170,8 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 		FileManagerApplication application = (FileManagerApplication) getApplication();
         
 		// add listview header to push items below the actionbar
-		LayoutInflater inflater = getLayoutInflater();
 		ListView navListView = (ListView) findViewById(R.id.listNavigation);
-		View header = inflater.inflate(R.layout.list_header_actionbar_padding, navListView, false);
-		SystemBarTintManager systemBarTintManager = new SystemBarTintManager(this);
-		int headerHeight = systemBarTintManager.getConfig().getPixelInsetTop(true);
-		header.setLayoutParams(new android.widget.AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, headerHeight));
-		navListView.addHeaderView(header, null, false);
-		int footerHeight = systemBarTintManager.getConfig().getPixelInsetBottom();
-		if (footerHeight > 0)
-		{
-			View footer = inflater.inflate(R.layout.list_header_actionbar_padding, navListView, false);
-			footer.setLayoutParams(new android.widget.AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, footerHeight));
-			navListView.addFooterView(footer, null, false);
-		}		
+		ListViewUtils.addListViewHeader(navListView, this, true);
 		
 		loadFavourites(application.getFavouritesManager());
         application.getFavouritesManager().addFavouritesListener(this);
@@ -191,26 +180,8 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 	void setupClipboardDrawer()
 	{
 		// add listview header to push items below the actionbar
-		LayoutInflater inflater = getLayoutInflater();
 		ListView clipboardListView = (ListView) findViewById(R.id.listClipboard);
-		View header = inflater.inflate(R.layout.list_header_actionbar_padding, clipboardListView, false);
-		SystemBarTintManager systemBarTintManager = new SystemBarTintManager(this);
-		int headerHeight = systemBarTintManager.getConfig().getPixelInsetTop(true);
-		header.setLayoutParams(new android.widget.AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, headerHeight));
-		clipboardListView.addHeaderView(header, null, false);
-		int footerHeight = systemBarTintManager.getConfig().getPixelInsetBottom();
-		int rightPadding = systemBarTintManager.getConfig().getPixelInsetRight();
-		if (footerHeight > 0)
-		{
-			View footer = inflater.inflate(R.layout.list_header_actionbar_padding, clipboardListView, false);
-			footer.setLayoutParams(new android.widget.AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, footerHeight));
-			clipboardListView.addFooterView(footer, null, false);
-		}
-		if (rightPadding > 0)
-		{
-			clipboardListView.setPadding(clipboardListView.getPaddingLeft(), clipboardListView.getPaddingTop(), 
-					clipboardListView.getPaddingRight()+rightPadding, clipboardListView.getPaddingBottom());
-		}
+		ListViewUtils.addListViewHeader(clipboardListView, this);
 		onClipboardContentsChange(Clipboard.getInstance());
 	}
 	

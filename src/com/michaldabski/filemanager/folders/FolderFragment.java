@@ -55,6 +55,7 @@ import com.michaldabski.utils.AsyncResult;
 import com.michaldabski.utils.FileUtils;
 import com.michaldabski.utils.FontApplicator;
 import com.michaldabski.utils.IntentUtils;
+import com.michaldabski.utils.ListViewUtils;
 import com.michaldabski.utils.OnResultListener;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
@@ -496,30 +497,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			setActionbarVisibility(true);
 		
 		// add listview header to push items below the actionbar
-		LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View header = inflater.inflate(R.layout.list_header_actionbar_padding, getListView(), false);
-		SystemBarTintManager systemBarTintManager = new SystemBarTintManager(getActivity());
-		int headerHeight = systemBarTintManager.getConfig().getPixelInsetTop(true);
-		header.setLayoutParams(new android.widget.AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, headerHeight));
-		getListView().addHeaderView(header, null, false);
-		
-		// add footer
-		int footerHeight = systemBarTintManager.getConfig().getPixelInsetBottom();
-		if (footerHeight > 0)
-		{
-			View footer = inflater.inflate(R.layout.list_header_actionbar_padding, getListView(), false);
-			footer.setLayoutParams(new android.widget.AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, footerHeight));
-			getListView().addFooterView(footer, null, false);
-		}
-		
-		int paddingRight = systemBarTintManager.getConfig().getPixelInsetRight();
-		if (paddingRight > 0)
-		{
-			
-			View layoutList = view.findViewById(R.id.layoutlist);
-			layoutList.setPadding(layoutList.getPaddingLeft(), layoutList.getPaddingTop(), 
-					layoutList.getPaddingRight()+paddingRight, layoutList.getPaddingBottom());
-		}
+		ListViewUtils.addListViewHeader(getListView(), getActivity());
 		
 		if (fileAdapter != null)
 			setListAdapter(fileAdapter);
