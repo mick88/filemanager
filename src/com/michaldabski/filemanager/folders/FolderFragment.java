@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -289,7 +290,12 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		final EditText editText = (EditText) view.findViewById(android.R.id.edit);
 		editText.setHint(hint);
 		editText.setText(defaultValue);
-		editText.setSelection(defaultValue.length());
+		
+		if (TextUtils.isEmpty(defaultValue) == false)
+		{
+			int end = defaultValue.toString().indexOf('.');
+			if (end > 0) editText.setSelection(0, end);
+		}
 		
 		new AlertDialog.Builder(getActivity())
 			.setTitle(title)
