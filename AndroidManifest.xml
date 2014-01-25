@@ -38,7 +38,7 @@
             android:parentActivityName="com.michaldabski.filemanager.folders.FolderActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.michaldabski.fileexplorer.MainActivity" />
+                android:value="com.michaldabski.filemanager.folders.FolderActivity" />
         </activity>
     </application>
 
