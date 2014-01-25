@@ -24,6 +24,9 @@ public class ListViewUtils
 	 */
 	public static void addListViewHeader(ListView listView, Activity activity, boolean ignoreRightInset)
 	{
+		listView.setHeaderDividersEnabled(false);
+		listView.setFooterDividersEnabled(false);
+		
 		SystemBarTintManager systemBarTintManager = new SystemBarTintManager(activity);
 		LayoutInflater inflater = activity.getLayoutInflater();
 		View header = inflater.inflate(R.layout.list_header_actionbar_padding, listView, false);
