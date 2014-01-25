@@ -34,7 +34,7 @@
         <activity
             android:name="com.michaldabski.filemanager.AboutActivity"
             android:label="@string/title_activity_about"
-            android:icon="@drawable/ic_about"
+            android:logo="@drawable/ic_about"
             android:parentActivityName="com.michaldabski.filemanager.folders.FolderActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
