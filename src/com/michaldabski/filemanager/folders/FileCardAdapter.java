@@ -41,7 +41,7 @@ public class FileCardAdapter extends FileAdapter
 	@SuppressLint("UseSparseArrays")
 	public FileCardAdapter(Context context, File[] files, FilePreviewCache previewCache, FileIconResolver fileIconResolver)
 	{
-		super(context, R.layout.list_item_file_card, files, fileIconResolver);
+		super(context, R.layout.list_item_file_card_image, files, fileIconResolver);
 		this.thumbCache = previewCache;
 		
 		viewTypes = new int[files.length];
@@ -52,7 +52,7 @@ public class FileCardAdapter extends FileAdapter
 	@SuppressLint("UseSparseArrays")
 	public FileCardAdapter(Context context, List<File> files, FilePreviewCache previewCache, FileIconResolver fileIconResolver)
 	{
-		super(context, R.layout.list_item_file_card, files, fileIconResolver);
+		super(context, R.layout.list_item_file_card_image, files, fileIconResolver);
 		this.thumbCache = previewCache;
 		
 		viewTypes = new int[files.size()];
