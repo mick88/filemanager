@@ -97,12 +97,11 @@ public class FileCardAdapter extends FileAdapter
 		switch (getItemViewType(position))
 		{
 			case VIEW_TYPE_IMAGE:
-			case VIEW_TYPE_NONE:
 				return super.getItemLayoutId(position);
 			case VIEW_TYPE_TEXT:
-				return R.layout.list_item_file_card_text;
+				return R.layout.list_item_file_card_text;				
 			default:
-				return super.getItemLayoutId(position);
+				return R.layout.list_item_file_card;
 		}
 	}
 	
