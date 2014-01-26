@@ -9,10 +9,10 @@ import java.util.HashSet;
 import java.util.List;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -29,7 +29,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AbsListView.OnScrollListener;
@@ -58,7 +58,6 @@ import com.michaldabski.utils.FontApplicator;
 import com.michaldabski.utils.IntentUtils;
 import com.michaldabski.utils.ListViewUtils;
 import com.michaldabski.utils.OnResultListener;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class FolderFragment extends Fragment implements OnItemClickListener, OnScrollListener, OnItemLongClickListener, MultiChoiceModeListener, OnFileSelectedListener
 {
@@ -297,7 +296,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			if (end > 0) editText.setSelection(0, end);
 		}
 		
-		new AlertDialog.Builder(getActivity())
+		final Dialog dialog = new AlertDialog.Builder(getActivity())
 			.setTitle(title)
 			.setView(view)
 			.setPositiveButton(okButtonText, new OnClickListener()
@@ -310,7 +309,10 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 				}
 			})
 			.setNegativeButton(android.R.string.cancel, null)
-			.show();
+			.create();
+		
+		dialog.show();
+		dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 	}
 	
 	@Override
