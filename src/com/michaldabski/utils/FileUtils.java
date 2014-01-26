@@ -200,7 +200,9 @@ public class FileUtils
 	
 	public static String getFileMimeType(File file)
 	{
-		return MimeTypeMap.getSingleton().getMimeTypeFromExtension(getFileExtension(file));
+		String type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(getFileExtension(file));
+		if (type == null) return "*/*";
+		return type;
 	}
 	
 	public static int getNumFilesInFolder(File folder)
