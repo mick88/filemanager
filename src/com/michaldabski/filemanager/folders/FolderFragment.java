@@ -253,7 +253,8 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 						return;
 					}
 					adapter = new FileAdapter(getActivity(), files, getApplication().getFileIconResolver());
-					if (FileUtils.isMediaDirectory(currentDir)) 
+					final int cardPreference = getPreferences().getCardLayout(); 
+					if (cardPreference == AppPreferences.CARD_LAYOUT_ALWAYS || (cardPreference == AppPreferences.CARD_LAYOUT_MEDIA && FileUtils.isMediaDirectory(currentDir))) 
 					{
 						if (thumbCache == null) thumbCache = new FilePreviewCache();
 						adapter = new FileCardAdapter(getActivity(), files, thumbCache, getApplication().getFileIconResolver());
