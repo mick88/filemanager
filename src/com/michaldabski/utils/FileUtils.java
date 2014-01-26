@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
@@ -18,10 +19,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.media.ThumbnailUtils;
 import android.os.Build;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.webkit.MimeTypeMap;
 
 import com.michaldabski.filemanager.R;
@@ -52,6 +56,10 @@ public class FileUtils
 	@SuppressLint("SdCardPath")
 	private static final String SDCARD_DISPLAY_PATH = "/sdcard";
 	private static final double FILE_APP_ICON_SCALE = 0.2;
+	private static final int NUM_FOLDER_PREVIEWS = 6;
+	private static final int THUMBNAIL_SIZE = 256;
+	private static final int PREVIEW_WIDTH = (int) (THUMBNAIL_SIZE * 1.3),
+			PREVIEW_HEIGHT = THUMBNAIL_SIZE;
 	
 	// user-friendly names for predefined folders
 	public static final String 
@@ -408,7 +416,7 @@ public class FileUtils
 	public static int countFilesIn(File root)
 	{
 		if (root.isDirectory() == false) return 1;
-		File[] files = root.listFiles(DEFAULT_FILE_FILTER);
+		File[] files = root.listFiles();
 		if (files == null) return 0;
 		
 		int n = 0;
@@ -446,15 +454,88 @@ public class FileUtils
 		else return folder.getName();
 	}
 	
+	public static void getBitmapsInFolder(File folder, List<Bitmap>previews)
+	{
+		File [] files = folder.listFiles(FileUtils.DEFAULT_FILE_FILTER);
+		Arrays.sort(files, new Comparator<File>()
+		{
+
+			@Override
+			public int compare(File lhs, File rhs)
+			{
+				if (lhs.lastModified() > rhs.lastModified()) return -1;
+				else if (lhs.lastModified() < rhs.lastModified()) return 1;
+				else return 0;
+			}
+			
+		});
+		for (File file : files) 
+			if (file.isDirectory() == false)
+		{
+			Bitmap bitmap = getPreview(file);
+			if (bitmap != null)
+			{
+				previews.add(bitmap);
+				if (previews.size() == NUM_FOLDER_PREVIEWS)
+					break;
+			}
+		}
+	}
+	
+	public static Bitmap buildFolderPreview(File folder)
+	{
+		List<Bitmap> previews = new ArrayList<Bitmap>(NUM_FOLDER_PREVIEWS);
+		getBitmapsInFolder(folder, previews);
+		if (previews.isEmpty()) return null;
+		
+		Bitmap folderPreview = Bitmap.createBitmap(PREVIEW_WIDTH, PREVIEW_HEIGHT, Bitmap.Config.ARGB_8888);
+		Rect[] destRect = BitmapUtils.layoutImagesInGrid(folderPreview, 3, 2);
+		Canvas canvas = new Canvas(folderPreview);
+		Paint paint = new Paint();
+		Rect srcRect = new Rect();
+		int i=0;
+		for (Bitmap bitmap : previews)
+		{
+			srcRect = BitmapUtils.getBestFitRect(bitmap, destRect[i]);
+			canvas.drawBitmap(bitmap, srcRect, destRect[i++], paint);
+			bitmap.recycle();
+		}
+		return folderPreview;
+	}
+	
+	public static Bitmap getPreview(File image) 
+	{
+		if (image.isDirectory()) return buildFolderPreview(image);
+		String type = getFileMimeType(image);
+		if (type.startsWith("video/"))
+		{
+			return ThumbnailUtils.createVideoThumbnail(image.getAbsolutePath(), MediaStore.Video.Thumbnails.MINI_KIND);
+		}
+		else if (type.startsWith("image/"))
+		{
+			BitmapFactory.Options bounds = new BitmapFactory.Options();
+		    bounds.inJustDecodeBounds = true;
+		    BitmapFactory.decodeFile(image.getPath(), bounds);
+		    if ((bounds.outWidth == -1) || (bounds.outHeight == -1))
+		        return null;
+
+		    int originalSize = (bounds.outHeight > bounds.outWidth) ? bounds.outHeight
+		            : bounds.outWidth;
+
+		    BitmapFactory.Options opts = new BitmapFactory.Options();
+		    opts.inSampleSize = originalSize / THUMBNAIL_SIZE;
+		    return BitmapFactory.decodeFile(image.getPath(), opts);    
+		}
+		else return null;
+	}
+	
 	public static boolean isMediaDirectory(File file)
 	{
 		try
 		{
 			String path = file.getCanonicalPath();
 			for (String directory : new String[]{Environment.DIRECTORY_DCIM, 
-					Environment.DIRECTORY_MOVIES, 
-					Environment.DIRECTORY_PICTURES, 
-					Environment.DIRECTORY_MUSIC})
+					Environment.DIRECTORY_PICTURES})
 			{
 				if (path.startsWith(Environment.getExternalStoragePublicDirectory(directory)
 						.getAbsolutePath()))

@@ -16,6 +16,7 @@ public class AppPreferences
 		NAME = "FileExplorerPreferences",
 		
 		PREF_START_FOLDER = "start_folder",
+		PREF_CARD_LAYOUT = "card_layout",
 		PREF_SORT_BY = "sort_by";
 	
 	public static final int
@@ -23,10 +24,16 @@ public class AppPreferences
 		SORT_BY_TYPE = 1,
 		SORT_BY_SIZE = 2;
 	
+	public static final int
+		CARD_LAYOUT_MEDIA = 0,
+		CARD_LAYOUT_ALWAYS = 1,
+		CARD_LAYOUT_NEVER = 2;
+	
 	private final static int DEFAULT_SORT_BY = SORT_BY_NAME;
 	
 	File startFolder;
 	int sortBy;
+	int cardLayout;
 	
 	private AppPreferences() {		
 	}
@@ -43,6 +50,7 @@ public class AppPreferences
 		}
 		else this.startFolder = new File(startPath);
 		this.sortBy = sharedPreferences.getInt(PREF_SORT_BY, DEFAULT_SORT_BY);
+		this.cardLayout = sharedPreferences.getInt(PREF_CARD_LAYOUT, CARD_LAYOUT_MEDIA);
 	}
 	
 	private void saveToSharedPreferences(SharedPreferences sharedPreferences)
@@ -50,6 +58,7 @@ public class AppPreferences
 		sharedPreferences.edit()
 			.putString(PREF_START_FOLDER, startFolder.getAbsolutePath())
 			.putInt(PREF_SORT_BY, sortBy)
+			.putInt(PREF_CARD_LAYOUT, cardLayout)
 			.commit();		
 	}
 	
@@ -76,6 +85,16 @@ public class AppPreferences
 	{
 		this.startFolder = startFolder;
 		return this;
+	}
+	
+	public void setCardLayout(int cardLayout)
+	{
+		this.cardLayout = cardLayout;
+	}
+	
+	public int getCardLayout()
+	{
+		return cardLayout;
 	}
 	
 	public AppPreferences setSortBy(int sortBy)
