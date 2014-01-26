@@ -9,10 +9,10 @@ import java.util.HashSet;
 import java.util.List;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -28,7 +29,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AbsListView.OnScrollListener;
@@ -36,6 +37,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.EditText;
+import android.widget.HeaderViewListAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
@@ -52,11 +55,12 @@ import com.michaldabski.filemanager.favourites.FavouritesManager;
 import com.michaldabski.filemanager.favourites.FavouritesManager.FolderAlreadyFavouriteException;
 import com.michaldabski.filemanager.folders.FileAdapter.OnFileSelectedListener;
 import com.michaldabski.utils.AsyncResult;
+import com.michaldabski.utils.FilePreviewCache;
 import com.michaldabski.utils.FileUtils;
 import com.michaldabski.utils.FontApplicator;
 import com.michaldabski.utils.IntentUtils;
+import com.michaldabski.utils.ListViewUtils;
 import com.michaldabski.utils.OnResultListener;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class FolderFragment extends Fragment implements OnItemClickListener, OnScrollListener, OnItemLongClickListener, MultiChoiceModeListener, OnFileSelectedListener
 {
@@ -79,6 +83,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	private ShareActionProvider shareActionProvider;
 	// set to true when selection shouldnt be cleared from switching out fragments
 	boolean preserveSelection = false;
+	FilePreviewCache thumbCache;
 	
 	public ListView getListView()
 	{
@@ -189,7 +194,18 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			listView.setFastScrollAlwaysVisible(true);
 		return view;
 	}
-	
+
+	@Override
+	public void onLowMemory()
+	{
+		super.onLowMemory();
+		if (thumbCache != null)
+		{
+			if (getView() == null) thumbCache.evictAll();
+			else thumbCache.trimToSize(1024*1024);
+		}
+	}
+
 	void loadFileList()
 	{
 		if (loadFilesTask != null) return;
@@ -237,6 +253,13 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 						return;
 					}
 					adapter = new FileAdapter(getActivity(), files, getApplication().getFileIconResolver());
+					final int cardPreference = getPreferences().getCardLayout(); 
+					if (cardPreference == AppPreferences.CARD_LAYOUT_ALWAYS || (cardPreference == AppPreferences.CARD_LAYOUT_MEDIA && FileUtils.isMediaDirectory(currentDir))) 
+					{
+						if (thumbCache == null) thumbCache = new FilePreviewCache();
+						adapter = new FileCardAdapter(getActivity(), files, thumbCache, getApplication().getFileIconResolver());
+					}
+					else adapter = new FileAdapter(getActivity(), files, getApplication().getFileIconResolver());
 					adapter.setSelectedFiles(selectedFiles);
 					adapter.setOnFileSelectedListener(FolderFragment.this);
 					adapter.setFontApplicator(getFontApplicator());
@@ -288,9 +311,14 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		final EditText editText = (EditText) view.findViewById(android.R.id.edit);
 		editText.setHint(hint);
 		editText.setText(defaultValue);
-		editText.setSelection(defaultValue.length());
 		
-		new AlertDialog.Builder(getActivity())
+		if (TextUtils.isEmpty(defaultValue) == false)
+		{
+			int end = defaultValue.toString().indexOf('.');
+			if (end > 0) editText.setSelection(0, end);
+		}
+		
+		final Dialog dialog = new AlertDialog.Builder(getActivity())
 			.setTitle(title)
 			.setView(view)
 			.setPositiveButton(okButtonText, new OnClickListener()
@@ -303,7 +331,10 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 				}
 			})
 			.setNegativeButton(android.R.string.cancel, null)
-			.show();
+			.create();
+		
+		dialog.show();
+		dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 	}
 	
 	@Override
@@ -496,30 +527,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			setActionbarVisibility(true);
 		
 		// add listview header to push items below the actionbar
-		LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View header = inflater.inflate(R.layout.list_header_actionbar_padding, getListView(), false);
-		SystemBarTintManager systemBarTintManager = new SystemBarTintManager(getActivity());
-		int headerHeight = systemBarTintManager.getConfig().getPixelInsetTop(true);
-		header.setLayoutParams(new android.widget.AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, headerHeight));
-		getListView().addHeaderView(header, null, false);
-		
-		// add footer
-		int footerHeight = systemBarTintManager.getConfig().getPixelInsetBottom();
-		if (footerHeight > 0)
-		{
-			View footer = inflater.inflate(R.layout.list_header_actionbar_padding, getListView(), false);
-			footer.setLayoutParams(new android.widget.AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, footerHeight));
-			getListView().addFooterView(footer, null, false);
-		}
-		
-		int paddingRight = systemBarTintManager.getConfig().getPixelInsetRight();
-		if (paddingRight > 0)
-		{
-			
-			View layoutList = view.findViewById(R.id.layoutlist);
-			layoutList.setPadding(layoutList.getPaddingLeft(), layoutList.getPaddingTop(), 
-					layoutList.getPaddingRight()+paddingRight, layoutList.getPaddingBottom());
-		}
+		ListViewUtils.addListViewHeader(getListView(), getActivity());
 		
 		if (fileAdapter != null)
 			setListAdapter(fileAdapter);
@@ -542,6 +550,8 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	{
 		if (loadFilesTask != null)
 			loadFilesTask.cancel(true);
+		if (thumbCache != null)
+			thumbCache.evictAll();
 		super.onDestroy();
 	}
 	
@@ -630,6 +640,17 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			setActionbarVisibility(false);
 			this.topVisibleItem = firstVisibleItem;
 		}
+		
+		ListAdapter adapter = view.getAdapter();
+		if (adapter instanceof HeaderViewListAdapter)
+		{
+			HeaderViewListAdapter headerViewListAdapter = (HeaderViewListAdapter) adapter;
+			if (headerViewListAdapter.getWrappedAdapter() instanceof FileCardAdapter)
+			{
+				int startPrefetch = firstVisibleItem + visibleItemCount-headerViewListAdapter.getHeadersCount();
+				((FileCardAdapter) headerViewListAdapter.getWrappedAdapter()).prefetchImages(startPrefetch, visibleItemCount);
+			}
+		}
 	}
 
 	@Override
@@ -644,6 +665,25 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	{
 		setFileSelected((File) arg0.getItemAtPosition(arg2), true);
 		return true;
+	}
+	
+	void showFileInfo(Collection<File> files)
+	{
+		final CharSequence title;
+		final StringBuilder message = new StringBuilder();
+		if (files.size() == 1) title = ((File) files.toArray()[0]).getName();
+		else title = getString(R.string._d_objects, files.size());
+		
+		if (files.size() > 1)
+			message.append(FileUtils.combineFileNames(files)).append("\n\n");
+		message.append(getString(R.string.size_s, FileUtils.formatFileSize(files))).append('\n');
+		message.append(getString(R.string.mime_type_s, FileUtils.getCollectiveMimeType(files)));
+		
+		new AlertDialog.Builder(getActivity())
+			.setTitle(title)
+			.setMessage(message)
+			.setPositiveButton(android.R.string.ok, null)
+			.show();
 	}
 
 	@Override
@@ -675,6 +715,11 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 				else selectFiles(files);
 				return true;
 				
+			case R.id.action_info:
+				if (selectedFiles.isEmpty()) return true;
+				showFileInfo(selectedFiles);
+				return true;
+
 			case R.id.action_copy:
 				Clipboard.getInstance().addFiles(selectedFiles, FileAction.Copy);
 				Toast.makeText(getActivity(), R.string.objects_copied_to_clipboard, Toast.LENGTH_SHORT).show();
