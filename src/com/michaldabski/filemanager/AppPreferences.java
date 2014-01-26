@@ -6,6 +6,7 @@ import java.util.Comparator;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Environment;
 
 import com.michaldabski.utils.FileUtils;
 
@@ -22,7 +23,6 @@ public class AppPreferences
 		SORT_BY_TYPE = 1,
 		SORT_BY_SIZE = 2;
 	
-	private final static String DEFAULT_START_FOLDER = "/";
 	private final static int DEFAULT_SORT_BY = SORT_BY_NAME;
 	
 	File startFolder;
@@ -33,7 +33,15 @@ public class AppPreferences
 	
 	private void loadFromSharedPreferences(SharedPreferences sharedPreferences)
 	{
-		this.startFolder = new File(sharedPreferences.getString(PREF_START_FOLDER, DEFAULT_START_FOLDER));
+		String startPath = sharedPreferences.getString(PREF_START_FOLDER, null);
+		if (startPath == null)
+		{
+			if (Environment.getExternalStorageDirectory().list() != null)
+				startFolder = Environment.getExternalStorageDirectory();
+			else 
+				startFolder = new File("/");
+		}
+		else this.startFolder = new File(startPath);
 		this.sortBy = sharedPreferences.getInt(PREF_SORT_BY, DEFAULT_SORT_BY);
 	}
 	
