@@ -209,10 +209,11 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 				args.putString(FolderFragment.EXTRA_DIR, getIntent().getStringExtra(EXTRA_DIR));
 				folderFragment.setArguments(args);
 			}
+			
 			getFragmentManager()
-			.beginTransaction()
-			.replace(R.id.fragment, folderFragment)
-			.commit();
+				.beginTransaction()
+				.replace(R.id.fragment, folderFragment)
+				.commit();
 		}
 	}
 	
