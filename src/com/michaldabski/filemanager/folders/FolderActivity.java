@@ -7,15 +7,13 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.view.WindowCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -108,14 +106,21 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 		if (visible)
 		{
 			getActionBar().show();
-			tintManager.setStatusBarTintEnabled(true);
-			tintManager.setStatusBarTintResource(R.color.accent_color);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+            {
+                WindowManager.LayoutParams params = getWindow().getAttributes();
+                params.flags &= (~WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                getWindow().setAttributes(params);
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            }
 		}
 		else
 		{
 			getActionBar().hide();
-			tintManager.setStatusBarTintEnabled(false);
-			tintManager.setStatusBarTintResource(android.R.color.transparent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+            {
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            }
 		}
 	}
 	
