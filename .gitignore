@@ -28,6 +28,6 @@ lint.xml
 out/
 .gradle/
 build/
-whatzereandroid.iml
+*.iml
 .DS_Store
 proguard/
