@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">File Manager Pro</string>
+    <string name="title_activity_about">Informazioni</string>
+    <string name="cannot_read_directory_s">Impossibile leggere la directory %s</string>
+    <string name="open_file_with_">Apri %s con:</string>
+    <string name="size_s">Dimensione: %s</string>
+    <string name="folder">%d file</string>
+    <string name="folder_is_empty">La cartella %s è vuota</string>
+    <string name="open_drawer">Apri drawer</string>
+    <string name="close_drawer">Chiudi drawer</string>
+    <string name="back">Indietro</string>
+    <string name="forward">Avanti</string>
+    <string name="favourite">Preferito</string>
+    <string name="remove_favourite">Rimuovi preferito</string>
+    <string name="folder_empty">Cartella vuota</string>
+    <string name="delete">Elimina</string>
+    <string name="_d_objects">%d file</string>
+    <string name="delete_d_items_">Eliminare %d file?</string>
+    <string name="select_all">Seleziona tutti</string>
+    <string name="rename">Rinomina</string>
+    <string name="share">Condividi</string>
+    <string name="_d_files_deleted">%d file eliminati</string>
+    <string name="add_to_homescreen">Crea collegamento</string>
+    <string name="add_to_homescreen_multiple">Crea collegamenti</string>
+    <string name="shortcut_created">Collegamento aggiunto alla homescreen</string>
+    <string name="bookmarks">Preferiti</string>
+    <string name="system">Sistema</string>
+    <string name="root">Root</string>
+    <string name="cut">Taglia</string>
+    <string name="paste_here">Incolla qui</string>
+    <string name="objects_cut_to_clipboard">File copiato negli appunti</string>
+    <string name="files_pasted">File incollato</string>
+    <string name="clipboard_is_empty">Gli appunti sono vuoti</string>
+    <string name="refresh">Ricarica</string>
+    <string name="copy">Copia</string>
+    <string name="objects_copied_to_clipboard">File copiati negli appunti</string>
+    <string name="create_folder">Crea cartella</string>
+    <string name="create">Crea</string>
+    <string name="folder_created_successfully">Cartella creata con successo</string>
+    <string name="loading_">Caricamento...</string>
+    <string name="folder_could_not_be_created">La cartella non è stata creata</string>
+    <string name="pasting_files_">Incollando i file...</string>
+    <string name="downloads">Download</string>
+    <string name="music">Musica</string>
+    <string name="pictures">Immagini</string>
+    <string name="movies">Video</string>
+    <string name="dcim">DCIM</string>
+    <string name="credits">App sviluppata da Michal Dabski www.michaldabski.com
+        \n
+        \n        
+        Icone in-app da www.iconsdb.com</string>
+    <string name="app_icon">App icon</string>
+    <string name="up">Su</string>
+    <string name="error">Errore</string>
+    <string name="rename_file">Rinomina File</string>
+    <string name="rename_folder">Rinomina Cartella</string>
+    <string name="file_renamed">File rinominato</string>
+    <string name="file_could_not_be_renamed_to_s">Il File non può essere rinominato in %s</string>
+    <string name="photos">Foto</string>
+    <string name="add_favourite">Aggiungi ai preferiti</string>
+    <string name="other_apps">Altre app</string>
+    <string name="feedback">Feedback</string>
+    <string name="file_info">Informazioni sul File</string>
+    <string name="mime_type_s">MIME Type: %s</string>
+
+</resources>
