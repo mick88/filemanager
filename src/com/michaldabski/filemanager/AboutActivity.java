@@ -51,12 +51,6 @@ public class AboutActivity extends Activity implements OnClickListener
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
-		SystemBarTintManager tintManager = new SystemBarTintManager(this);
-		tintManager.setStatusBarTintEnabled(true);
-		tintManager.setStatusBarTintResource(R.color.accent_color);
-		tintManager.setNavigationBarTintEnabled(true);
-		tintManager.setNavigationBarTintResource(R.color.accent_color);
-		
 		TextView tvAppVersion = (TextView) findViewById(R.id.tvAppVersion);
 		try
 		{
