@@ -39,9 +39,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.michaldabski.filemanager.AboutActivity;
 import com.michaldabski.filemanager.FileManagerApplication;
 import com.michaldabski.filemanager.R;
+import com.michaldabski.filemanager.about.AboutActivity;
 import com.michaldabski.filemanager.clipboard.Clipboard;
 import com.michaldabski.filemanager.clipboard.Clipboard.ClipboardListener;
 import com.michaldabski.filemanager.clipboard.ClipboardFileAdapter;

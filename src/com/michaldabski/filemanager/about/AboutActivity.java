@@ -18,7 +18,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
-package com.michaldabski.filemanager;
+package com.michaldabski.filemanager.about;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -34,6 +34,10 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.michaldabski.filemanager.R;
+import com.michaldabski.filemanager.R.id;
+import com.michaldabski.filemanager.R.layout;
+import com.michaldabski.filemanager.R.menu;
+import com.michaldabski.filemanager.R.string;
 import com.michaldabski.utils.FontApplicator;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 

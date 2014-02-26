@@ -53,7 +53,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.michaldabski.filemanager.AboutActivity"
+            android:name="com.michaldabski.filemanager.about.AboutActivity"
             android:label="@string/title_activity_about"
             android:logo="@drawable/ic_about"
             android:parentActivityName="com.michaldabski.filemanager.folders.FolderActivity" >
