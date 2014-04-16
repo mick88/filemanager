@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (c) 2014 Michal Dabski
+  
+  Permission is hereby granted, free of charge, to any person obtaining a copy of
+  this software and associated documentation files (the "Software"), to deal in
+  the Software without restriction, including without limitation the rights to
+  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+  the Software, and to permit persons to whom the Software is furnished to do so,
+  subject to the following conditions:
+  
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+  
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+  FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+  IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+<resources>
+
+    <string name="app_name">File Manager Pro</string>
+    <string name="title_activity_about">À propos</string>
+    <string name="cannot_read_directory_s">Impossible de lire le dossier %s</string>
+    <string name="open_file_with_">Ouvrir %s avec :</string>
+    <string name="size_s">Taille : %s</string>
+    <string name="folder">%d éléments</string>
+    <string name="folder_is_empty">Le dossier %s est vide</string>
+    <!--<string name="open_drawer">Ouvrir drawer</string>
+    <string name="close_drawer">Fermer drawer</string>-->
+    <string name="back">En arrière</string>
+    <string name="forward">En avant</string>
+    <string name="favourite">Favori</string>
+    <string name="remove_favourite">Supprimer le favori</string>
+    <string name="folder_empty">Dossier vide</string>
+    <string name="delete">Supprimer</string>
+    <string name="_d_objects">%d objets</string>
+    <string name="delete_d_items_">Supprimer %d éléments ?</string>
+    <string name="select_all">Selectionner tout</string>
+    <string name="rename">Renommer</string>
+    <string name="share">Partager</string>
+    <string name="_d_files_deleted">%d fichiers supprimés</string>
+    <string name="add_to_homescreen">Créer un raccourci</string>
+    <string name="add_to_homescreen_multiple">Créer des raccourcis</string>
+    <string name="shortcut_created">Raccouci aujouté à l\'écran de démarrage</string>
+    <string name="bookmarks">Marque-pages</string>
+    <string name="system">Système</string>
+    <string name="root">Root</string>
+    <string name="cut">Couper</string>
+    <string name="paste_here">Coller içi</string>
+    <string name="objects_cut_to_clipboard">Objets coupés dans le presse-papiers</string>
+    <string name="files_pasted">Fichiers collés</string>
+    <string name="clipboard_is_empty">Le presse-papiers est vide</string>
+    <string name="refresh">Rafraichir</string>
+    <string name="copy">Copier</string>
+    <string name="objects_copied_to_clipboard">Objets copiés dans le presse-papiers</string>
+    <string name="create_folder">Créer un dossier</string>
+    <string name="create">Créer</string>
+    <string name="folder_created_successfully">Dossier créé avec succès</string>
+    <string name="loading_">Chargement...</string>
+    <string name="folder_could_not_be_created">Le dossier n\'a pas pu être créé</string>
+    <string name="pasting_files_">Collage de fichiers...</string>
+    <string name="downloads">Téléchargements</string>
+    <string name="music">Musiques</string>
+    <string name="pictures">Images</string>
+    <string name="movies">Films</string>
+    <string name="dcim">DCIM</string>
+    <string name="credits">App développé par Michal Dabski www.michaldabski.com
+        \n
+        \n        
+        Icônes de l\'app par www.iconsdb.com</string>
+    <string name="app_icon">Icône de l\'app</string>
+    <!--<string name="up">Up</string>-->
+    <string name="error">Erreur</string>
+    <string name="rename_file">Renommer le fichier</string>
+    <string name="rename_folder">Renommer le dossier</string>
+    <string name="file_renamed">Fichir renommé</string>
+    <string name="file_could_not_be_renamed_to_s">Le fichier ne peut être renommé en %s</string>
+    <string name="photos">Photos</string>
+    <string name="add_favourite">Ajouter un favouri</string>
+    <string name="other_apps">Autres apps</string>
+    <string name="feedback">Feedback</string>
+    <string name="file_info">Info du fichier</string>
+    <string name="mime_type_s">Type MIME : %s</string>
+
+</resources>
