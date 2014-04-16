@@ -45,7 +45,8 @@ public class CardPreviewer extends AsyncTask<File, Void, Bitmap>
 	public void setImageView(ImageView imageView)
 	{
 		this.imageView = imageView;
-		if (imageView != null) imageView.setImageResource(R.drawable.card_image_placeholder);
+		if (imageView != null)
+			imageView.setImageResource(R.drawable.card_image_placeholder);
 	}
 	
 	@Override
@@ -55,7 +56,8 @@ public class CardPreviewer extends AsyncTask<File, Void, Bitmap>
 		try
 		{
 			Bitmap bitmap = thumbCache.get(file);
-			if (bitmap == null) bitmap = FileUtils.getPreview(file);
+			if (bitmap == null)
+				bitmap = FileUtils.getPreview(file);
 			return bitmap;
 		}
 		catch (Exception e)
@@ -70,7 +72,8 @@ public class CardPreviewer extends AsyncTask<File, Void, Bitmap>
 	protected void onPreExecute()
 	{
 		super.onPreExecute();
-		if (imageView != null) imageView.setImageResource(R.drawable.card_image_placeholder);
+		if (imageView != null)
+			imageView.setImageResource(R.drawable.card_image_placeholder);
 	}
 	
 	@Override
@@ -89,12 +92,14 @@ public class CardPreviewer extends AsyncTask<File, Void, Bitmap>
 		super.onPostExecute(result);
 		if (result == null)
 		{
-			if (imageView != null) imageView.setImageResource(R.drawable.card_image_error);
+			if (imageView != null)
+				imageView.setImageResource(R.drawable.card_image_error);
 		}
 		else
 		{
 			thumbCache.put(file, result);
-			if (imageView != null) imageView.setImageBitmap(result);
+			if (imageView != null)
+				imageView.setImageBitmap(result);
 		}
 	}
 

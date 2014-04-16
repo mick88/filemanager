@@ -121,8 +121,9 @@ public class FileUtils
 			{
 				if (lhs.isDirectory() == rhs.isDirectory())
 					return lhs.getName().compareToIgnoreCase(rhs.getName());
-				else if (lhs.isDirectory()) return FIRST;
-				else return SECOND;
+				if (lhs.isDirectory())
+					return FIRST;
+				return SECOND;
 			}
 			return lhs.getName().compareToIgnoreCase(rhs.getName());
 		}		
@@ -147,8 +148,7 @@ public class FileUtils
 
 			if (ext1.equals(ext2))
 				return super.compare(lhs, rhs);
-			else
-				return ext1.compareToIgnoreCase(ext2);
+			return ext1.compareToIgnoreCase(ext2);
 		}
 	}
 	
@@ -164,9 +164,9 @@ public class FileUtils
 
 			if (lhs.length() > rhs.length())
 				return ascending ? SECOND : FIRST;
-			else if (lhs.length() < rhs.length())
+			if (lhs.length() < rhs.length())
 				return ascending ? FIRST : SECOND;
-			else return super.compare(lhs, rhs);
+			return super.compare(lhs, rhs);
 		}
 	}
 	
@@ -179,12 +179,11 @@ public class FileUtils
 	{
 		if (size < MAX_BYTE_SIZE)
 			return String.format(Locale.ENGLISH, "%d bytes", size);
-		else if (size < MAX_KILOBYTE_SIZE)
+		if (size < MAX_KILOBYTE_SIZE)
 			return String.format(Locale.ENGLISH, "%.2f kb", (float)size / KILOBYTE);
-		else if (size < MAX_MEGABYTE_SIZE)
+		if (size < MAX_MEGABYTE_SIZE)
 			return String.format(Locale.ENGLISH, "%.2f mb", (float)size / MEGABYTE);
-		else 
-			return String.format(Locale.ENGLISH, "%.2f gb", (float)size / GIGABYTE);
+		return String.format(Locale.ENGLISH, "%.2f gb", (float)size / GIGABYTE);
 	}
 	
 	public static String formatFileSize(Collection<File> files)
@@ -200,7 +199,8 @@ public class FileUtils
 		{
 			if (file.isDirectory())
 				size += getFileSize(file.listFiles());
-			else size += file.length();
+			else
+				size += file.length();
 		}
 		return size;
 	}
@@ -268,7 +268,8 @@ public class FileUtils
 				continue;
 			else if (thisType.startsWith(typeStart))
 				type = typeStart + "*";
-			else return MIME_TYPE_ANY;
+			else
+				return MIME_TYPE_ANY;
 		}
 		if (type == null) return MIME_TYPE_ANY;
 		return type;
@@ -296,7 +297,8 @@ public class FileUtils
 			{
 				if (file.isDirectory())
 					flattenDirectory(file, result);
-				else result.add(file);
+				else
+					result.add(file);
 			}
 		}
 		else result.add(directory);
@@ -316,17 +318,17 @@ public class FileUtils
 	{
 		if (src.isDirectory())
 			throw new IOException("Source is a directory");
-	    InputStream in = new FileInputStream(src);
-	    OutputStream out = new FileOutputStream(dst);
-
-	    // Transfer bytes from in to out
-	    byte[] buf = new byte[1024];
-	    int len;
-	    while ((len = in.read(buf)) > 0) {
-	        out.write(buf, 0, len);
-	    }
-	    in.close();
-	    out.close();
+		InputStream in = new FileInputStream(src);
+		OutputStream out = new FileOutputStream(dst);
+		
+		// Transfer bytes from in to out
+		byte[] buf = new byte[1024];
+		int len;
+		while ((len = in.read(buf)) > 0) {
+		out.write(buf, 0, len);
+		}
+		in.close();
+		out.close();
 	}
 	
 	public static void deleteEmptyFolders(Collection<File> directories) throws DirectoryNotEmptyException
@@ -348,7 +350,7 @@ public class FileUtils
 			{
 				n += deleteFiles(Arrays.asList(file.listFiles()));
 			}
-			if (file.delete()) n++;
+			if (file.delete()) ++n;
 		}
 		return n;
 	}
@@ -363,17 +365,17 @@ public class FileUtils
 		{
 			if (file.equals(Environment.getExternalStorageDirectory()) || SDCARD_DISPLAY_PATH.equals(file.getAbsolutePath()))
 				return R.drawable.icon_sdcard;
-			else if (file.equals(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)))
+			if (file.equals(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)))
 				return R.drawable.icon_pictures;
-			else if (file.equals(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)))
+			if (file.equals(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)))
 				return R.drawable.icon_downloads;
-			else if (file.equals(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES)))
+			if (file.equals(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES)))
 				return R.drawable.icon_movies;
-			else if (file.equals(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)))
+			if (file.equals(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)))
 				return R.drawable.icon_music;
-			else if (file.equals(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)))
+			if (file.equals(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)))
 				return R.drawable.icon_pictures;
-			else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && file.equals(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)))
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && file.equals(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)))
 				return R.drawable.icon_documents;
 			return R.drawable.icon_folder;
 		}
@@ -422,7 +424,7 @@ public class FileUtils
 		if (homescreen)
 			canvas.drawBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_home_shortcut), 0, 0, null);
 		
-		return  bitmap;
+		return bitmap;
 	}
 	
 	public static int countFilesIn(Collection<File> roots)
@@ -484,8 +486,8 @@ public class FileUtils
 			public int compare(File lhs, File rhs)
 			{
 				if (lhs.lastModified() > rhs.lastModified()) return -1;
-				else if (lhs.lastModified() < rhs.lastModified()) return 1;
-				else return 0;
+				if (lhs.lastModified() < rhs.lastModified()) return 1;
+				return 0;
 			}
 			
 		});

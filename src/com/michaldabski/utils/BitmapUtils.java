@@ -62,7 +62,7 @@ public class BitmapUtils
 		
 		Rect[] result = new Rect[numItems];
 		
-		for (int i=0; i < numItems; i++)
+		for (int i=0; i < numItems; ++i)
 		{
 			int x = (i % cols) * itemWidth,
 				y = (i / (rows+1)) * itemHeight;

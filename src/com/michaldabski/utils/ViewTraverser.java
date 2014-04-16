@@ -53,7 +53,7 @@ public class ViewTraverser
 		if (root instanceof ViewGroup)
 		{
 			ViewGroup viewGroup = (ViewGroup) root;
-			for (int i = 0; i < viewGroup.getChildCount(); i++)
+			for (int i = 0; i < viewGroup.getChildCount(); ++i)
 			{
 				traverse(viewGroup.getChildAt(i), foreach);
 			}
