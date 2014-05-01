@@ -221,8 +221,10 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		super.onLowMemory();
 		if (thumbCache != null)
 		{
-			if (getView() == null) thumbCache.evictAll();
-			else thumbCache.trimToSize(1024*1024);
+			if (getView() == null)
+				thumbCache.evictAll();
+			else
+				thumbCache.trimToSize(1024*1024);
 		}
 	}
 
@@ -274,12 +276,14 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 					}
 					adapter = new FileAdapter(getActivity(), files, getApplication().getFileIconResolver());
 					final int cardPreference = getPreferences().getCardLayout(); 
-					if (cardPreference == AppPreferences.CARD_LAYOUT_ALWAYS || (cardPreference == AppPreferences.CARD_LAYOUT_MEDIA && FileUtils.isMediaDirectory(currentDir))) 
+					if (cardPreference == AppPreferences.CARD_LAYOUT_ALWAYS || (cardPreference == AppPreferences.CARD_LAYOUT_MEDIA && FileUtils.isMediaDirectory(currentDir)))
 					{
-						if (thumbCache == null) thumbCache = new FilePreviewCache();
+						if (thumbCache == null)
+							thumbCache = new FilePreviewCache();
 						adapter = new FileCardAdapter(getActivity(), files, thumbCache, getApplication().getFileIconResolver());
 					}
-					else adapter = new FileAdapter(getActivity(), files, getApplication().getFileIconResolver());
+					else
+						adapter = new FileAdapter(getActivity(), files, getApplication().getFileIconResolver());
 					adapter.setSelectedFiles(selectedFiles);
 					adapter.setOnFileSelectedListener(FolderFragment.this);
 					adapter.setFontApplicator(getFontApplicator());
@@ -335,7 +339,8 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		if (TextUtils.isEmpty(defaultValue) == false)
 		{
 			int end = defaultValue.toString().indexOf('.');
-			if (end > 0) editText.setSelection(0, end);
+			if (end > 0)
+				editText.setSelection(0, end);
 		}
 		
 		final Dialog dialog = new AlertDialog.Builder(getActivity())
@@ -477,7 +482,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 						@Override
 						public void onFileProcessed(String filename)
 						{
-							progress[0]++;
+							++progress[0];
 							publishProgress((float)progress[0] / (float)total);
 						}
 						

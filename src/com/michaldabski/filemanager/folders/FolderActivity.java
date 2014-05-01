@@ -295,8 +295,7 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 		Fragment fragment = getFragmentManager().findFragmentById(R.id.fragment);
 		if (fragment instanceof FolderFragment)
 			return (FolderFragment) fragment;
-		else return null;
-		
+		return null;
 	}
 	
 	public File getCurrentFolder() throws FolderNotOpenException
@@ -304,7 +303,7 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 		FolderFragment folderFragment = getFolderFragment();
 		if (folderFragment == null)
 			throw new FolderNotOpenException();
-		else return folderFragment.currentDir;
+		return folderFragment.currentDir;
 	}
 
 	@Override

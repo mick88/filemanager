@@ -90,7 +90,8 @@ public class NavDrawerAdapter extends RobotoAdapter<NavDrawerItem>
 			view.setTag(viewHolder = new ViewHolder(view));
 			applyFont(view);
 		}
-		else viewHolder = (ViewHolder) view.getTag();
+		else
+			viewHolder = (ViewHolder) view.getTag();
 		
 		NavDrawerItem item = getItem(position);
 		

@@ -31,7 +31,7 @@ import com.michaldabski.filemanager.R;
 
 public class FileIconResolver extends LruCache<String, Bitmap>
 {	
-	public static final int CACHE_SIZE = 5 * 1024 * 1024;
+	public static final int CACHE_SIZE = 5242880; // 5 * 1024 * 1024
 	final Context context;
 	Bitmap nullIcon=null;
 	

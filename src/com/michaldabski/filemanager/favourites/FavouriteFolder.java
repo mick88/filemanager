@@ -44,9 +44,12 @@ public class FavouriteFolder extends NavDrawerShortcut implements Comparable<Fav
 	public FavouriteFolder(File folder, String label)
 	{
 		this();
-		if (folder.isDirectory() == false)
-			throw new RuntimeException(folder.getName()+" is not a directory");
-		this.path = folder.getAbsolutePath();
+		if(folder != null)
+		{
+			if (!folder.isDirectory())
+				throw new RuntimeException(folder.getName()+" is not a directory");
+			this.path = folder.getAbsolutePath();
+		}
 		this.label = label;
 	}
 	
@@ -70,7 +73,7 @@ public class FavouriteFolder extends NavDrawerShortcut implements Comparable<Fav
 	{
 		if (o instanceof FavouriteFolder)
 			return ((FavouriteFolder) o).path.equals(path);
-		else if (o instanceof File)
+		if (o instanceof File)
 			return o.equals(getFile());
 		return super.equals(o);
 	}
@@ -78,7 +81,7 @@ public class FavouriteFolder extends NavDrawerShortcut implements Comparable<Fav
 	@Override
 	public String toString()
 	{
-		return label;
+		return this.label;
 	}
 	
 	@Override
