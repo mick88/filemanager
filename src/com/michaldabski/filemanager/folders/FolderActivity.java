@@ -198,7 +198,7 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
         
 		// add listview header to push items below the actionbar
 		ListView navListView = (ListView) findViewById(R.id.listNavigation);
-		ListViewUtils.addListViewHeader(navListView, this, true);
+		ListViewUtils.addListViewPadding(navListView, this, true);
 		
 		loadFavourites(application.getFavouritesManager());
         application.getFavouritesManager().addFavouritesListener(this);

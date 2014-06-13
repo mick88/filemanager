@@ -32,6 +32,7 @@
         android:footerDividersEnabled="false"
         android:divider="@color/accent_color"
         android:listSelector="@null"
+        android:clipToPadding="false"
         android:fastScrollEnabled="true"
         android:visibility="gone" />
 
