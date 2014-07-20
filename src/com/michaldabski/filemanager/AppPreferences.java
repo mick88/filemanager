@@ -79,7 +79,7 @@ public class AppPreferences
 			.putString(PREF_START_FOLDER, startFolder.getAbsolutePath())
 			.putInt(PREF_SORT_BY, sortBy)
 			.putInt(PREF_CARD_LAYOUT, cardLayout)
-			.commit();		
+			.apply();
 	}
 	
 	public void saveChangesAsync(final Context context)
