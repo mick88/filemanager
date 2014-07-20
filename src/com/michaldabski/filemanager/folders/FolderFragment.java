@@ -28,6 +28,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -215,13 +216,15 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		return view;
 	}
 
-	@Override
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    @Override
 	public void onLowMemory()
 	{
 		super.onLowMemory();
 		if (thumbCache != null)
 		{
-			if (getView() == null) thumbCache.evictAll();
+			if (getView() == null || Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1)
+                thumbCache.evictAll();
 			else thumbCache.trimToSize(1024*1024);
 		}
 	}
