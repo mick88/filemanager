@@ -20,9 +20,6 @@
  ******************************************************************************/
 package com.michaldabski.utils;
 
-import java.io.File;
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -31,6 +28,9 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
 import com.michaldabski.filemanager.folders.FolderActivity;
+
+import java.io.File;
+import java.util.List;
 
 public class IntentUtils
 {

@@ -20,11 +20,6 @@
  ******************************************************************************/
 package com.michaldabski.filemanager.folders;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,6 +30,11 @@ import com.michaldabski.filemanager.BaseFileAdapter;
 import com.michaldabski.filemanager.R;
 import com.michaldabski.utils.FileIconResolver;
 import com.michaldabski.utils.ViewHolder;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 
 public class FileAdapter extends BaseFileAdapter

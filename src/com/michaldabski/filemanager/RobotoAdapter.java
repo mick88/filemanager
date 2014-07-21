@@ -20,13 +20,13 @@
  ******************************************************************************/
 package com.michaldabski.filemanager;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
 import com.michaldabski.utils.FontApplicator;
+
+import java.util.List;
 
 public class RobotoAdapter<T> extends ArrayAdapter<T>
 {

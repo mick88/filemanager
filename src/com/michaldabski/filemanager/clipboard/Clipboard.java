@@ -20,9 +20,13 @@
  ******************************************************************************/
 package com.michaldabski.filemanager.clipboard;
 
+import android.util.Log;
+
+import com.michaldabski.utils.FileUtils;
+import com.michaldabski.utils.FileUtils.DirectoryNotEmptyException;
+
 import java.io.File;
 import java.io.IOException;
-import java.nio.channels.AlreadyConnectedException;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,11 +37,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
-import android.util.Log;
-
-import com.michaldabski.utils.FileUtils;
-import com.michaldabski.utils.FileUtils.DirectoryNotEmptyException;
 
 public class Clipboard
 {

@@ -21,6 +21,8 @@
 package com.michaldabski.filemanager.folders;
 
 import java.io.File;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -82,6 +84,14 @@ import com.michaldabski.utils.FontApplicator;
 import com.michaldabski.utils.IntentUtils;
 import com.michaldabski.utils.ListViewUtils;
 import com.michaldabski.utils.OnResultListener;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 public class FolderFragment extends Fragment implements OnItemClickListener, OnScrollListener, OnItemLongClickListener, MultiChoiceModeListener, OnFileSelectedListener
 {

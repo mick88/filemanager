@@ -20,8 +20,6 @@
  ******************************************************************************/
 package com.michaldabski.filemanager.nav_drawer;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +32,8 @@ import com.michaldabski.filemanager.RobotoAdapter;
 import com.michaldabski.filemanager.folders.FolderActivity;
 import com.michaldabski.filemanager.nav_drawer.NavDrawerAdapter.NavDrawerItem;
 import com.michaldabski.utils.ViewHolder;
+
+import java.util.List;
 
 public class NavDrawerAdapter extends RobotoAdapter<NavDrawerItem>
 {

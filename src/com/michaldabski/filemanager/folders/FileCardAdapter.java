@@ -20,14 +20,6 @@
  ******************************************************************************/
 package com.michaldabski.filemanager.folders;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -42,6 +34,14 @@ import com.michaldabski.utils.FileIconResolver;
 import com.michaldabski.utils.FilePreviewCache;
 import com.michaldabski.utils.FileUtils;
 import com.michaldabski.utils.ViewHolder;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FileCardAdapter extends FileAdapter
 {

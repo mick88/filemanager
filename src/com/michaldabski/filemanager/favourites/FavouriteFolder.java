@@ -20,13 +20,13 @@
  ******************************************************************************/
 package com.michaldabski.filemanager.favourites;
 
-import java.io.File;
-
 import android.content.Context;
 
 import com.michaldabski.filemanager.nav_drawer.NavDrawerShortcut;
 import com.michaldabski.msqlite.Annotations.ColumnName;
 import com.michaldabski.msqlite.Annotations.PrimaryKey;
+
+import java.io.File;
 
 public class FavouriteFolder extends NavDrawerShortcut implements Comparable<FavouriteFolder>
 {

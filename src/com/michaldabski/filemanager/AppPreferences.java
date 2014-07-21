@@ -20,15 +20,15 @@
  ******************************************************************************/
 package com.michaldabski.filemanager;
 
-import java.io.File;
-import java.security.InvalidParameterException;
-import java.util.Comparator;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Environment;
 
 import com.michaldabski.utils.FileUtils;
+
+import java.io.File;
+import java.security.InvalidParameterException;
+import java.util.Comparator;
 
 public class AppPreferences
 {

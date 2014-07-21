@@ -20,14 +20,14 @@
  ******************************************************************************/
 package com.michaldabski.utils;
 
-import java.io.File;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.LruCache;
 
 import com.michaldabski.filemanager.R;
+
+import java.io.File;
 
 public class FileIconResolver extends LruCache<String, Bitmap>
 {	

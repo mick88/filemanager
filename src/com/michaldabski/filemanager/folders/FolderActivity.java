@@ -20,9 +20,6 @@
  ******************************************************************************/
 package com.michaldabski.filemanager.folders;
 
-import java.io.File;
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -30,11 +27,13 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.WindowCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.view.*;
-import android.view.ViewGroup.LayoutParams;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -52,6 +51,9 @@ import com.michaldabski.filemanager.nav_drawer.NavDrawerAdapter.NavDrawerItem;
 import com.michaldabski.utils.FontApplicator;
 import com.michaldabski.utils.ListViewUtils;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+
+import java.io.File;
+import java.util.ArrayList;
 
 public class FolderActivity extends Activity implements OnItemClickListener, ClipboardListener, FavouritesListener
 {	

@@ -20,15 +20,15 @@
  ******************************************************************************/
 package com.michaldabski.filemanager.favourites;
 
+import android.content.Context;
+
+import com.michaldabski.filemanager.sqlite.SQLiteHelper;
+
 import java.io.File;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import android.content.Context;
-
-import com.michaldabski.filemanager.sqlite.SQLiteHelper;
 
 public class FavouritesManager
 {

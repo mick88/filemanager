@@ -20,9 +20,6 @@
  ******************************************************************************/
 package com.michaldabski.filemanager;
 
-import java.io.File;
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +30,9 @@ import android.widget.TextView;
 import com.michaldabski.utils.FileIconResolver;
 import com.michaldabski.utils.FileUtils;
 import com.michaldabski.utils.ViewHolder;
+
+import java.io.File;
+import java.util.List;
 
 public class BaseFileAdapter extends RobotoAdapter<File>
 {	

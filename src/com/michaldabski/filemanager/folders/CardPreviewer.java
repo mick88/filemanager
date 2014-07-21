@@ -20,8 +20,6 @@
  ******************************************************************************/
 package com.michaldabski.filemanager.folders;
 
-import java.io.File;
-
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.widget.ImageView;
@@ -29,6 +27,8 @@ import android.widget.ImageView;
 import com.michaldabski.filemanager.R;
 import com.michaldabski.utils.FilePreviewCache;
 import com.michaldabski.utils.FileUtils;
+
+import java.io.File;
 
 public class CardPreviewer extends AsyncTask<File, Void, Bitmap>
 {

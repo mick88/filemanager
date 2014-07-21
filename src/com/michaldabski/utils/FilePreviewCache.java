@@ -20,10 +20,10 @@
  ******************************************************************************/
 package com.michaldabski.utils;
 
-import java.io.File;
-
 import android.graphics.Bitmap;
 import android.util.LruCache;
+
+import java.io.File;
 
 public class FilePreviewCache extends LruCache<File, Bitmap>
 {

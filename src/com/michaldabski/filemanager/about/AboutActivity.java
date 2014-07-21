@@ -34,12 +34,7 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.michaldabski.filemanager.R;
-import com.michaldabski.filemanager.R.id;
-import com.michaldabski.filemanager.R.layout;
-import com.michaldabski.filemanager.R.menu;
-import com.michaldabski.filemanager.R.string;
 import com.michaldabski.utils.FontApplicator;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class AboutActivity extends Activity implements OnClickListener
 {
