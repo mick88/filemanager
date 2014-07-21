@@ -27,4 +27,5 @@
     android:background="#fff"
     android:choiceMode="singleChoice"
     android:divider="@android:color/transparent"
+    android:clipToPadding="false"
     android:dividerHeight="0dp" />

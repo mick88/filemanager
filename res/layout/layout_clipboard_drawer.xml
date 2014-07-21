@@ -30,4 +30,5 @@
     android:divider="@android:color/transparent"
     android:dividerHeight="0dp"
     android:visibility="visible"
+    android:clipToPadding="false"
     tools:listitem="@layout/list_item_file" />

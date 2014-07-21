@@ -25,14 +25,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <ListView
+    <GridView
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:footerDividersEnabled="false"
         android:divider="@color/accent_color"
         android:listSelector="@null"
+        android:clipToPadding="false"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
         android:fastScrollEnabled="true"
+        android:columnWidth="@dimen/min_tile_width"
         android:visibility="gone" />
 
     <LinearLayout
