@@ -50,8 +50,9 @@ public class FileCardAdapter extends FileAdapter
 		VIEW_TYPE_NONE = 0,
 		VIEW_TYPE_IMAGE = 1,
 		VIEW_TYPE_TEXT = 2,
+        VIEW_TYPE_MUSIC = 3,
 		VIEW_TYPE_INVALID = -1,
-		VIEW_TYPE_COUNT = 3;
+		VIEW_TYPE_COUNT = 4;
 	private static final int MAX_PREFETCH_JOBS = 2;
 	private final FilePreviewCache thumbCache;
 	Map<ImageView, CardPreviewer> runningTasks = new HashMap<ImageView, CardPreviewer>();
@@ -94,6 +95,8 @@ public class FileCardAdapter extends FileAdapter
 				String mime = FileUtils.getFileMimeType(file);
 				if (mime.startsWith("image/") || mime.startsWith("video/"))
 					type = VIEW_TYPE_IMAGE;
+                else if (mime.startsWith("audio/"))
+                    type = VIEW_TYPE_MUSIC;
 				else if (mime.startsWith("text/"))
 					type = VIEW_TYPE_TEXT;
 				else
@@ -117,6 +120,7 @@ public class FileCardAdapter extends FileAdapter
 		switch (getItemViewType(position))
 		{
 			case VIEW_TYPE_IMAGE:
+            case VIEW_TYPE_MUSIC:
 				return super.getItemLayoutId(position);
 			case VIEW_TYPE_TEXT:
 				return R.layout.list_item_file_card_text;				
@@ -134,7 +138,8 @@ public class FileCardAdapter extends FileAdapter
 		File file = getItem(position);
 		switch (getItemViewType(position))
 		{
-			case VIEW_TYPE_IMAGE:			
+			case VIEW_TYPE_IMAGE:
+            case VIEW_TYPE_MUSIC:
 				ImageView imgFileContent = viewHolder.getViewById(R.id.imgFileContent);
 				if (runningTasks.containsKey(imgFileContent))
 				{

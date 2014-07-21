@@ -20,6 +20,23 @@
  ******************************************************************************/
 package com.michaldabski.utils;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.media.MediaMetadataRetriever;
+import android.media.ThumbnailUtils;
+import android.os.Build;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.webkit.MimeTypeMap;
+
+import com.michaldabski.filemanager.R;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -33,22 +50,6 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
-import android.media.ThumbnailUtils;
-import android.os.Build;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.webkit.MimeTypeMap;
-
-import com.michaldabski.filemanager.R;
 
 public class FileUtils
 {
@@ -546,6 +547,16 @@ public class FileUtils
 		    opts.inSampleSize = originalSize / THUMBNAIL_SIZE;
 		    return BitmapFactory.decodeFile(image.getPath(), opts);    
 		}
+        else if (type.startsWith("audio/"))
+        {
+            MediaMetadataRetriever metadataRetriever;
+            metadataRetriever = new MediaMetadataRetriever();
+            metadataRetriever.setDataSource(image.getAbsolutePath());
+            byte[] picture = metadataRetriever.getEmbeddedPicture();
+            if (picture == null) return null;
+            metadataRetriever.release();
+            return BitmapFactory.decodeByteArray(picture, 0, picture.length);
+        }
 		else return null;
 	}
 	
@@ -554,7 +565,8 @@ public class FileUtils
 		try
 		{
 			String path = file.getCanonicalPath();
-			for (String directory : new String[]{Environment.DIRECTORY_DCIM, 
+			for (String directory : new String[]{Environment.DIRECTORY_DCIM,
+                    Environment.DIRECTORY_MUSIC,
 					Environment.DIRECTORY_PICTURES})
 			{
 				if (path.startsWith(Environment.getExternalStoragePublicDirectory(directory)
