@@ -20,16 +20,6 @@
  ******************************************************************************/
 package com.michaldabski.filemanager.folders;
 
-import java.io.File;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -107,7 +97,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	List<File> files = null;
 	@SuppressWarnings("rawtypes")
 	AsyncTask loadFilesTask=null;
-	ListView listView = null;
+	AbsListView listView = null;
 	FileAdapter fileAdapter;
 	private ActionMode actionMode = null;
 	private final HashSet<File> selectedFiles = new HashSet<File>();
@@ -116,7 +106,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	boolean preserveSelection = false;
 	FilePreviewCache thumbCache;
 	
-	public ListView getListView()
+	public AbsListView getListView()
 	{
 		return listView;
 	}
@@ -219,7 +209,7 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			Bundle savedInstanceState)
 	{
 		View view = inflater.inflate(R.layout.fragment_list, container, false);
-		this.listView = (ListView) view.findViewById(android.R.id.list);
+		this.listView = (AbsListView) view.findViewById(android.R.id.list);
 		
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
 			listView.setFastScrollAlwaysVisible(true);
