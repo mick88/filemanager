@@ -30,6 +30,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -365,5 +366,15 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 	{
 		loadFavourites(favouritesManager);
 	}
-	
+
+    @Override
+    public boolean onKeyLongPress(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            finish();
+            return true;
+        }
+        else return super.onKeyLongPress(keyCode, event);
+    }
 }
