@@ -22,8 +22,6 @@ target
 project.properties
 *.log
 
-lint.xml
-
 .idea/
 out/
 .gradle/
