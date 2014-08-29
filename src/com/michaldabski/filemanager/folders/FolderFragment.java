@@ -846,7 +846,8 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	{
 		setActionbarVisibility(true);
 		getActivity().getMenuInflater().inflate(R.menu.action_file, menu);
-		
+		getActivity().getMenuInflater().inflate(R.menu.action_file_single, menu);
+
 		MenuItem shareMenuItem = menu.findItem(R.id.action_share);
 		shareActionProvider = (ShareActionProvider) shareMenuItem.getActionProvider();
 		this.preserveSelection = false;

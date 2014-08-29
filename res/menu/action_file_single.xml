@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_rename"
+        android:icon="@drawable/ic_rename"
+        android:orderInCategory="4"
+        android:showAsAction="ifRoom"
+        android:title="@string/rename"
+        android:visible="true"/>
+
+    <item
+        android:id="@+id/menu_add_homescreen_icon"
+        android:orderInCategory="30"
+        android:showAsAction="never"
+        android:title="@string/add_to_homescreen"/>
+</menu>
