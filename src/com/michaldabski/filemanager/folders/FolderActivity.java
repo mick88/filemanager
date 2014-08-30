@@ -27,6 +27,7 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Gravity;
@@ -184,6 +185,7 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 		};
 		drawerLayout.setDrawerListener(actionBarDrawerToggle);
 		drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
+        drawerLayout.setFocusableInTouchMode(false);
 //		drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, Gravity.END);
 		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -192,8 +194,19 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
         setupNavDrawer();
 		setupClipboardDrawer();
 	}
-	
-	void setupNavDrawer()
+
+    @Override
+    public void onBackPressed()
+    {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START))
+            drawerLayout.closeDrawer(GravityCompat.START);
+        else if (drawerLayout.isDrawerOpen(GravityCompat.END))
+            drawerLayout.closeDrawer(GravityCompat.END);
+        else
+            super.onBackPressed();
+    }
+
+    void setupNavDrawer()
 	{
 		FileManagerApplication application = (FileManagerApplication) getApplication();
         
@@ -370,11 +383,26 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
     @Override
     public boolean onKeyLongPress(int keyCode, KeyEvent event)
     {
+        Log.d("Key Long Press", event.toString());
         if (keyCode == KeyEvent.KEYCODE_BACK)
         {
             finish();
             return true;
         }
         else return super.onKeyLongPress(keyCode, event);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event)
+    {
+        Log.d("Key Up", event.toString());
+        return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        Log.d("Key Down", event.toString());
+        return super.onKeyDown(keyCode, event);
     }
 }
