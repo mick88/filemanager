@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (c) 2014 Michal Dabski
+  
+  Permission is hereby granted, free of charge, to any person obtaining a copy of
+  this software and associated documentation files (the "Software"), to deal in
+  the Software without restriction, including without limitation the rights to
+  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+  the Software, and to permit persons to whom the Software is furnished to do so,
+  subject to the following conditions:
+  
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+  
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+  FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+  IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+<resources>
+
+    <string name="app_name">File Manager Pro</string>
+    <string name="title_activity_about">O aplikaci</string>
+    <string name="cannot_read_directory_s">Nelze načíst adresář %s</string>
+    <string name="open_file_with_">Otevřít %s s:</string>
+    <string name="size_s">Velikost: %s</string>
+    <string name="folder">%d položek</string>
+    <string name="folder_is_empty">Adresář %s je prázdný</string>
+    <string name="open_drawer">Otevřít šuplík</string>
+    <string name="close_drawer">Zavřít šuplík</string>
+    <string name="back">Zpět</string>
+    <string name="forward">Vpřed</string>
+    <string name="favourite">Oblíbené</string>
+    <string name="remove_favourite">Odstranit z oblíbených</string>
+    <string name="folder_empty">Prázdný adresář</string>
+    <string name="delete">Smazat</string>
+    <string name="_d_objects">%d objektů</string>
+    <string name="delete_d_items_">Smazat %d položek?</string>
+    <string name="select_all">Vybrat vše</string>
+    <string name="rename">Přejmenovat</string>
+    <string name="share">Sdílet</string>
+    <string name="_d_files_deleted">%d soubory smazány</string>
+    <string name="add_to_homescreen">Vytvořit odkaz</string>
+    <string name="add_to_homescreen_multiple">Vytvořit odkazy</string>
+    <string name="shortcut_created">Odkazy přidány na domovskou obrazovku</string>
+    <string name="bookmarks">Záložky</string>
+    <string name="system">Systém</string>
+    <string name="root">Kořen</string>
+    <string name="cut">Vyjmout</string>
+    <string name="paste_here">Vložit sem</string>
+    <string name="objects_cut_to_clipboard">Objekty vloženy do schránky</string>
+    <string name="files_pasted">Soubory vloženy</string>
+    <string name="clipboard_is_empty">Schránka je prázdná</string>
+    <string name="refresh">Obnovit</string>
+    <string name="copy">Kopírovat</string>
+    <string name="objects_copied_to_clipboard">Objekty zkopírovány do schránky</string>
+    <string name="create_folder">Vytvořit adresář</string>
+    <string name="create">Vytvořit</string>
+    <string name="folder_created_successfully">Adresář úspěšně vytvořen</string>
+    <string name="loading_">Načítám...</string>
+    <string name="folder_could_not_be_created">Adresář nemohl být vytvořen</string>
+    <string name="pasting_files_">Vkládám soubory...</string>
+    <string name="downloads">Stažené</string>
+    <string name="music">Hudba</string>
+    <string name="pictures">Obrázky</string>
+    <string name="movies">Filmy</string>
+    <string name="dcim">DCIM</string>
+    <string name="credits">Aplikaci vyvinul Michal Dabski www.michaldabski.com
+        \n
+        \n        
+        Ikony použité z www.iconsdb.com</string>
+    <string name="app_icon">Ikona aplikace</string>
+    <string name="up">Vzhůru</string>
+    <string name="error">Chyba</string>
+    <string name="rename_file">Přejmenovat soubor</string>
+    <string name="rename_folder">Přejmenovat adresář</string>
+    <string name="file_renamed">Soubor přejmenován</string>
+    <string name="file_could_not_be_renamed_to_s">Soubor nemohl být přejmenován na %s</string>
+    <string name="photos">Fotografie</string>
+    <string name="add_favourite">Přidat k oblíbeným</string>
+    <string name="other_apps">Další aplikace</string>
+    <string name="feedback">Odezva na aplikaci</string>
+    <string name="file_info">Informace o souboru</string>
+    <string name="mime_type_s">MIME typ: %s</string>
+
+</resources>
