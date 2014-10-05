@@ -27,12 +27,8 @@
     <string name="open_file_with_">Otevřít %s s:</string>
     <string name="size_s">Velikost: %s</string>
     <string name="folder">%d položek</string>
-    <string name="folder_is_empty">Adresář %s je prázdný</string>
     <string name="open_drawer">Otevřít šuplík</string>
     <string name="close_drawer">Zavřít šuplík</string>
-    <string name="back">Zpět</string>
-    <string name="forward">Vpřed</string>
-    <string name="favourite">Oblíbené</string>
     <string name="remove_favourite">Odstranit z oblíbených</string>
     <string name="folder_empty">Prázdný adresář</string>
     <string name="delete">Smazat</string>
@@ -45,8 +41,6 @@
     <string name="add_to_homescreen">Vytvořit odkaz</string>
     <string name="add_to_homescreen_multiple">Vytvořit odkazy</string>
     <string name="shortcut_created">Odkazy přidány na domovskou obrazovku</string>
-    <string name="bookmarks">Záložky</string>
-    <string name="system">Systém</string>
     <string name="root">Kořen</string>
     <string name="cut">Vyjmout</string>
     <string name="paste_here">Vložit sem</string>

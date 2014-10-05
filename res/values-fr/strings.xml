@@ -27,12 +27,8 @@
     <string name="open_file_with_">Ouvrir %s avec :</string>
     <string name="size_s">Taille : %s</string>
     <string name="folder">%d éléments</string>
-    <string name="folder_is_empty">Le dossier %s est vide</string>
     <!--<string name="open_drawer">Ouvrir drawer</string>
     <string name="close_drawer">Fermer drawer</string>-->
-    <string name="back">En arrière</string>
-    <string name="forward">En avant</string>
-    <string name="favourite">Favori</string>
     <string name="remove_favourite">Supprimer le favori</string>
     <string name="folder_empty">Dossier vide</string>
     <string name="delete">Supprimer</string>
@@ -45,8 +41,6 @@
     <string name="add_to_homescreen">Créer un raccourci</string>
     <string name="add_to_homescreen_multiple">Créer des raccourcis</string>
     <string name="shortcut_created">Raccouci aujouté à l\'écran de démarrage</string>
-    <string name="bookmarks">Marque-pages</string>
-    <string name="system">Système</string>
     <string name="root">Root</string>
     <string name="cut">Couper</string>
     <string name="paste_here">Coller içi</string>

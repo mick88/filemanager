@@ -27,12 +27,8 @@
     <string name="open_file_with_">Apri %s con:</string>
     <string name="size_s">Dimensione: %s</string>
     <string name="folder">%d file</string>
-    <string name="folder_is_empty">La cartella %s è vuota</string>
     <string name="open_drawer">Apri drawer</string>
     <string name="close_drawer">Chiudi drawer</string>
-    <string name="back">Indietro</string>
-    <string name="forward">Avanti</string>
-    <string name="favourite">Preferito</string>
     <string name="remove_favourite">Rimuovi preferito</string>
     <string name="folder_empty">Cartella vuota</string>
     <string name="delete">Elimina</string>
@@ -45,8 +41,6 @@
     <string name="add_to_homescreen">Crea collegamento</string>
     <string name="add_to_homescreen_multiple">Crea collegamenti</string>
     <string name="shortcut_created">Collegamento aggiunto alla homescreen</string>
-    <string name="bookmarks">Preferiti</string>
-    <string name="system">Sistema</string>
     <string name="root">Root</string>
     <string name="cut">Taglia</string>
     <string name="paste_here">Incolla qui</string>
