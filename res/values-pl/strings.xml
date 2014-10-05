@@ -59,9 +59,9 @@
     <string name="create_folder">Utwórz folder</string>
     <string name="create">Utwórz</string>
     <string name="folder_created_successfully">Folder utworzony pomyślnie</string>
-    <string name="loading_">Ładowanie...</string>
+    <string name="loading_">Ładowanie…</string>
     <string name="folder_could_not_be_created">Błąd tworzenia folderu</string>
-    <string name="pasting_files_">Wklejanie plików...</string>
+    <string name="pasting_files_">Wklejanie plików…</string>
     <string name="downloads">Pobrane</string>
     <string name="music">Muzyka</string>
     <string name="pictures">Obrazy</string>

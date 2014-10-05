@@ -59,9 +59,9 @@
     <string name="create_folder">Créer un dossier</string>
     <string name="create">Créer</string>
     <string name="folder_created_successfully">Dossier créé avec succès</string>
-    <string name="loading_">Chargement...</string>
+    <string name="loading_">Chargement…</string>
     <string name="folder_could_not_be_created">Le dossier n\'a pas pu être créé</string>
-    <string name="pasting_files_">Collage de fichiers...</string>
+    <string name="pasting_files_">Collage de fichiers…</string>
     <string name="downloads">Téléchargements</string>
     <string name="music">Musiques</string>
     <string name="pictures">Images</string>

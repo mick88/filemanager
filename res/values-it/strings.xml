@@ -59,9 +59,9 @@
     <string name="create_folder">Crea cartella</string>
     <string name="create">Crea</string>
     <string name="folder_created_successfully">Cartella creata con successo</string>
-    <string name="loading_">Caricamento...</string>
+    <string name="loading_">Caricamento…</string>
     <string name="folder_could_not_be_created">La cartella non è stata creata</string>
-    <string name="pasting_files_">Incollando i file...</string>
+    <string name="pasting_files_">Incollando i file…</string>
     <string name="downloads">Download</string>
     <string name="music">Musica</string>
     <string name="pictures">Immagini</string>

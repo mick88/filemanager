@@ -59,9 +59,9 @@
     <string name="create_folder">Create folder</string>
     <string name="create">Create</string>
     <string name="folder_created_successfully">Folder created successfully</string>
-    <string name="loading_">Loading...</string>
+    <string name="loading_">Loading…</string>
     <string name="folder_could_not_be_created">Folder could not be created</string>
-    <string name="pasting_files_">Pasting files...</string>
+    <string name="pasting_files_">Pasting files…</string>
     <string name="downloads">Downloads</string>
     <string name="music">Music</string>
     <string name="pictures">Pictures</string>

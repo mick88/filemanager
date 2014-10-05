@@ -59,9 +59,9 @@
     <string name="create_folder">Vytvořit adresář</string>
     <string name="create">Vytvořit</string>
     <string name="folder_created_successfully">Adresář úspěšně vytvořen</string>
-    <string name="loading_">Načítám...</string>
+    <string name="loading_">Načítám…</string>
     <string name="folder_could_not_be_created">Adresář nemohl být vytvořen</string>
-    <string name="pasting_files_">Vkládám soubory...</string>
+    <string name="pasting_files_">Vkládám soubory…</string>
     <string name="downloads">Stažené</string>
     <string name="music">Hudba</string>
     <string name="pictures">Obrázky</string>
