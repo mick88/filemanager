@@ -27,12 +27,8 @@
     <string name="open_file_with_">Otwórz %s w:</string>
     <string name="size_s">Rozmiar: %s</string>
     <string name="folder">%d plików</string>
-    <string name="folder_is_empty">Folder %s jest pusty</string>
     <string name="open_drawer">Otwórz menu</string>
     <string name="close_drawer">Zamknij menu</string>
-    <string name="back">Powrót</string>
-    <string name="forward">Dalej</string>
-    <string name="favourite">Dodaj do ulubionych</string>
     <string name="remove_favourite">Usuń z ulubionych</string>
     <string name="folder_empty">Pusty folder</string>
     <string name="delete">Usuń</string>
@@ -45,8 +41,6 @@
     <string name="add_to_homescreen">Utwórz skrót</string>
     <string name="add_to_homescreen_multiple">Utwórz skróty</string>
     <string name="shortcut_created">Skrót dodany do ekranu głównego</string>
-    <string name="bookmarks">Ulubione</string>
-    <string name="system">System</string>
     <string name="root">Root</string>
     <string name="cut">Wytnij</string>
     <string name="paste_here">Wklej tutaj</string>
@@ -59,9 +53,9 @@
     <string name="create_folder">Utwórz folder</string>
     <string name="create">Utwórz</string>
     <string name="folder_created_successfully">Folder utworzony pomyślnie</string>
-    <string name="loading_">Ładowanie...</string>
+    <string name="loading_">Ładowanie…</string>
     <string name="folder_could_not_be_created">Błąd tworzenia folderu</string>
-    <string name="pasting_files_">Wklejanie plików...</string>
+    <string name="pasting_files_">Wklejanie plików…</string>
     <string name="downloads">Pobrane</string>
     <string name="music">Muzyka</string>
     <string name="pictures">Obrazy</string>

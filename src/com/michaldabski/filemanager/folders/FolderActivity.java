@@ -20,6 +20,8 @@
  ******************************************************************************/
 package com.michaldabski.filemanager.folders;
 
+import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -52,7 +54,6 @@ import com.michaldabski.filemanager.nav_drawer.NavDrawerAdapter;
 import com.michaldabski.filemanager.nav_drawer.NavDrawerAdapter.NavDrawerItem;
 import com.michaldabski.utils.FontApplicator;
 import com.michaldabski.utils.ListViewUtils;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -73,15 +74,12 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 	File lastFolder=null;
 	private FontApplicator fontApplicator;
 
-	private SystemBarTintManager tintManager;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		tintManager = new SystemBarTintManager(this);
-		
+
 		setupDrawers();
 		Clipboard.getInstance().addListener(this);
 		
@@ -118,42 +116,47 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 		}
 		super.onPause();
 	}
-	
-	@Override
-	protected void onNewIntent(Intent intent)
+
+    public void setActionbarVisible(boolean visible)
 	{
-		super.onNewIntent(intent);
-	}
-	
-	public void setActionbarVisible(boolean visible)
-	{
+        ActionBar actionBar = getActionBar();
+        if (actionBar == null) return;
 		if (visible)
 		{
-			getActionBar().show();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            {
-                WindowManager.LayoutParams params = getWindow().getAttributes();
-                params.flags &= (~WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                getWindow().setAttributes(params);
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-            }
+			actionBar.show();
+            setSystemBarTranslucency(false);
 		}
 		else
 		{
-			getActionBar().hide();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            {
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            }
+			actionBar.hide();
+            setSystemBarTranslucency(true);
 		}
 	}
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    protected void setSystemBarTranslucency(boolean translucent)
+    {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return;
+
+        if (translucent)
+        {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+        else
+        {
+            WindowManager.LayoutParams params = getWindow().getAttributes();
+            params.flags &= (~WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().setAttributes(params);
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
+    }
 	
 	private void setupDrawers()
 	{
 		this.drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.drawable.ic_drawer, R.string.open_drawer, R.string.close_drawer)
 		{
-			boolean actionBarShown = false;;
+			boolean actionBarShown = false;
 			
 			@Override
 			public void onDrawerOpened(View drawerView)
@@ -299,14 +302,8 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu)
-	{
-		return super.onPrepareOptionsMenu(menu);
-	}
-	
-	public FolderFragment getFolderFragment()
+
+    public FolderFragment getFolderFragment()
 	{
 		Fragment fragment = getFragmentManager().findFragmentById(R.id.fragment);
 		if (fragment instanceof FolderFragment)
@@ -392,17 +389,4 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
         else return super.onKeyLongPress(keyCode, event);
     }
 
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event)
-    {
-        Log.d("Key Up", event.toString());
-        return super.onKeyUp(keyCode, event);
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
-        Log.d("Key Down", event.toString());
-        return super.onKeyDown(keyCode, event);
-    }
 }

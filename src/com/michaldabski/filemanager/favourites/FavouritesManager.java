@@ -37,7 +37,6 @@ public class FavouritesManager
 
 		public FolderAlreadyFavouriteException(FavouriteFolder folder) {
 			super(folder.toString() + " is already bookmarked");
-			// TODO Auto-generated constructor stub
 		}
 		
 	}

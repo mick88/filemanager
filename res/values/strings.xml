@@ -27,12 +27,8 @@
     <string name="open_file_with_">Open %s with:</string>
     <string name="size_s">Size: %s</string>
     <string name="folder">%d items</string>
-    <string name="folder_is_empty">Folder %s is empty</string>
     <string name="open_drawer">Open drawer</string>
     <string name="close_drawer">Close drawer</string>
-    <string name="back">Back</string>
-    <string name="forward">Forward</string>
-    <string name="favourite">Favourite</string>
     <string name="remove_favourite">Remove favourite</string>
     <string name="folder_empty">Empty folder</string>
     <string name="delete">Delete</string>
@@ -45,8 +41,6 @@
     <string name="add_to_homescreen">Create shortcut</string>
     <string name="add_to_homescreen_multiple">Create shortcuts</string>
     <string name="shortcut_created">Shortcut added to homescreen</string>
-    <string name="bookmarks">Bookmarks</string>
-    <string name="system">System</string>
     <string name="root">Root</string>
     <string name="cut">Cut</string>
     <string name="paste_here">Paste here</string>
@@ -59,9 +53,9 @@
     <string name="create_folder">Create folder</string>
     <string name="create">Create</string>
     <string name="folder_created_successfully">Folder created successfully</string>
-    <string name="loading_">Loading...</string>
+    <string name="loading_">Loading…</string>
     <string name="folder_could_not_be_created">Folder could not be created</string>
-    <string name="pasting_files_">Pasting files...</string>
+    <string name="pasting_files_">Pasting files…</string>
     <string name="downloads">Downloads</string>
     <string name="music">Music</string>
     <string name="pictures">Pictures</string>

@@ -46,7 +46,7 @@ import java.util.Map;
 public class FileCardAdapter extends FileAdapter
 {
 	private static final int TEXT_FILE_PREVIEW_LENGTH = 1000;
-	private final int 
+	private static final int
 		VIEW_TYPE_NONE = 0,
 		VIEW_TYPE_IMAGE = 1,
 		VIEW_TYPE_TEXT = 2,
@@ -179,7 +179,6 @@ public class FileCardAdapter extends FileAdapter
 					e.printStackTrace();
 				} catch (IOException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				

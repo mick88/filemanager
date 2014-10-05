@@ -502,9 +502,9 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			protected void onCancelled() {
 				progressDialog.dismiss();
 				refreshFolder();
-			};
-			
-			@Override
+			}
+
+            @Override
 			protected void onPostExecute(Exception result) {
 				progressDialog.dismiss();
 				refreshFolder();
@@ -520,9 +520,9 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 						.setPositiveButton(android.R.string.ok, null)
 						.show();
 				}
-			};
-			
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Clipboard.getInstance());
+			}
+
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Clipboard.getInstance());
 	}
 	
 	@Override
