@@ -20,6 +20,8 @@
  ******************************************************************************/
 package com.michaldabski.filemanager.folders;
 
+import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -117,26 +119,37 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 
     public void setActionbarVisible(boolean visible)
 	{
+        ActionBar actionBar = getActionBar();
+        if (actionBar == null) return;
 		if (visible)
 		{
-			getActionBar().show();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            {
-                WindowManager.LayoutParams params = getWindow().getAttributes();
-                params.flags &= (~WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                getWindow().setAttributes(params);
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-            }
+			actionBar.show();
+            setSystemBarTranslucency(false);
 		}
 		else
 		{
-			getActionBar().hide();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            {
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            }
+			actionBar.hide();
+            setSystemBarTranslucency(true);
 		}
 	}
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    protected void setSystemBarTranslucency(boolean translucent)
+    {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return;
+
+        if (translucent)
+        {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+        else
+        {
+            WindowManager.LayoutParams params = getWindow().getAttributes();
+            params.flags &= (~WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().setAttributes(params);
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
+    }
 	
 	private void setupDrawers()
 	{
