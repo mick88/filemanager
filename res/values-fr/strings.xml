@@ -27,8 +27,8 @@
     <string name="open_file_with_">Ouvrir %s avec :</string>
     <string name="size_s">Taille : %s</string>
     <string name="folder">%d éléments</string>
-    <!--<string name="open_drawer">Ouvrir drawer</string>
-    <string name="close_drawer">Fermer drawer</string>-->
+    <string name="open_drawer">Ouvrir drawer</string>
+    <string name="close_drawer">Fermer drawer</string>
     <string name="remove_favourite">Supprimer le favori</string>
     <string name="folder_empty">Dossier vide</string>
     <string name="delete">Supprimer</string>
