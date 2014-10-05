@@ -179,7 +179,6 @@ public class FileCardAdapter extends FileAdapter
 					e.printStackTrace();
 				} catch (IOException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				

@@ -34,7 +34,6 @@ public class FilePreviewCache extends LruCache<File, Bitmap>
 	 */
 	public FilePreviewCache(int maxSize) {
 		super(maxSize);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public FilePreviewCache()
