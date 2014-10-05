@@ -26,7 +26,7 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="20" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -56,7 +56,7 @@
             android:name="com.michaldabski.filemanager.about.AboutActivity"
             android:label="@string/title_activity_about"
             android:logo="@drawable/ic_about"
-            android:parentActivityName="com.michaldabski.filemanager.folders.FolderActivity" >
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.michaldabski.filemanager.folders.FolderActivity" />
