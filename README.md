@@ -1,5 +1,5 @@
 #File Manager
-![App icon](https://lh4.ggpht.com/65bzvo_sEhkf5rjup__ilTP8Bwt54Q7C3K4JzZ6yS9vWUpt9AZbvdFH-b9qNRVt1Xw=w300-rw)
+![App icon](https://raw.githubusercontent.com/mick88/filemanager/master/res/drawable-xxxhdpi/ic_launcher.png)
 
 [![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_45.png)](https://play.google.com/store/apps/details?id=com.michaldabski.filemanager)
 
