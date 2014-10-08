@@ -15,3 +15,5 @@ All New File Manager designed for ease of use and beautiful interface. It boasts
 ![Screenshot](http://www.michaldabski.com/wp-content/uploads/2014/10/2014-10-05-12.02.10-168x300.png)
 ![Screenshot](http://www.michaldabski.com/wp-content/uploads/2014/10/2014-10-05-12.14.09-168x300.png)
 ![Screenshot](http://www.michaldabski.com/wp-content/uploads/2014/10/2014-10-05-12.02.32-168x300.png)
+
+[More info...](http://www.michaldabski.com/file-manager/)
