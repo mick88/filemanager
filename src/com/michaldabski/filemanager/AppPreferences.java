@@ -133,6 +133,8 @@ public class AppPreferences
 	
 	public File getStartFolder()
 	{
+        if (startFolder.exists() == false)
+            startFolder = new File("/");
 		return startFolder;
 	}
 	
