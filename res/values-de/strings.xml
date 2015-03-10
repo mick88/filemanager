@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (c) 2014 Michal Dabski
+  
+  Permission is hereby granted, free of charge, to any person obtaining a copy of
+  this software and associated documentation files (the "Software"), to deal in
+  the Software without restriction, including without limitation the rights to
+  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+  the Software, and to permit persons to whom the Software is furnished to do so,
+  subject to the following conditions:
+  
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+  
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+  FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+  IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+<resources>
+
+    <string name="app_name">File Manager Pro</string>
+    <string name="title_activity_about">Über</string>
+    <string name="cannot_read_directory_s">Ordner %s kann nicht lesen werden</string>
+    <string name="open_file_with_">Öffne %s mit:</string>
+    <string name="size_s">Größe: %s</string>
+    <string name="folder">%d Dateien</string>
+    <string name="open_drawer">Drawer öffnen</string>
+    <string name="close_drawer">Drawer schließen</string>
+    <string name="remove_favourite">Favoriten löschen</string>
+    <string name="folder_empty">Leerer Ordner</string>
+    <string name="delete">Löschen</string>
+    <string name="_d_objects">%d objects</string>
+    <string name="delete_d_items_">Lösche %d Dateien?</string>
+    <string name="select_all">Alles Auswählen</string>
+    <string name="rename">Umbenennen</string>
+    <string name="share">Teilen</string>
+    <string name="_d_files_deleted">%d Dateien gelöscht</string>
+    <string name="add_to_homescreen">Verknüpfung erstellen</string>
+    <string name="add_to_homescreen_multiple">Verknüpfungen erstellen</string>
+    <string name="shortcut_created">Verknüpfung zum Startbildschirm hinzugefügt</string>
+    <string name="root">Hauptverzeichnis</string>
+    <string name="cut">Ausschneiden</string>
+    <string name="paste_here">Einfügen</string>
+    <string name="objects_cut_to_clipboard">Dateien in die Zwischenablage ausgeschnitten</string>
+    <string name="files_pasted">Dateien eingefügt</string>
+    <string name="clipboard_is_empty">Zwischenablage ist leer</string>
+    <string name="refresh">Aktualisieren</string>
+    <string name="copy">Kopieren</string>
+    <string name="objects_copied_to_clipboard">Dateien in die Zwischenablage kopiert</string>
+    <string name="create_folder">Neuer Ordner</string>
+    <string name="create">Erstellen</string>
+    <string name="folder_created_successfully">Ordner erfolgreich erstellt</string>
+    <string name="loading_">Lade…</string>
+    <string name="folder_could_not_be_created">Ordner kann nicht erstellt werden</string>
+    <string name="pasting_files_">Pasting files…</string>
+    <string name="downloads">Downloads</string>
+    <string name="music">Musik</string>
+    <string name="pictures">Bilder</string>
+    <string name="movies">Filme</string>
+    <string name="dcim">DCIM</string>
+    <string name="credits">App entwickelt von Michal Dabski www.michaldabski.com
+        \n
+        \n        
+        In-app icons von www.iconsdb.com</string>
+    <string name="app_icon">App Icon</string>
+    <string name="up">Nach oben</string>
+    <string name="error">Fehler</string>
+    <string name="rename_file">Datei umbenennen</string>
+    <string name="rename_folder">Ordner umbenennen</string>
+    <string name="file_renamed">Datei umbenannt</string>
+    <string name="file_could_not_be_renamed_to_s">Datei kann nicht in %s umbenannt werden</string>
+    <string name="photos">Fotos</string>
+    <string name="add_favourite">Zu den Favoriten hinzufügen</string>
+    <string name="other_apps">Andere Apps</string>
+    <string name="feedback">Feedback</string>
+    <string name="file_info">Dateiinfo</string>
+    <string name="mime_type_s">MIME Typ: %s</string>
+
+</resources>
