@@ -24,6 +24,8 @@ import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
@@ -41,6 +43,8 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.michaldabski.filemanager.FileManagerApplication;
 import com.michaldabski.filemanager.R;
@@ -58,17 +62,19 @@ import com.michaldabski.utils.ListViewUtils;
 import java.io.File;
 import java.util.ArrayList;
 
+
 public class FolderActivity extends Activity implements OnItemClickListener, ClipboardListener, FavouritesListener
 {	
 	public static class FolderNotOpenException extends Exception
 	{
 		
 	}
-	
+
 	private static final String LOG_TAG = "Main Activity";
 
 	public static final String EXTRA_DIR = FolderFragment.EXTRA_DIR;
-	
+
+    NavDrawerAdapter navDrawerAdapter;
 	DrawerLayout drawerLayout;
 	ActionBarDrawerToggle actionBarDrawerToggle;
 	File lastFolder=null;
@@ -220,19 +226,21 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 		loadFavourites(application.getFavouritesManager());
         application.getFavouritesManager().addFavouritesListener(this);
 	}
-	
+
 	void setupClipboardDrawer()
 	{
+
 		// add listview header to push items below the actionbar
-		ListView clipboardListView = (ListView) findViewById(R.id.listClipboard);
+        ListView clipboardListView = (ListView) findViewById(R.id.listClipboard);
 		ListViewUtils.addListViewHeader(clipboardListView, this);
 		onClipboardContentsChange(Clipboard.getInstance());
 	}
-	
+
+
 	void loadFavourites(FavouritesManager favouritesManager)
 	{
 		ListView listNavigation = (ListView) findViewById(R.id.listNavigation);
-		NavDrawerAdapter navDrawerAdapter = new NavDrawerAdapter(this, new ArrayList<NavDrawerAdapter.NavDrawerItem>(favouritesManager.getFolders()));
+        navDrawerAdapter = new NavDrawerAdapter(this, new ArrayList<NavDrawerAdapter.NavDrawerItem>(favouritesManager.getFolders()));
 		navDrawerAdapter.setFontApplicator(fontApplicator);
 		listNavigation.setAdapter(navDrawerAdapter);
 		listNavigation.setOnItemClickListener(this);
@@ -278,6 +286,9 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 			case R.id.menu_about:
 				startActivity(new Intent(getApplicationContext(), AboutActivity.class));
 				return true;
+            /*case R.id.menu_search:
+                Toast.makeText(getApplicationContext(), "ila 3yiti gol 3ad bditi", Toast.LENGTH_LONG).show();
+                return true;*/
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -295,13 +306,9 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 	{
 		getFragmentManager().popBackStack();
 	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+	//***********
+    //**************
+    //**************
 
     public FolderFragment getFolderFragment()
 	{
@@ -364,7 +371,7 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
 			FileManagerApplication application = (FileManagerApplication) getApplication();
 			if (clipboardListView != null)
 			{
-				ClipboardFileAdapter clipboardFileAdapter = new ClipboardFileAdapter(this, clipboard, application.getFileIconResolver());
+                ClipboardFileAdapter clipboardFileAdapter = new ClipboardFileAdapter(this, clipboard, application.getFileIconResolver());
 				clipboardFileAdapter.setFontApplicator(fontApplicator);
 				clipboardListView.setAdapter(clipboardFileAdapter);
 			}
@@ -388,5 +395,42 @@ public class FolderActivity extends Activity implements OnItemClickListener, Cli
         }
         else return super.onKeyLongPress(keyCode, event);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.main, menu);
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.menu_search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+        // Associate SearchView  with QueryTextListener
+        SearchView.OnQueryTextListener textChangeListener = new SearchView.OnQueryTextListener()
+        {
+            @Override
+            public boolean onQueryTextChange(String newText)
+            {
+                // navDrawerAdapter filter
+                navDrawerAdapter.getFilter().filter(newText);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextSubmit(String query)
+            {
+                // navDrawerAdapter filter
+                navDrawerAdapter.getFilter().filter(query);
+                  return true;
+            }
+            };
+
+        searchView.setOnQueryTextListener(textChangeListener);
+        return true;
+        }
+
 
 }

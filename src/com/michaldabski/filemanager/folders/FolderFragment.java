@@ -25,7 +25,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -53,6 +55,7 @@ import android.widget.EditText;
 import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -213,6 +216,8 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
 			listView.setFastScrollAlwaysVisible(true);
+
+        //System.out.println("************************listtttt"+fileAdapter.getCount());
 		return view;
 	}
 
@@ -307,9 +312,13 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 		inflater.inflate(R.menu.folder_browser, menu);
 		
 		menu.findItem(R.id.menu_selectAll).setVisible(!(files == null || files.isEmpty()));
-		
+
+
+
+
 		if (getApplication().getFavouritesManager().isFolderFavourite(currentDir))
 		{
+			menu.findItem(R.id.menu_unfavourite).setVisible(true);
 			menu.findItem(R.id.menu_unfavourite).setVisible(true);
 			menu.findItem(R.id.menu_favourite).setVisible(false);
 		}
@@ -318,6 +327,10 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			menu.findItem(R.id.menu_unfavourite).setVisible(false);
 			menu.findItem(R.id.menu_favourite).setVisible(true);
 		}
+
+
+
+
 	}
 	
 	@Override
@@ -363,7 +376,13 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
-		switch (item.getItemId())
+//******* test toast
+        Context context = this.getApplication().getApplicationContext();
+                 CharSequence text = "ila 3yiti gol 3ad bditi";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+//*******************
+        switch (item.getItemId())
 		{				
 			case R.id.menu_selectAll:
 				selectFiles(this.files);
@@ -438,6 +457,15 @@ public class FolderFragment extends Fragment implements OnItemClickListener, OnS
 			case R.id.menu_refresh:
 				refreshFolder();
 				return true;
+           // case R.id.menu_search:
+                //Context context = getApplicationContext();
+                /*CharSequence text = "ila 3yiti gol 3ad bditi";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(getApplication().getApplicationContext(), text, duration);
+               */
+             // toast.show();
+               // return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
