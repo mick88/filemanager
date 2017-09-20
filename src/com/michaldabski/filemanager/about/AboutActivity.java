@@ -40,7 +40,7 @@ public class AboutActivity extends Activity implements OnClickListener
 {
 	
 	private static final String PLAYSTORE_URL = "https://play.google.com/store/apps/developer?id=mick88";
-	private static final String FEEDBACK_ADDRESS = "contact@michaldabski.com";
+	private static final String FEEDBACK_ADDRESS = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
