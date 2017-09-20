@@ -35,7 +35,9 @@
         android:showAsAction="ifRoom"
         android:title="@string/add_favourite"
         android:visible="false"/>
-    
+
+
+
     <item
         android:id="@+id/menu_navigate_up"
         android:icon="@drawable/ic_navigate_up"
@@ -43,7 +45,10 @@
         android:showAsAction="always"
         android:title="@string/up"
         android:visible="true"/>
-    
+
+
+
+
     <item
         android:id="@+id/menu_refresh"
         android:icon="@drawable/ic_refresh"
